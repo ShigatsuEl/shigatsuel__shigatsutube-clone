@@ -1,8 +1,6 @@
 import routes from "../routes";
 
-export const getJoin = (req, res) => {
-  res.render("join", { pageTitle: "Join" });
-};
+export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 
 export const postJoin = (req, res) => {
   const {
@@ -18,7 +16,13 @@ export const postJoin = (req, res) => {
   }
 };
 
-export const login = (req, res) => res.render("login", { pageTitle: "Log In" });
+export const getLogin = (req, res) =>
+  res.render("login", { pageTitle: "Log In" });
+
+export const postLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
 export const logout = (req, res) =>
   res.render("logout", { pageTitle: "Log Out" });
 export const userDetail = (req, res) =>
