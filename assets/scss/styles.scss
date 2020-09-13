@@ -1,5 +1,10 @@
+// Config SCSS
 @import "/config/_variables.scss";
+@import "/config/reset.scss";
 
-body {
-  background-color: $bgColor;
-}
+// Pages SCSS
+@import "main.scss";
+@import "/pages/home.scss";
+
+// Paritials SCSS
+@import "/partials/header.scss";
