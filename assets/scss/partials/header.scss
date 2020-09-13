@@ -1,27 +1,23 @@
 .header {
   background-color: $red;
-  margin-bottom: 50px;
   width: 100%;
   position: fixed;
   top: 0;
   z-index: 10;
   .header__wrapper {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
     margin: 0 auto;
-    width: 100%;
+    max-width: 90vw;
     height: 55px;
     .header__column {
-      display: flex;
-      width: 33%;
       &:first-child {
-        padding-left: 80px;
-        justify-content: flex-start;
         a {
           display: flex;
           align-items: center;
-          color: white;
+          width: 155px;
+          color: $white;
           i {
             font-size: 30px;
           }
@@ -33,9 +29,11 @@
         }
       }
       &:nth-child(2) {
-        justify-content: center;
+        justify-self: center;
+        width: 100%;
         form {
-          width: 100%;
+          display: flex;
+          justify-content: center;
           input {
             padding: 5px 10px;
             width: 80%;
@@ -51,10 +49,10 @@
         }
       }
       &:last-child {
-        justify-content: flex-end;
+        justify-self: end;
         ul {
           display: flex;
-          margin-right: 80px;
+          align-items: center;
           li {
             font-size: 20px;
             font-weight: 600;
