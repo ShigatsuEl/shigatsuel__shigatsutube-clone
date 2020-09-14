@@ -1,15 +1,31 @@
 extends layouts/main.pug
 
 block content
-    .video__player
-        video(src=`/${video.fileUrl}`)
-    .video__info
-        a(href=routes.editVideo(video.id)) Edit Video
-        h5.video__title=video.title
-        span.video__views=video.views
-        p.video__description=video.description
-    .video__comments
-        if video.comment.length === 1
-            span.video__comment-number 1 comment
-        else
-            span.video__comment-number #{video.comment.length} comments 
+    .detail__wrap
+        .video__container
+            .video__edit-box
+                a(href=routes.editVideo(video.id)) 
+                    button Edit Video
+            .video__play-box
+                .video__player
+                    video(src=`/${video.fileUrl}`, controls="true", allow="autoplay")
+                .video__info-one
+                    h5.video__title=video.title
+                    .video__subtitle
+                        .video__views=`VIEWS ${video.views} · ${video.createdAt}`
+                        .video__likes
+                            span.video__like
+                                i.fas.fa-thumbs-up
+                                | 0
+                            span.video__dislike
+                                i.fas.fa-thumbs-down
+                                | 0
+                .video__info-two
+                    p.video__description=video.description
+        .comments__container
+            .commnets__number
+                if video.comment.length === 1
+                    span.comments__number-one 1 comment
+                else
+                    span.comments__number-remainder #{video.comment.length} comments 
+            
