@@ -1,4 +1,4 @@
-extends layouts/main.pug
+extends layouts/sub-main.pug
 
 block content
     .detail__wrap
@@ -22,10 +22,5 @@ block content
                                 | 0
                 .video__info-two
                     p.video__description=video.description
-        .comments__container
-            .commnets__number
-                if video.comment.length === 1
-                    span.comments__number-one 1 comment
-                else
-                    span.comments__number-remainder #{video.comment.length} comments 
+        include ./partials/comment.pug
             

@@ -8,6 +8,9 @@
     width: 100%;
     max-width: $first-width;
     height: auto;
+    position: fixed;
+    left: 0;
+    top: $second-padding;
     .video__edit-box {
       margin: 0px 0px 5px 0px;
       display: flex;
