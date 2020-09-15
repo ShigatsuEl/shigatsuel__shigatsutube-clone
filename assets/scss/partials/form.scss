@@ -3,25 +3,43 @@
   flex-direction: column;
   align-items: center;
   padding-top: $first-padding;
-  input {
+  form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 25px;
-    padding: 10px 10px;
+    input,
+    textarea {
+      margin-bottom: 25px;
+      padding: 10px 10px;
+      border-radius: 7px;
+      width: 350px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+      &:last-child {
+        background-color: $red;
+        color: $white;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      &:not(input) {
+        border: none;
+        height: 200px;
+      }
+      &:focus {
+        border: 2px solid $light-blue;
+      }
+    }
+  }
+  .form-container__link--delete {
+    padding: 11px 10px;
     border-radius: 7px;
-    width: 350px;
+    width: 330px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    &:last-child {
-      margin-bottom: 40px;
-      background-color: $red;
-      color: $white;
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
-    }
-    &:focus {
-      border: 2px solid $light-blue;
-    }
+    background-color: $dark-red;
+    color: $white;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
   }
 }
