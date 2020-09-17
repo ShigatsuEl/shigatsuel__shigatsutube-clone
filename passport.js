@@ -1,8 +1,14 @@
 import passport from "passport";
 import GithubStrategy from "passport-github";
-import { githubLoginCallback } from "./controllers/userControllers";
+import GoogleStrategy from "passport-google-oauth20";
+import {
+  githubLoginCallback,
+  googleLoginCallback,
+} from "./controllers/userControllers";
 import User from "./models/User";
 import routes from "./routes";
+
+passport.use(User.createStrategy());
 
 passport.use(
   new GithubStrategy(
@@ -15,6 +21,16 @@ passport.use(
   )
 );
 
-passport.use(User.createStrategy());
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: `http://localhost:4000${routes.googleCallback}`,
+    },
+    googleLoginCallback
+  )
+);
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
