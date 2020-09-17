@@ -1,7 +1,16 @@
-extends layouts/main.pug
+extends layouts/sub-main.pug
 
 block content
-    .user-profile
-        .user-profile__header
-            img.avatar(src=user.avatarUrl)
-            h4.profile__username=user.name
+    .userDetail__wrapper
+        .uploaded-videos__container
+        .user-profile__container
+            .user-profile
+                .user-profile__header
+                    img.avatar(src=user.avatarUrl)
+                    h4.profile__username=user.name
+                .user-profile__btns
+                    a(href=`/users${routes.editProfile}`)
+                        button.btns__editProfile 🛠 Edit Profile
+                    a(href=`/users${routes.changePassword}`)
+                        button.btns__changePassword 🔑 Change Password
+        .liked-videos__container
