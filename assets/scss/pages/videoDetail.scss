@@ -71,8 +71,11 @@
         }
       }
       .video__info-two {
+        font-size: 15px;
+        .video__creator {
+          margin-bottom: 10px;
+        }
         .video__despription {
-          font-size: 15px;
         }
       }
     }

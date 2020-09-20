@@ -4,8 +4,9 @@ block content
     .detail__wrap
         .video__container
             .video__edit-box
-                a(href=routes.editVideo(video.id)) 
-                    button Edit Video
+                if loggedUser && video.creator.id === loggedUser.id
+                    a(href=routes.editVideo(video.id)) 
+                        button Edit Video
             .video__play-box
                 .video__player
                     video(src=`/${video.fileUrl}`, controls="true", allow="autoplay")
@@ -21,6 +22,8 @@ block content
                                 i.fas.fa-thumbs-down
                                 | 0
                 .video__info-two
-                    p.video__description=video.description
+                    h5.video__creator Uploaded by
+                        a(href=routes.userDetail(video.creator.id))=video.creator.name
+                    h5.video__description=video.description
         include ./partials/comment.pug
             

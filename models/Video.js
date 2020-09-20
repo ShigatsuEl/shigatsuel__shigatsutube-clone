@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const VideoSchema = new mongoose.Schema({
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   fileUrl: {
     type: String,
     required: "File URL is required",

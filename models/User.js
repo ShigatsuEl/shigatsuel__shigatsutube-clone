@@ -4,9 +4,24 @@ import passportLocalMongoose from "passport-local-mongoose";
 const UserSchema = new mongoose.Schema({
   name: String,
   email: String,
-  avatarUrl: String,
+  avatarUrl: {
+    type: String,
+    default: process.env.YOUTUBE_LOGO,
+  },
   googleId: Number,
   githubId: Number,
+  videos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video",
+    },
+  ],
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
 });
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });
