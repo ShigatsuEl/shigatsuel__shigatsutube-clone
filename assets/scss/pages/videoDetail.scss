@@ -73,7 +73,13 @@
       .video__info-two {
         font-size: 15px;
         .video__creator {
+          display: flex;
+          align-items: center;
           margin-bottom: 10px;
+          a {
+            margin-left: $first-margin;
+            color: rgba($color: blue, $alpha: 0.5);
+          }
         }
         .video__despription {
         }

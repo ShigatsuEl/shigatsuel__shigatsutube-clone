@@ -1,14 +1,23 @@
 extends layouts/sub-main.pug
+include mixins/videoBlock
 
 block content
     .userDetail__wrapper
         .uploaded-videos__container
+            .videos
+                each item in user.videos
+                    +videoBlock({
+                        id:item.id,
+                        title:item.title,
+                        views:item.views,
+                        videoFile:item.fileUrl
+                    })
         .user-profile__container
             .user-profile
                 .user-profile__header
                     img.avatar(src=user.avatarUrl)
                     h4.profile__username=user.name
-                if user.id === loggedUser.id
+                if loggedUser && user.id === loggedUser.id
                     .user-profile__btns
                         a(href=`/users${routes.editProfile}`)
                             button.btns__editProfile 🛠 Edit Profile
