@@ -23,7 +23,10 @@ block content
                                 | 0
                 .video__info-two
                     h5.video__creator Uploaded by
-                        a(href=routes.userDetail(video.creator.id))=video.creator.name
+                        if(loggedUser && video.creator.id === loggedUser.id)
+                            a(href=routes.me)=video.creator.name
+                        else
+                            a(href=routes.userDetail(video.creator.id))=video.creator.name
                     h5.video__description=video.description
         include ./partials/comment.pug
             
