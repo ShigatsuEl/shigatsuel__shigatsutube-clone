@@ -1,32 +1,31 @@
 extends layouts/sub-main.pug
 
 block content
-    .detail__wrap
-        .video__container
-            .video__edit-box
-                if loggedUser && video.creator.id === loggedUser.id
-                    a(href=routes.editVideo(video.id)) 
-                        button Edit Video
-            .video__play-box
-                .video__player
-                    video(src=`/${video.fileUrl}`, controls="true", allow="autoplay")
-                .video__info-one
-                    h5.video__title=video.title
-                    .video__subtitle
-                        .video__views=`VIEWS ${video.views} · ${video.createdAt}`
-                        .video__likes
-                            span.video__like
-                                i.fas.fa-thumbs-up
-                                | 0
-                            span.video__dislike
-                                i.fas.fa-thumbs-down
-                                | 0
-                .video__info-two
-                    h5.video__creator Uploaded by
-                        if(loggedUser && video.creator.id === loggedUser.id)
-                            a(href=routes.me)=video.creator.name
-                        else
-                            a(href=routes.userDetail(video.creator.id))=video.creator.name
-                    h5.video__description=video.description
-        include ./partials/comment.pug
+    .video__container
+        .video__edit-box
+            if loggedUser && video.creator.id === loggedUser.id
+                a(href=routes.editVideo(video.id)) 
+                    button Edit Video
+        .video__play-box
+            .video__player
+                video(src=`/${video.fileUrl}`, controls="true", allow="autoplay")
+            .video__info-one
+                h5.video__title=video.title
+                .video__subtitle
+                    .video__views=`VIEWS ${video.views} · ${video.createdAt}`
+                    .video__likes
+                        span.video__like
+                            i.fas.fa-thumbs-up
+                            | 0
+                        span.video__dislike
+                            i.fas.fa-thumbs-down
+                            | 0
+            .video__info-two
+                h5.video__creator Uploaded by
+                    if(loggedUser && video.creator.id === loggedUser.id)
+                        a(href=routes.me)=video.creator.name
+                    else
+                        a(href=routes.userDetail(video.creator.id))=video.creator.name
+                h5.video__description=video.description
+    include ./partials/comment.pug
             

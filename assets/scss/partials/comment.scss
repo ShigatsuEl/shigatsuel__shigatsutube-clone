@@ -1,4 +1,14 @@
 .comments__container {
-  position: relative;
-  left: $first-width;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: $second-padding;
+  width: 100%;
+  height: 680px;
+  .comments__invisible-box {
+    width: 100%;
+    max-width: $first-width;
+    height: auto;
+  }
+  .comments__visible-box {
+  }
 }
