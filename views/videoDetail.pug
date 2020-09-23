@@ -1,4 +1,5 @@
 extends layouts/sub-main.pug
+include mixins/videoPlayer
 
 block content
     .video__container
@@ -7,8 +8,9 @@ block content
                 a(href=routes.editVideo(video.id)) 
                     button Edit Video
         .video__play-box
-            .video__player
-                video(src=`/${video.fileUrl}`, controls="true", allow="autoplay")
+            +videoPlayer({
+                src:video.fileUrl
+            })
             .video__info-one
                 h5.video__title=video.title
                 .video__subtitle

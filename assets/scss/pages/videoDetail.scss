@@ -29,12 +29,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    .video__player {
-      video {
-        width: 100%;
-        max-width: $first-width;
-      }
-    }
     .video__info-one,
     .video__info-two {
       border-bottom: 1px solid rgba($color: $black, $alpha: 0.3);

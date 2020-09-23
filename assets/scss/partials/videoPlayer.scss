@@ -1,0 +1,39 @@
+.videoPlayer {
+  position: relative;
+  &:hover {
+    .videoPlayer__controls {
+      opacity: 1;
+    }
+  }
+  video {
+    width: 100%;
+    max-width: $first-width;
+  }
+  .videoPlayer__controls {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 15px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: black;
+    font-size: 18px;
+    .videoPlayer__column:first-child {
+      display: flex;
+      align-items: center;
+    }
+    .videoPlayer__column:last-child {
+      justify-self: end;
+    }
+    span {
+      color: white;
+    }
+    span i {
+      margin-right: $first-margin;
+      font-size: 22px;
+      cursor: pointer;
+    }
+  }
+}

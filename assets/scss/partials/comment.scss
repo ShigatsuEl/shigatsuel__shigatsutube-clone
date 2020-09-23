@@ -3,11 +3,11 @@
   flex-wrap: wrap;
   margin-top: $second-padding;
   width: 100%;
-  height: 680px;
+  height: 100%;
   .comments__invisible-box {
     width: 100%;
     max-width: $first-width;
-    height: auto;
+    padding-bottom: 56.25%;
   }
   .comments__visible-box {
   }
