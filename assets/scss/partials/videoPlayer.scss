@@ -1,17 +1,11 @@
 .videoPlayer {
   position: relative;
-  &:hover {
-    .videoPlayer__controls {
-      opacity: 1;
-    }
-  }
+  cursor: pointer;
   video {
     width: 100%;
     max-width: $first-width;
   }
   .videoPlayer__controls {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding: 15px;
