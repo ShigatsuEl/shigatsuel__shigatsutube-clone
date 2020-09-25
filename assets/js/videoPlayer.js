@@ -6,6 +6,8 @@ const fullScreenBtn = document.getElementById("jsFullScreen");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
+const progressBar = document.getElementById("jsProgressBarFilled");
+const filledBar = document.getElementById("jsFilledBar");
 
 function handleVideoPlayer() {
   if (videoPlayer.played) {
@@ -117,6 +119,23 @@ function handleVolumeRange(event) {
   }
 }
 
+function handleProgressSeek(event) {
+  const seekTotal = parseInt(progressBar.offsetWidth, 10);
+  const seekX = event.offsetX;
+  console.log(seekX);
+  const seekPercent = 100 * (seekX / seekTotal);
+  filledBar.style.width = seekPercent + "%";
+  const seekMove = (seekPercent / 100) * Math.floor(videoPlayer.duration);
+  videoPlayer.currentTime = seekMove;
+}
+
+function handleProgress() {
+  const max = Math.floor(videoPlayer.duration);
+  const current = Math.floor(videoPlayer.currentTime);
+  const percent = 100 * (current / max);
+  filledBar.style.width = percent + "%";
+}
+
 function init() {
   videoPlayer.volume = 1;
   videoPlayer.addEventListener("play", handleVideoPlayer);
@@ -127,6 +146,9 @@ function init() {
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
   videoPlayer.addEventListener("ended", handleEnded);
   volumeRange.addEventListener("input", handleVolumeRange);
+  videoPlayer.addEventListener("timeupdate", handleProgress);
+  progressBar.addEventListener("click", handleProgressSeek);
+  progressBar.addEventListener("dragover", handleProgressSeek);
 }
 
 if (videoContainer) {
