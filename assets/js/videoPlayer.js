@@ -7,6 +7,22 @@ const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
 const progressBar = document.getElementById("jsProgressBarFilled");
+const filledBar = document.getElementById("jsFilledBar");
+const mql = window.matchMedia("(max-width:900px)");
+
+const element = document.querySelector(".videoPlayer__Bar");
+const newProgressBar = document.createElement("div");
+newProgressBar.classList.add("videoPlayer__progressBar");
+newProgressBar.id = "jsProgressBarFilled";
+const newFilledBar = document.createElement("div");
+newFilledBar.classList.add("videoPlayer__filledBar");
+newFilledBar.id = "jsFilledBar";
+newFilledBar.style.width = 0;
+
+window.matchMedia("screen and (orientation:portrait)");
+window.matchMedia(
+  "only screen and (max-device-width: 900px) and (-webkit-device-pixel-ratio:1)"
+);
 
 function handleVideoPlayer() {
   if (videoPlayer.played) {
@@ -118,22 +134,53 @@ function handleVolumeRange(event) {
   }
 }
 
+function handleMobileProgressSeek(event) {
+  const seekTotal = parseInt(newProgressBar.offsetWidth, 10);
+  const seekX = event.offsetX;
+  const seekPercent = 100 * (seekX / seekTotal);
+  newFilledBar.style.width = seekPercent;
+  const seekMove = (seekPercent / 100) * Math.floor(videoPlayer.duration);
+  videoPlayer.currentTime = seekMove;
+}
+
+function handleMobileProgress() {
+  const max = Math.floor(videoPlayer.duration);
+  const current = Math.floor(videoPlayer.currentTime);
+  const percent = 100 * (current / max);
+  newFilledBar.style.width = percent + "%";
+}
+
 function handleProgressSeek(event) {
   const seekTotal = parseInt(progressBar.offsetWidth, 10);
   console.log(progressBar.offsetWidth);
   const seekX = event.offsetX;
-  const seekPercent = 99 * (seekX / seekTotal);
+  const seekPercent = 100 * (seekX / seekTotal);
   progressBar.value = seekPercent;
   progressBar.setAttribute("value", seekPercent);
-  const seekMove = (seekPercent / 99) * Math.floor(videoPlayer.duration);
+  const seekMove = (seekPercent / 100) * Math.floor(videoPlayer.duration);
   videoPlayer.currentTime = seekMove;
 }
 
 function handleProgress() {
   const max = Math.floor(videoPlayer.duration);
   const current = Math.floor(videoPlayer.currentTime);
-  const percent = 99 * (current / max);
+  const percent = 100 * (current / max);
   progressBar.value = percent;
+}
+
+function mediaMatch() {
+  if (mql.matches) {
+    element.removeChild(jsProgressBarFilled);
+    element.prepend(newProgressBar);
+    newProgressBar.prepend(newFilledBar);
+    videoPlayer.addEventListener("timeupdate", handleMobileProgress);
+    newProgressBar.addEventListener("click", handleMobileProgressSeek);
+    newProgressBar.addEventListener("dragover", handleMobileProgressSeek);
+  } else {
+    videoPlayer.addEventListener("timeupdate", handleProgress);
+    progressBar.addEventListener("click", handleProgressSeek);
+    progressBar.addEventListener("dragover", handleProgressSeek);
+  }
 }
 
 function init() {
@@ -146,9 +193,7 @@ function init() {
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
   videoPlayer.addEventListener("ended", handleEnded);
   volumeRange.addEventListener("input", handleVolumeRange);
-  videoPlayer.addEventListener("timeupdate", handleProgress);
-  progressBar.addEventListener("click", handleProgressSeek);
-  progressBar.addEventListener("dragover", handleProgressSeek);
+  mediaMatch();
 }
 
 if (videoContainer) {
