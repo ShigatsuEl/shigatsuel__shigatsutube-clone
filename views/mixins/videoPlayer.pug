@@ -2,8 +2,7 @@ mixin videoPlayer(video={})
     .videoPlayer#jsVideoPlayer
         video(src=`/${video.src}`, autoplay)
         .videoPlayer__Bar
-            .videoPlayer__progressBar#jsProgressBarFilled
-                .videoPlayer__filled#jsFilledBar
+            input.videoPlayer__progressBar#jsProgressBarFilled(type="range", min="0", max="100", step="0.0001", value="0")
             .videoPlayer__controls
                 .videoPlayer__column
                     span

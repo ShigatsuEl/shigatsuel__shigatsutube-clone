@@ -7,7 +7,6 @@ const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
 const progressBar = document.getElementById("jsProgressBarFilled");
-const filledBar = document.getElementById("jsFilledBar");
 
 function handleVideoPlayer() {
   if (videoPlayer.played) {
@@ -121,19 +120,20 @@ function handleVolumeRange(event) {
 
 function handleProgressSeek(event) {
   const seekTotal = parseInt(progressBar.offsetWidth, 10);
+  console.log(progressBar.offsetWidth);
   const seekX = event.offsetX;
-  console.log(seekX);
-  const seekPercent = 100 * (seekX / seekTotal);
-  filledBar.style.width = seekPercent + "%";
-  const seekMove = (seekPercent / 100) * Math.floor(videoPlayer.duration);
+  const seekPercent = 99 * (seekX / seekTotal);
+  progressBar.value = seekPercent;
+  progressBar.setAttribute("value", seekPercent);
+  const seekMove = (seekPercent / 99) * Math.floor(videoPlayer.duration);
   videoPlayer.currentTime = seekMove;
 }
 
 function handleProgress() {
   const max = Math.floor(videoPlayer.duration);
   const current = Math.floor(videoPlayer.currentTime);
-  const percent = 100 * (current / max);
-  filledBar.style.width = percent + "%";
+  const percent = 99 * (current / max);
+  progressBar.value = percent;
 }
 
 function init() {

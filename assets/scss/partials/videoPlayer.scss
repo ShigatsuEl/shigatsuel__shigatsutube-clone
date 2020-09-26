@@ -13,14 +13,8 @@
       z-index: 5;
       position: absolute;
       bottom: 50px;
-      width: 100%;
+      width: 99%;
       height: 7px;
-      background-color: white;
-      .videoPlayer__filled {
-        width: 0;
-        height: 7px;
-        background-color: red;
-      }
     }
     .videoPlayer__controls {
       cursor: default;
