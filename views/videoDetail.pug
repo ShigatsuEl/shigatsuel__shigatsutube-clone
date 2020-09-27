@@ -2,12 +2,12 @@ extends layouts/sub-main.pug
 include mixins/videoPlayer
 
 block content
-    .video__container
-        .video__edit-box
-            if loggedUser && video.creator.id === loggedUser.id
-                a(href=routes.editVideo(video.id)) 
-                    button Edit Video
-        .video__play-box
+    .video__wrapper
+        .video__container
+            .video__edit-box
+                if loggedUser && video.creator.id === loggedUser.id
+                    a(href=routes.editVideo(video.id)) 
+                        button Edit Video
             +videoPlayer({
                 src:video.fileUrl
             })
@@ -29,5 +29,5 @@ block content
                     else
                         a(href=routes.userDetail(video.creator.id))=video.creator.name
                 h5.video__description=video.description
-    include ./partials/comment.pug
+        include ./partials/comment.pug
             

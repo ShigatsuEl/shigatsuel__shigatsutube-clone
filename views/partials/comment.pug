@@ -1,7 +1,9 @@
 .comments__container
-    .comments__invisible-box
-    .comments__visible-box
+    .comments__submit-box
         if video.comment.length === 1
             span.comments__number-one 1 comment
         else
-            span.comments__number-remainder #{video.comment.length} comments 
+            span 댓글 입력창이 될 구역입니다.
+            //- span.comments__number-remainder #{video.comment.length} comments 
+    .comments__view-box
+        | 댓글창이 될 구역입니다.

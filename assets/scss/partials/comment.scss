@@ -1,14 +1,17 @@
 .comments__container {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  margin-top: $second-padding;
-  width: 100%;
-  height: 100%;
-  .comments__invisible-box {
-    width: 100%;
-    max-width: $first-width;
-    padding-bottom: 56.25%;
+  flex: 1;
+  padding: 15px 0px 15px 15px;
+  .comments__submit-box {
+    display: flex;
+    margin-bottom: $first-margin;
   }
-  .comments__visible-box {
+  .comments__view-box {
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    flex: 1;
   }
 }

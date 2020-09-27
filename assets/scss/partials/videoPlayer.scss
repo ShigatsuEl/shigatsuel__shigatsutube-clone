@@ -1,5 +1,7 @@
 .videoPlayer {
   position: relative;
+  width: 100%;
+  max-width: $first-width;
   cursor: pointer;
   video {
     width: 100%;

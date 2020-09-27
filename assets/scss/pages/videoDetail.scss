@@ -1,34 +1,33 @@
-.video__container {
+.video__wrapper {
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: 100%;
-  max-width: $first-width;
-  position: fixed;
-  left: 0;
-  top: $second-padding;
-  .video__edit-box {
-    margin: 0px 0px 5px 0px;
+  height: 100vh;
+  padding-top: $second-padding;
+  .video__container {
     display: flex;
-    justify-content: flex-end;
-    a button {
-      border: 4px solid rgba($color: $grey, $alpha: 1);
-      border-radius: 5px;
-      padding: 5px 20px;
-      color: $white;
-      background-color: $red;
-      font-weight: 600;
-      font-size: 17px;
-      &:hover,
-      &:focus {
-        border: 4px solid rgba($color: $light-blue, $alpha: 0.7);
-      }
-    }
-  }
-  .video__play-box {
-    display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     width: 100%;
+    max-width: $first-width;
+    padding: 0 15px;
+    box-shadow: 0 0 10px 3px;
+    .video__edit-box {
+      padding: 0px 0px 5px 0px;
+      display: flex;
+      justify-content: flex-end;
+      a button {
+        border: 4px solid rgba($color: $grey, $alpha: 1);
+        border-radius: 5px;
+        padding: 5px 20px;
+        color: $white;
+        background-color: $red;
+        font-weight: 600;
+        font-size: 17px;
+        &:hover,
+        &:focus {
+          border: 4px solid rgba($color: $light-blue, $alpha: 0.7);
+        }
+      }
+    }
     .video__info-one,
     .video__info-two {
       border-bottom: 1px solid rgba($color: $black, $alpha: 0.3);
@@ -68,6 +67,7 @@
         a {
           margin-left: $first-margin;
           color: rgba($color: blue, $alpha: 0.5);
+          font-weight: 600;
         }
       }
       .video__despription {
