@@ -2,8 +2,11 @@ extends layouts/main.pug
 
 block content
     .form-container
+        .record-container#jsRecordContainer
+            h2 Upload Video
+            video#jsVideoPreview 
+            button#jsRecordBtn Start Recording
         form(action=`/videos${routes.upload}`, method="post", enctype="multipart/form-data")
-            label(for="file") Video File
             input(type="file", id="file", name="videoFile", required=true, accept="video/*")
             input(type="text", name="title", placeholder="Title", required=true)
             textarea(name="description", placeholder="Description", required=true)
