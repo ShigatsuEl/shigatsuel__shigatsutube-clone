@@ -8,21 +8,11 @@ const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
 const progressBar = document.getElementById("jsProgressBarFilled");
 const filledBar = document.getElementById("jsFilledBar");
-const mql = window.matchMedia("(max-width:900px)");
 
+// Match Media(JS)
 const element = document.querySelector(".videoPlayer__Bar");
 const newProgressBar = document.createElement("div");
-newProgressBar.classList.add("videoPlayer__progressBar");
-newProgressBar.id = "jsProgressBarFilled";
 const newFilledBar = document.createElement("div");
-newFilledBar.classList.add("videoPlayer__filledBar");
-newFilledBar.id = "jsFilledBar";
-newFilledBar.style.width = 0;
-
-window.matchMedia("screen and (orientation:portrait)");
-window.matchMedia(
-  "only screen and (max-device-width: 900px) and (-webkit-device-pixel-ratio:1)"
-);
 
 const registerView = () => {
   const videoId = window.location.href.split("/videos/")[1];
@@ -177,13 +167,23 @@ function handleProgress() {
 }
 
 function mediaMatch() {
+  window.matchMedia("screen and (orientation:portrait)");
+  window.matchMedia(
+    "only screen and (max-device-width: 900px) and (-webkit-device-pixel-ratio:1)"
+  );
+  const mql = window.matchMedia("(max-width:900px)");
   if (mql.matches) {
     element.removeChild(jsProgressBarFilled);
+    newProgressBar.classList.add("videoPlayer__progressBar");
+    newProgressBar.id = "jsProgressBarFilled";
     element.prepend(newProgressBar);
+    newFilledBar.classList.add("videoPlayer__filledBar");
+    newFilledBar.id = "jsFilledBar";
+    newFilledBar.style.width = 0;
     newProgressBar.prepend(newFilledBar);
     videoPlayer.addEventListener("timeupdate", handleMobileProgress);
     newProgressBar.addEventListener("click", handleMobileProgressSeek);
-    newProgressBar.addEventListener("touchmove", handleMobileProgressSeek);
+    newProgressBar.addEventListener("dragover", handleMobileProgressSeek);
   } else {
     videoPlayer.addEventListener("timeupdate", handleProgress);
     progressBar.addEventListener("click", handleProgressSeek);
