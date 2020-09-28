@@ -1,15 +1,19 @@
 .comments__container
     h5.comments__count
         if video.comments.length === 1
-            span.comments__number-one 1 comment
+            span.comments__number-one
+                span#jsCommentNumber 1
+                |   comment
         else
-            span.comments__number-remainder #{video.comments.length} comments 
+            span.comments__number-remainder
+                span#jsCommentNumber=video.comments.length
+                |   comments 
     .comments__submit-box
         img
         form.add__comment#jsAddComment
             input(type="text", placeholder="Add a public comment", name="comment")
     .comments__view-box
-        ul.comments__list
-            each comment in video.comments
+        ul.comments__list#jsCommentList
+            each comment in video.comments.reverse()
                 li
                     span.comments__reply=comment.text
