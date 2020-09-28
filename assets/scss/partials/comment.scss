@@ -5,11 +5,9 @@
   flex: 1;
   padding: 15px 0px 15px 15px;
   .comments__submit-box {
-    display: flex;
     margin-bottom: $first-margin;
   }
   .comments__view-box {
-    display: flex;
     overflow-x: hidden;
     overflow-y: scroll;
     flex: 1;

@@ -1,9 +1,14 @@
 .comments__container
-    .comments__submit-box
-        if video.comment.length === 1
+    h5.comments__count
+        if video.comments.length === 1
             span.comments__number-one 1 comment
         else
-            span 댓글 입력창이 될 구역입니다.
-            //- span.comments__number-remainder #{video.comment.length} comments 
+            span.comments__number-remainder #{video.comments.length} comments 
+    .comments__submit-box
+        img
+        form.add__comment#jsAddComment
+            input(type="text", placeholder="Add a public comment", name="comment")
     .comments__view-box
-        | 댓글창이 될 구역입니다.
+        ul.comments__list
+            each comment in video.comments
+                span.comments__reply
