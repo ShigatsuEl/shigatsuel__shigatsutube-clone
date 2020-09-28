@@ -175,7 +175,7 @@ function mediaMatch() {
     newProgressBar.prepend(newFilledBar);
     videoPlayer.addEventListener("timeupdate", handleMobileProgress);
     newProgressBar.addEventListener("click", handleMobileProgressSeek);
-    newProgressBar.addEventListener("dragover", handleMobileProgressSeek);
+    newProgressBar.addEventListener("touchmove", handleMobileProgressSeek);
   } else {
     videoPlayer.addEventListener("timeupdate", handleProgress);
     progressBar.addEventListener("click", handleProgressSeek);
