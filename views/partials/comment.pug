@@ -9,9 +9,12 @@
                 span#jsCommentNumber=video.comments.length
                 |   comments 
     .comments__submit-box
-        img
-        form.add__comment#jsAddComment
-            input(type="text", placeholder="Add a public comment", name="comment")
+        if loggedUser && user.id === loggedUser.id
+            img.comment__loginAvatar(src=`${user.avatarUrl}`)
+        else
+            i.fas.fa-user
+                form.add__comment#jsAddComment
+                    input(type="text", placeholder="Add a public comment", name="comment")
     .comments__view-box
         ul.comments__list#jsCommentList
             each comment in video.comments.reverse()
