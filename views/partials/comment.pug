@@ -11,4 +11,5 @@
     .comments__view-box
         ul.comments__list
             each comment in video.comments
-                span.comments__reply
+                li
+                    span.comments__reply=comment.text
