@@ -24,6 +24,13 @@ window.matchMedia(
   "only screen and (max-device-width: 900px) and (-webkit-device-pixel-ratio:1)"
 );
 
+const registerView = () => {
+  const videoId = window.location.href.split("/videos/")[1];
+  fetch(`/api/${videoId}/view`, {
+    method: "POST",
+  });
+};
+
 function handleVideoPlayer() {
   if (videoPlayer.played) {
     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
@@ -114,6 +121,7 @@ function setTotalTime() {
 }
 
 function handleEnded() {
+  registerView();
   videoPlayer.currentTime = 0;
   playBtn.innerHTML = '<i class="fas fa-play"></i>';
 }
