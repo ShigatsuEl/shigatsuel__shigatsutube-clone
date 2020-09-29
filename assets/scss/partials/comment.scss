@@ -4,10 +4,39 @@
   flex-wrap: wrap;
   flex: 1;
   padding: 15px 0px 15px 15px;
+  box-shadow: 0 0 10px 3px;
+  .comments__count {
+    font-weight: 600;
+    font-size: 20px;
+    padding-bottom: 15px;
+  }
   .comments__submit-box {
-    margin-bottom: $first-margin;
+    display: flex;
+    align-items: center;
+    padding-bottom: $first-margin;
+    .comment__loginAvatar {
+      border-radius: 50%;
+      margin-right: $first-margin;
+      width: 30px;
+      height: 30px;
+    }
+    .comment__UnLoginAvatar {
+      padding-right: $first-margin;
+      font-size: 25px;
+    }
+    .add__formComment {
+      display: flex;
+      width: 100%;
+      .add__inputComment {
+        border-radius: 7px;
+        padding: $third-padding;
+        width: 95%;
+        font-size: 18px;
+      }
+    }
   }
   .comments__view-box {
+    display: flex;
     overflow-x: hidden;
     overflow-y: scroll;
     flex: 1;

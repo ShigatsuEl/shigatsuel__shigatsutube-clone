@@ -1,20 +1,20 @@
 .comments__container
     h5.comments__count
         if video.comments.length === 1
-            span.comments__number-one
-                span#jsCommentNumber 1
-                |   comment
+            span.comments__number-one#jsCommentNumber 1
+            |   comment
         else
-            span.comments__number-remainder
-                span#jsCommentNumber=video.comments.length
-                |   comments 
+            span.comments__number-remainder#jsCommentNumber=video.comments.length
+            |   comments 
     .comments__submit-box
         if loggedUser && user.id === loggedUser.id
             img.comment__loginAvatar(src=`${user.avatarUrl}`)
+            form.add__formComment#jsAddComment
+                input.add__inputComment(type="text", placeholder="Please feel free to comment~", name="comment")
         else
-            i.fas.fa-user
-                form.add__comment#jsAddComment
-                    input(type="text", placeholder="Add a public comment", name="comment")
+            i.fas.fa-user.comment__UnLoginAvatar
+            form.add__formComment#jsAddComment
+                input.add__inputComment(type="text", placeholder="Please feel free to comment~", name="comment")
     .comments__view-box
         ul.comments__list#jsCommentList
             each comment in video.comments.reverse()
