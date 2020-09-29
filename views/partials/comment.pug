@@ -18,5 +18,6 @@
     .comments__view-box
         ul.comments__list#jsCommentList
             each comment in video.comments.reverse()
-                li
-                    span.comments__reply=comment.text
+                li.comments__eachlist
+                    img.comments__publish-avatar(src=`${comment.creator.avatarUrl}`)
+                    span.comments__publish=comment.text
