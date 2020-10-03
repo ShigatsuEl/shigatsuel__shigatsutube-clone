@@ -1,8 +1,10 @@
 import axios from "axios";
 
-const addCommentForm = document.getElementById("jsAddCommentForm");
-const commentList = document.getElementById("jsCommentList");
 const commentNumber = document.getElementById("jsCommentNumber");
+const addCommentForm = document.getElementById("jsAddCommentForm");
+const addCommentInput = document.getElementById("jsAddCommentInput");
+const buttonBox = document.getElementById("jsBtnBox");
+const commentList = document.getElementById("jsCommentList");
 
 const increaseNumber = () => {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
@@ -43,8 +45,19 @@ const handleSubmit = (event) => {
   commentInput.value = "";
 };
 
+const handleFocusInput = () => {
+  const focus = document.activeElement;
+  if (addCommentInput === focus) {
+    buttonBox.classList.remove("hidden");
+  } else {
+    buttonBox.classList.add("hidden");
+  }
+};
+
 function init() {
   addCommentForm.addEventListener("submit", handleSubmit);
+  addCommentInput.addEventListener("focus", handleFocusInput);
+  addCommentInput.addEventListener("blur", handleFocusInput);
 }
 
 if (addCommentForm) {
