@@ -14,7 +14,7 @@ block content
             .video__info-one
                 h5.video__title=video.title
                 .video__subtitle
-                    .video__views=`VIEWS ${video.views} · ${video.createdAt}`
+                    .video__views=`VIEWS ${video.views} · ${dateFormatter(video.createdAt)}`
                     .video__likes
                         span.video__like
                             i.fas.fa-thumbs-up

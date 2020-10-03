@@ -8,6 +8,7 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "ShigatsuTube";
   res.locals.routes = routes;
   res.locals.loggedUser = req.user || null;
+  res.locals.dateFormatter = dateFormatter;
   next();
 };
 
@@ -27,5 +28,13 @@ export const onlyPrivate = (req, res, next) => {
   }
 };
 
+export const dateFormatter = (dateStr) => {
+  const date = new Date(dateStr);
+  return `${date.getFullYear()}.${
+    date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+  }.${
+    date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+  } ${date.getHours()}시 ${date.getMinutes()}분`;
+};
 export const uploadVideo = multerVideo.single("videoFile");
 export const uploadAvatar = multerAvatar.single("avatar");

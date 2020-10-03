@@ -9,12 +9,10 @@
     .comments__submit-box
         if loggedUser && user.id === loggedUser.id
             img.comment__loginAvatar(src=`${user.avatarUrl}`)
-            form.add__formComment#jsAddComment
-                input.add__inputComment(type="text", placeholder="Please feel free to comment~", name="comment")
         else
             i.fas.fa-user.comment__UnLoginAvatar
-            form.add__formComment#jsAddComment
-                input.add__inputComment(type="text", placeholder="Please feel free to comment~", name="comment")
+        form.add__formComment#jsAddComment
+            input.add__inputComment(type="text", placeholder="Please feel free to comment~", name="comment")
     .comments__view-box
         ul.comments__list#jsCommentList
             each comment in video.comments.reverse()
