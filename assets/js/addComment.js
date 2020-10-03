@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const addCommentForm = document.getElementById("jsAddComment");
+const addCommentForm = document.getElementById("jsAddCommentForm");
 const commentList = document.getElementById("jsCommentList");
 const commentNumber = document.getElementById("jsCommentNumber");
 
@@ -37,7 +37,7 @@ const sendComment = async (comment) => {
 
 const handleSubmit = (event) => {
   event.preventDefault();
-  const commentInput = addCommentForm.querySelector("input");
+  const commentInput = document.getElementById("jsAddCommentInput");
   const comment = commentInput.value;
   sendComment(comment);
   commentInput.value = "";

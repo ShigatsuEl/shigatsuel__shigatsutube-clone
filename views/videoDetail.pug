@@ -1,5 +1,6 @@
 extends layouts/sub-main.pug
 include mixins/videoPlayer
+include mixins/commentBlock
 
 block content
     .video__wrapper
@@ -24,10 +25,37 @@ block content
                             | 0
             .video__info-two
                 h5.video__creator Uploaded by
-                    if(loggedUser && video.creator.id === loggedUser.id)
+                    if loggedUser && video.creator.id === loggedUser.id
                         a(href=routes.me)=video.creator.name
                     else
                         a(href=routes.userDetail(video.creator.id))=video.creator.name
                 h5.video__description=video.description
-        include ./partials/comment.pug
+        .comments__container
+            h5.comments__count
+                if video.comments.length === 1
+                    span.comments__number-one#jsCommentNumber 1
+                    |   comment
+                else
+                    span.comments__number-remainder#jsCommentNumber=video.comments.length
+                    |   comments 
+            .comments__submit-box
+                if loggedUser && loggedUser.id === user.id
+                    img.comment__loginAvatar#jsCommentLoginAvatar(src=loggedUser.avatarUrl)
+                else
+                    i.fas.fa-user.comment__UnLoginAvatar#jsCommentUnloginAvatar
+                form.add__formComment#jsAddCommentForm
+                    input.add__inputComment#jsAddCommentInput(type="text", placeholder="Please feel free to comment~", name="comment", autocomplete="off", required)
+            .comments__btnBox
+                button.cancel__btn#jsCancelBtn(type="button") CANCEL
+                button.comment__btn#jsCommentBtn COMMENT
+            .comments__view-box
+                ul.comments__list#jsCommentList
+                    each comment in video.comments.reverse()
+                        +commentBlock({
+                            id : comment.id,
+                            creator : comment.creator,
+                            avatarUrl : comment.creator.avatarUrl,
+                            createdAt : dateFormatter(comment.createdAt),
+                            text : comment.text,
+                        })
             

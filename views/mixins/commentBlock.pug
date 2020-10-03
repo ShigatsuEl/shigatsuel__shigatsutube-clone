@@ -1,0 +1,4 @@
+mixin commentBlock(comment ={})
+    li.comments__eachlist
+        img.comments__publish-avatar(src=`${comment.creator.avatarUrl}`)
+        span.comments__publish=comment.text

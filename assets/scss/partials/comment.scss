@@ -35,6 +35,28 @@
       }
     }
   }
+  .comments__btnBox {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+    .cancel__btn {
+      margin-right: 1rem;
+      border-radius: 7px;
+      border: none;
+      padding: 8px;
+      width: 100px;
+      background-color: $black;
+      color: white;
+    }
+    .comment__btn {
+      border-radius: 7px;
+      border: none;
+      padding: 8px;
+      width: 100px;
+      background-color: $red;
+      color: white;
+    }
+  }
   .comments__view-box {
     display: flex;
     overflow-x: hidden;
