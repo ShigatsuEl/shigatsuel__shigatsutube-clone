@@ -4,6 +4,8 @@ const commentNumber = document.getElementById("jsCommentNumber");
 const addCommentForm = document.getElementById("jsAddCommentForm");
 const addCommentInput = document.getElementById("jsAddCommentInput");
 const buttonBox = document.getElementById("jsBtnBox");
+const cancelBtn = document.getElementById("jsCancelBtn");
+const commentBtn = document.getElementById("jsCommentBtn");
 const commentList = document.getElementById("jsCommentList");
 
 const increaseNumber = () => {
@@ -39,25 +41,26 @@ const sendComment = async (comment) => {
 
 const handleSubmit = (event) => {
   event.preventDefault();
-  const commentInput = document.getElementById("jsAddCommentInput");
-  const comment = commentInput.value;
+  const comment = addCommentInput.value;
   sendComment(comment);
-  commentInput.value = "";
+  addCommentInput.value = "";
+  addCommentInput.blur();
 };
 
 const handleFocusInput = () => {
-  const focus = document.activeElement;
-  if (addCommentInput === focus) {
-    buttonBox.classList.remove("hidden");
-  } else {
-    buttonBox.classList.add("hidden");
-  }
+  buttonBox.classList.remove("hidden");
+};
+
+const handleCancelBtn = () => {
+  addCommentInput.value = "";
+  addCommentInput.blur();
 };
 
 function init() {
   addCommentForm.addEventListener("submit", handleSubmit);
-  addCommentInput.addEventListener("focus", handleFocusInput);
-  addCommentInput.addEventListener("blur", handleFocusInput);
+  addCommentInput.addEventListener("click", handleFocusInput);
+  cancelBtn.addEventListener("click", handleCancelBtn);
+  commentBtn.addEventListener("click", handleSubmit);
 }
 
 if (addCommentForm) {
