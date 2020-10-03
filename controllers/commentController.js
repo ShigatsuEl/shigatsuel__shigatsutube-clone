@@ -1,6 +1,7 @@
 import Video from "../models/Video";
 import User from "../models/User";
 import Comment from "../models/Comment";
+import { dateFormatter } from "../middlewares";
 
 // Register Video View
 
@@ -27,19 +28,29 @@ export const postAddComment = async (req, res) => {
   const {
     params: { id },
     body: { comment },
-    user,
   } = req;
   try {
-    const video = await Video.findById(id);
-    const commentUser = await User.findById(user);
     const newComment = await Comment.create({
       text: comment,
-      creator: user.id,
+      creator: req.user.id,
     });
+
+    const video = await Video.findById(id);
     video.comments.push(newComment.id);
     video.save();
-    commentUser.comments.push(newComment.id);
-    commentUser.save();
+
+    const user = await User.findById(newComment.creator);
+    user.comments.push(newComment.id);
+    user.save();
+
+    const parsedInfo = {
+      name: user.name,
+      date: dateFormatter(newComment.createdAt),
+      avatarUrl: user.avatarUrl,
+      comment,
+      commentId: newComment.id,
+    };
+    res.json(parsedInfo);
   } catch (error) {
     res.status(400);
   } finally {

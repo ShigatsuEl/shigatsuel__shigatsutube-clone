@@ -8,10 +8,13 @@ const increaseNumber = () => {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
 };
 
-const addComment = (comment) => {
+const addComment = (parsedInfo) => {
   const li = document.createElement("li");
   const span = document.createElement("span");
-  span.innerHTML = comment;
+  const img = document.createElement("img");
+  span.innerHTML = parsedInfo.comment;
+  img.src = parsedInfo.avatarUrl;
+  li.appendChild(img);
   li.appendChild(span);
   commentList.prepend(li);
   increaseNumber();
@@ -27,7 +30,8 @@ const sendComment = async (comment) => {
     },
   });
   if (response.status === 200) {
-    addComment(comment);
+    console.log(response.data);
+    addComment(response.data);
   }
 };
 
