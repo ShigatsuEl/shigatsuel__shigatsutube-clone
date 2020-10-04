@@ -13,7 +13,7 @@
   .comments__submit-box {
     display: flex;
     align-items: center;
-    padding-bottom: $first-margin;
+    padding-bottom: 5px;
     .comment__loginAvatar {
       border-radius: 50%;
       margin-right: $first-margin;
@@ -21,7 +21,7 @@
       height: 50px;
     }
     .comment__UnLoginAvatar {
-      padding-right: $first-margin;
+      margin-right: $first-margin;
       font-size: 40px;
     }
     .add__formComment {
@@ -35,50 +35,30 @@
       }
     }
   }
-}
-.comments__btnBox {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 10%;
-  .cancel__btn {
-    margin-right: 1rem;
-    border-radius: 7px;
-    border: none;
-    padding: 8px;
-    width: 100px;
-    background-color: $black;
-    color: white;
-  }
-  .comment__btn {
-    border-radius: 7px;
-    border: none;
-    padding: 8px;
-    width: 100px;
-    background-color: $red;
-    color: white;
-  }
-}
-.hidden {
-  display: none;
-}
-.comments__view-box {
-  display: flex;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  flex: 1;
-  .comments__list {
-    width: 95%;
-    .comment__block {
-      padding-bottom: $third-padding;
-      display: flex;
-      align-items: center;
-      width: 100%;
-      .comment__publish-avatar {
-        margin-right: $first-margin;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-      }
+  .comments__btnBox {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+    margin-bottom: $first-margin;
+    .cancel__btn {
+      margin-right: 1rem;
+      border-radius: 7px;
+      border: none;
+      padding: 8px;
+      width: 100px;
+      background-color: $black;
+      color: white;
     }
+    .comment__btn {
+      border-radius: 7px;
+      border: none;
+      padding: 8px;
+      width: 100px;
+      background-color: $red;
+      color: white;
+    }
+  }
+  .hidden {
+    display: none;
   }
 }
