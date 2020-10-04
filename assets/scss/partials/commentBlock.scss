@@ -59,6 +59,7 @@
             }
           }
           .comment__reply {
+            margin-right: $first-margin;
             cursor: pointer;
             .fa-reply {
               color: rgba($color: black, $alpha: 0.5);
@@ -67,6 +68,27 @@
               &:focus {
                 transform: scale(1.3);
                 color: black;
+              }
+            }
+          }
+          .comment__edit {
+            margin-right: $first-margin;
+            .fa-edit {
+              transition: all 0.3s ease-in-out;
+              &:hover,
+              &:focus {
+                transform: scale(1.3);
+                color: blue;
+              }
+            }
+          }
+          .comment__delete {
+            .fa-trash-alt {
+              transition: all 0.3s ease-in-out;
+              &:hover,
+              &:focus {
+                transform: scale(1.3);
+                color: red;
               }
             }
           }

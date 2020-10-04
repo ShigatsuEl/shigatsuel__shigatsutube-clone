@@ -15,4 +15,8 @@ mixin commentBlock(comment ={})
                     span.comment__heart-number 0
                 span.comment__reply
                     i.fas.fa-reply
-                
+                if loggedUser && loggedUser.id === comment.creator.id
+                    span.comment__edit
+                        i.far.fa-edit
+                    span.comment__delete
+                        i.far.fa-trash-alt
