@@ -1,4 +1,18 @@
 mixin commentBlock(comment ={})
-    li.comments__eachlist
-        img.comments__publish-avatar(src=`${comment.creator.avatarUrl}`)
-        span.comments__publish=comment.text
+    li.comment__block
+        .comment__left
+            img.comment__publish-avatar(src=`${comment.creator.avatarUrl}`)
+        .comment__right
+            .comment__info
+                a.comment__writer(href=routes.userDetail(comment.creator.id))
+                    span.comment__writer-name=comment.creator.name
+                span.comment__createdAt=comment.createdAt
+            .comment__content
+                span.comment__publish=comment.text
+            .comment__subinfo
+                span.comment__heart
+                    i.fas.fa-heart
+                span.comment__heart-number 0
+                span.comment.reply
+                    i.fas.fa-reply
+                

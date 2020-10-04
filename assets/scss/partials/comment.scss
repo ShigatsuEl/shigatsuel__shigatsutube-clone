@@ -68,12 +68,12 @@
   flex: 1;
   .comments__list {
     width: 95%;
-    .comments__eachlist {
+    .comment__block {
       padding-bottom: $third-padding;
       display: flex;
       align-items: center;
       width: 100%;
-      .comments__publish-avatar {
+      .comment__publish-avatar {
         margin-right: $first-margin;
         border-radius: 50%;
         width: 40px;
