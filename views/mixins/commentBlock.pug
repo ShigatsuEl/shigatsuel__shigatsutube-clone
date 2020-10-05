@@ -23,6 +23,6 @@ mixin commentBlock(comment ={})
                     i.fas.fa-reply
                 if loggedUser && loggedUser.id === comment.creator.id
                     span.comment__editBtn#jsCommentEdit
-                        i.far.fa-edit
+                        i.far.fa-edit.editBtn
                     span.comment__deleteBtn
                         i.far.fa-trash-alt

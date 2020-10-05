@@ -16,8 +16,13 @@ const handleEdit = (event) => {
   const commentEditInput = editBox.querySelector("#jsCommentEditInput");
   const commentEditCancelBtn = editBox.querySelector("#jsCommentEditCancelBtn");
   const commentEditSaveBtn = editBox.querySelector("#jsCommentEditSaveBtn");
-  commentContent.classList.toggle("hidden");
-  editBox.classList.toggle("hidden");
+  if (event.target.className.includes("editBtn")) {
+    commentContent.classList.toggle("hidden");
+    editBox.classList.toggle("hidden");
+    const comment = commentEditInput.textContent;
+    commentEditInput.value = comment;
+    commentEditInput.focus();
+  }
 };
 
 function init() {

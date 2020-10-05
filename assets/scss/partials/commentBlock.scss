@@ -45,14 +45,43 @@
         .hidden {
           display: none;
         }
-        .comment__editForm {
-          border-radius: 5px;
-          border: 3px solid rgba($color: black, $alpha: 0.5);
-          .comment__editInput {
-            padding: 5px;
-            width: 100%;
+        .comment__editBox {
+          .comment__editForm {
+            display: flex;
+            flex-direction: column;
+            border-radius: 5px;
+            .comment__editInput {
+              margin-bottom: 5px;
+              border: 3px solid rgba($color: black, $alpha: 0.5);
+              padding: 5px;
+            }
+            .editBtnBox {
+              align-self: flex-end;
+              .comment__editCancelBtn {
+                cursor: pointer;
+                margin-right: 5px;
+                border-radius: 7px;
+                border: none;
+                padding: 5px;
+                width: 80px;
+                background-color: black;
+                color: white;
+                font-size: 0.8rem;
+              }
+              .comment__editSaveBtn {
+                cursor: pointer;
+                border-radius: 7px;
+                border: none;
+                padding: 5px;
+                width: 80px;
+                background-color: red;
+                color: white;
+                font-size: 0.8rem;
+              }
+            }
           }
         }
+
         .comment__subinfo {
           display: flex;
           align-items: center;
