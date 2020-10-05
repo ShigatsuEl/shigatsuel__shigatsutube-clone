@@ -12,9 +12,31 @@ let commentEditInput;
 let commentEditCancelBtn;
 let commentEditSaveBtn;
 
+const handleEnter = async (event) => {
+  if (window.event.keyCode === 13) {
+    if (!window.event.shiftKey) {
+      event.preventDefault();
+      const newComment = commentEditInput.innerText;
+      const response = await axios({
+        url: `/api/${commentId}/edit-comment`,
+        method: "post",
+        data: {
+          editComment: newComment,
+        },
+      });
+      if (response.status === 200) {
+        commentContent.textContent = newComment;
+        commentEditInput.textContent = newComment;
+        commentContent.classList.toggle("hidden");
+        editBox.classList.toggle("hidden");
+      }
+    }
+  }
+};
+
 const handleSave = async (event) => {
   event.preventDefault();
-  const newComment = commentEditInput.value;
+  const newComment = commentEditInput.innerText;
   const response = await axios({
     url: `/api/${commentId}/edit-comment`,
     method: "post",
@@ -54,11 +76,12 @@ const handleEdit = (event) => {
 
     commentContent.classList.toggle("hidden");
     editBox.classList.toggle("hidden");
-    const comment = commentEditInput.textContent;
-    commentEditInput.value = comment;
+    const comment = commentContent.textContent;
+    commentEditInput.innerHTML = comment;
     commentEditInput.focus();
     commentEditCancelBtn.addEventListener("click", handleCancle);
     commentEditForm.addEventListener("submit", handleSave);
+    commentEditInput.addEventListener("keydown", handleEnter);
     commentEditSaveBtn.addEventListener("click", handleSave);
   }
 };

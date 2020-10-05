@@ -11,7 +11,7 @@ mixin commentBlock(comment ={})
                 span.comment__text=comment.text
             .comment__editBox.hidden#jsCommentEditBox(data-id=comment.id)
                 form.comment__editForm#jsCommentEditForm
-                    textarea.comment__editInput#jsCommentEditInput(name="editComment", placeholder="Edit your comment", autocomplete="off", rows="5" cols="60", required)=value=comment.text
+                    .comment__editInput#jsCommentEditInput(contenteditable="true", name="editComment", placeholder="Edit your comment", autocomplete="off", required)=comment.text
                     .editBtnBox
                         button.comment__editCancelBtn#jsCommentEditCancelBtn CANCEL
                         button.comment__editSaveBtn#jsCommentEditSaveBtn SAVE

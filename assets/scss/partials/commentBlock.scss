@@ -10,7 +10,7 @@
       margin-bottom: $first-margin;
       padding: $third-padding;
       width: 100%;
-      background-color: white;
+      background-color: rgba($color: red, $alpha: 0.4);
       .comment__left {
         .comment__publish-avatar {
           margin-right: $first-margin;
