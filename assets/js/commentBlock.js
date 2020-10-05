@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const CommentContainer = document.getElementById("jsCommentContainer");
 const commentSubinfo = document.querySelector(".comment__subinfo");
 
@@ -9,6 +11,23 @@ let commentEditForm;
 let commentEditInput;
 let commentEditCancelBtn;
 let commentEditSaveBtn;
+
+const handleSave = async (event) => {
+  event.preventDefault();
+  const newComment = commentEditInput.value;
+  const response = await axios({
+    url: `/api/${commentId}/edit-comment`,
+    method: "post",
+    data: {
+      editComment: newComment,
+    },
+  });
+  if (response.status === 200) {
+    commentEditInput.textContent = newComment;
+    commentContent.classList.toggle("hidden");
+    editBox.classList.toggle("hidden");
+  }
+};
 
 const handleCancle = (event) => {
   event.preventDefault();
@@ -36,6 +55,7 @@ const handleEdit = (event) => {
     commentEditInput.value = comment;
     commentEditInput.focus();
     commentEditCancelBtn.addEventListener("click", handleCancle);
+    commentEditSaveBtn.addEventListener("click", handleSave);
   }
 };
 

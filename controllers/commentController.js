@@ -57,3 +57,19 @@ export const postAddComment = async (req, res) => {
     res.end();
   }
 };
+
+// Edit Comment
+
+export const postEditComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { editComment },
+  } = req;
+  try {
+    await Comment.findByIdAndUpdate({ _id: id }, { text: editComment });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};
