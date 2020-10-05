@@ -9,7 +9,7 @@ mixin commentBlock(comment ={})
                 span.comment__createdAt=comment.createdAt
             .comment__content#jsCommentContent
                 span.comment__text=comment.text
-            .comment__editBox.hidden#jsCommentEditBox
+            .comment__editBox.hidden#jsCommentEditBox(data-id=comment.id)
                 form.comment__editForm#jsCommentEditForm
                     textarea.comment__editInput#jsCommentEditInput(name="editComment", placeholder="Edit your comment", autocomplete="off", rows="5" cols="60", required)=value=comment.text
                     .editBtnBox

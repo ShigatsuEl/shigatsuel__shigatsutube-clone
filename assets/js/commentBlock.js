@@ -1,27 +1,41 @@
 const CommentContainer = document.getElementById("jsCommentContainer");
 const commentSubinfo = document.querySelector(".comment__subinfo");
 
+let commentId;
+let commentBlock;
+let commentContent;
+let editBox;
+let commentEditForm;
+let commentEditInput;
+let commentEditCancelBtn;
+let commentEditSaveBtn;
+
+const handleCancle = (event) => {
+  event.preventDefault();
+  commentContent.classList.toggle("hidden");
+  editBox.classList.toggle("hidden");
+};
+
 const handleEdit = (event) => {
-  /* console.log(
-    event.target.parentElement.parentElement.parentElement.parentElement.dataset
-      .id
-  ); */
-  const commentId =
+  /* console.log(event.target.parentElement.parentElement.parentElement.parentElement.dataset.id); */
+  commentId =
     event.target.parentElement.parentElement.parentElement.parentElement.dataset
       .id;
-  const commentBlock = document.getElementById(`${commentId}`);
-  const commentContent = commentBlock.querySelector("#jsCommentContent");
-  const editBox = commentBlock.querySelector("#jsCommentEditBox");
-  const commentEditForm = editBox.querySelector("#jsCommentEditForm");
-  const commentEditInput = editBox.querySelector("#jsCommentEditInput");
-  const commentEditCancelBtn = editBox.querySelector("#jsCommentEditCancelBtn");
-  const commentEditSaveBtn = editBox.querySelector("#jsCommentEditSaveBtn");
+  commentBlock = document.getElementById(`${commentId}`);
+  commentContent = commentBlock.querySelector("#jsCommentContent");
+  editBox = commentBlock.querySelector("#jsCommentEditBox");
+  commentEditForm = editBox.querySelector("#jsCommentEditForm");
+  commentEditInput = editBox.querySelector("#jsCommentEditInput");
+  commentEditCancelBtn = editBox.querySelector("#jsCommentEditCancelBtn");
+  commentEditSaveBtn = editBox.querySelector("#jsCommentEditSaveBtn");
+
   if (event.target.className.includes("editBtn")) {
     commentContent.classList.toggle("hidden");
     editBox.classList.toggle("hidden");
     const comment = commentEditInput.textContent;
     commentEditInput.value = comment;
     commentEditInput.focus();
+    commentEditCancelBtn.addEventListener("click", handleCancle);
   }
 };
 
