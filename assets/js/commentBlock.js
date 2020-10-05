@@ -23,6 +23,7 @@ const handleSave = async (event) => {
     },
   });
   if (response.status === 200) {
+    commentContent.textContent = newComment;
     commentEditInput.textContent = newComment;
     commentContent.classList.toggle("hidden");
     editBox.classList.toggle("hidden");
@@ -37,24 +38,27 @@ const handleCancle = (event) => {
 
 const handleEdit = (event) => {
   /* console.log(event.target.parentElement.parentElement.parentElement.parentElement.dataset.id); */
-  commentId =
-    event.target.parentElement.parentElement.parentElement.parentElement.dataset
-      .id;
-  commentBlock = document.getElementById(`${commentId}`);
-  commentContent = commentBlock.querySelector("#jsCommentContent");
-  editBox = commentBlock.querySelector("#jsCommentEditBox");
-  commentEditForm = editBox.querySelector("#jsCommentEditForm");
-  commentEditInput = editBox.querySelector("#jsCommentEditInput");
-  commentEditCancelBtn = editBox.querySelector("#jsCommentEditCancelBtn");
-  commentEditSaveBtn = editBox.querySelector("#jsCommentEditSaveBtn");
 
   if (event.target.className.includes("editBtn")) {
+    //assign variables
+    commentId =
+      event.target.parentElement.parentElement.parentElement.parentElement
+        .dataset.id;
+    commentBlock = document.getElementById(`${commentId}`);
+    commentContent = commentBlock.querySelector("#jsCommentContent");
+    editBox = commentBlock.querySelector("#jsCommentEditBox");
+    commentEditForm = editBox.querySelector("#jsCommentEditForm");
+    commentEditInput = editBox.querySelector("#jsCommentEditInput");
+    commentEditCancelBtn = editBox.querySelector("#jsCommentEditCancelBtn");
+    commentEditSaveBtn = editBox.querySelector("#jsCommentEditSaveBtn");
+
     commentContent.classList.toggle("hidden");
     editBox.classList.toggle("hidden");
     const comment = commentEditInput.textContent;
     commentEditInput.value = comment;
     commentEditInput.focus();
     commentEditCancelBtn.addEventListener("click", handleCancle);
+    commentEditForm.addEventListener("submit", handleSave);
     commentEditSaveBtn.addEventListener("click", handleSave);
   }
 };
