@@ -1,5 +1,5 @@
 mixin commentBlock(comment ={})
-    li.comment__block
+    li.comment__block(id=comment.id data-id=comment.id)
         .comment__left
             img.comment__publish-avatar(src=`${comment.creator.avatarUrl}`)
         .comment__right
@@ -7,16 +7,22 @@ mixin commentBlock(comment ={})
                 a.comment__writer(href=routes.userDetail(comment.creator.id))
                     span.comment__writer-name=comment.creator.name
                 span.comment__createdAt=comment.createdAt
-            .comment__content
-                span.comment__publish=comment.text
-            .comment__subinfo
+            .comment__content#jsCommentContent
+                span.comment__text=comment.text
+            .comment__editBox.hidden#jsCommentEditBox
+                form.comment__editForm#jsCommentEditForm
+                    textarea.comment__editInput#jsCommentEditInput(name="editComment", placeholder="Edit your comment", autocomplete="off", rows="5" cols="60", required)=value=comment.text
+                    .editBtnBox
+                        button.comment__editCancelBtn#jsCommentEditCancelBtn CANCEL
+                        button.comment__editSaveBtn#jsCommentEditSaveBtn SAVE
+            .comment__subinfo#jsCommentSubinfo
                 span.comment__heart
                     i.fas.fa-heart
                     span.comment__heart-number 0
                 span.comment__reply
                     i.fas.fa-reply
                 if loggedUser && loggedUser.id === comment.creator.id
-                    span.comment__edit
+                    span.comment__editBtn#jsCommentEdit
                         i.far.fa-edit
-                    span.comment__delete
+                    span.comment__deleteBtn
                         i.far.fa-trash-alt

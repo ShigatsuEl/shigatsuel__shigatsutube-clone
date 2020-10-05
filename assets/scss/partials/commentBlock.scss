@@ -42,6 +42,17 @@
           width: 100%;
           font-size: 1rem;
         }
+        .hidden {
+          display: none;
+        }
+        .comment__editForm {
+          border-radius: 5px;
+          border: 3px solid rgba($color: black, $alpha: 0.5);
+          .comment__editInput {
+            padding: 5px;
+            width: 100%;
+          }
+        }
         .comment__subinfo {
           display: flex;
           align-items: center;
@@ -71,7 +82,8 @@
               }
             }
           }
-          .comment__edit {
+          .comment__editBtn {
+            cursor: pointer;
             margin-right: $first-margin;
             .fa-edit {
               transition: all 0.3s ease-in-out;
@@ -82,7 +94,8 @@
               }
             }
           }
-          .comment__delete {
+          .comment__deleteBtn {
+            cursor: pointer;
             .fa-trash-alt {
               transition: all 0.3s ease-in-out;
               &:hover,
