@@ -8,7 +8,7 @@ mixin commentBlock(comment ={})
                     span.comment__writer-name=comment.creator.name
                 span.comment__createdAt=comment.createdAt
             .comment__content#jsCommentContent
-                span.comment__text=comment.text
+                .comment__text#jsCommentText=comment.text
             .comment__editBox.hidden#jsCommentEditBox(data-id=comment.id)
                 form.comment__editForm#jsCommentEditForm
                     .comment__editInput#jsCommentEditInput(contenteditable="true", name="editComment", placeholder="Edit your comment", autocomplete="off", required)=comment.text

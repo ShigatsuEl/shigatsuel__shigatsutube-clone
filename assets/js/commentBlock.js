@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const CommentContainer = document.getElementById("jsCommentContainer");
+const commentContainer = document.getElementById("jsCommentContainer");
 const commentSubinfo = document.querySelector(".comment__subinfo");
+const commentText = document.querySelectorAll(".comment__text");
 
 let commentId;
 let commentBlock;
@@ -16,7 +17,7 @@ const handleEnter = async (event) => {
   if (window.event.keyCode === 13) {
     if (!window.event.shiftKey) {
       event.preventDefault();
-      const newComment = commentEditInput.innerText;
+      const newComment = commentEditInput.innerHTML;
       const response = await axios({
         url: `/api/${commentId}/edit-comment`,
         method: "post",
@@ -25,8 +26,8 @@ const handleEnter = async (event) => {
         },
       });
       if (response.status === 200) {
-        commentContent.textContent = newComment;
-        commentEditInput.textContent = newComment;
+        commentContent.innerHTML = newComment;
+        commentEditInput.innerHTML = newComment;
         commentContent.classList.toggle("hidden");
         editBox.classList.toggle("hidden");
       }
@@ -36,7 +37,7 @@ const handleEnter = async (event) => {
 
 const handleSave = async (event) => {
   event.preventDefault();
-  const newComment = commentEditInput.innerText;
+  const newComment = commentEditInput.innerHTML;
   const response = await axios({
     url: `/api/${commentId}/edit-comment`,
     method: "post",
@@ -45,8 +46,8 @@ const handleSave = async (event) => {
     },
   });
   if (response.status === 200) {
-    commentContent.textContent = newComment;
-    commentEditInput.textContent = newComment;
+    commentContent.innerHTML = newComment;
+    commentEditInput.innerHTML = newComment;
     commentContent.classList.toggle("hidden");
     editBox.classList.toggle("hidden");
   }
@@ -76,7 +77,7 @@ const handleEdit = (event) => {
 
     commentContent.classList.toggle("hidden");
     editBox.classList.toggle("hidden");
-    const comment = commentContent.textContent;
+    const comment = commentContent.innerHTML;
     commentEditInput.innerHTML = comment;
     commentEditInput.focus();
     commentEditCancelBtn.addEventListener("click", handleCancle);
@@ -87,7 +88,10 @@ const handleEdit = (event) => {
 };
 
 function init() {
-  CommentContainer.addEventListener("click", handleEdit);
+  for (let i = 0; i < commentText.length; i++) {
+    commentText[i].innerHTML = commentText[i].innerText;
+  }
+  commentContainer.addEventListener("click", handleEdit);
 }
 
 if (commentSubinfo) {
