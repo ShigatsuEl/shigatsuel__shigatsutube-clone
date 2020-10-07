@@ -2,10 +2,14 @@
   position: relative;
   width: 100%;
   max-width: $first-width;
+  height: 100%;
+  max-height: 490px;
   cursor: pointer;
   video {
     width: 100%;
     max-width: $first-width;
+    height: 100%;
+    max-height: 490px;
   }
   .videoPlayer__Bar {
     display: flex;

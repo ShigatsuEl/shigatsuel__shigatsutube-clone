@@ -52,7 +52,7 @@ function handleVolumeClick() {
 }
 
 function exitFullScreen() {
-  videoPlayer.style.cssText = "max-width: $first-width";
+  videoPlayer.style.cssText = "max-width: $first-width; max-height: 490px";
   fullScreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
   fullScreenBtn.addEventListener("click", goFullScreen);
   if (document.exitFullScreen) {
@@ -76,7 +76,7 @@ function goFullScreen() {
   } else if (videoContainer.msRequestFullscreen) {
     videoContainer.msRequestFullscreen();
   }
-  videoPlayer.style.cssText = "max-width: 100%";
+  videoPlayer.style.cssText = "max-width: 100%; max-height: 100%";
   fullScreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
   fullScreenBtn.removeEventListener("click", goFullScreen);
   fullScreenBtn.addEventListener("click", exitFullScreen);
