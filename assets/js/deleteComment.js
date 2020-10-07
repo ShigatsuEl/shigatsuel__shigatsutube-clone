@@ -13,6 +13,7 @@ const decreaseNumber = () => {
   commentNumber.textContent = parseInt(commentNumber.textContent, 10) - 1;
   if (commentNumber.textContent <= 0) {
     commentNumber.textContent = "0";
+    commentLiteral.textContent = " Comments";
   } else if (commentNumber.textContent === "1") {
     commentLiteral.textContent = " Comment";
   } else {

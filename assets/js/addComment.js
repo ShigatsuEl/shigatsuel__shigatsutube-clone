@@ -1,6 +1,5 @@
 import axios from "axios";
 
-const commentNumber = document.getElementById("jsCommentNumber");
 const addCommentForm = document.getElementById("jsAddCommentForm");
 const addCommentInput = document.getElementById("jsAddCommentInput");
 const buttonBox = document.getElementById("jsBtnBox");
@@ -9,7 +8,17 @@ const commentBtn = document.getElementById("jsCommentBtn");
 const commentList = document.getElementById("jsCommentList");
 
 const increaseNumber = () => {
-  commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
+  const commentNumber = document.getElementById("jsCommentNumber");
+  const commentLiteral = document.getElementById("jsLiteralComment");
+  commentNumber.textContent = parseInt(commentNumber.textContent, 10) + 1;
+  if (commentNumber.textContent <= 0) {
+    commentNumber.textContent = "0";
+    commentLiteral.textContent = " Comments";
+  } else if (commentNumber.textContent === "1") {
+    commentLiteral.textContent = " Comment";
+  } else {
+    commentLiteral.textContent = " Comments";
+  }
 };
 
 const addComment = (parsedInfo) => {
