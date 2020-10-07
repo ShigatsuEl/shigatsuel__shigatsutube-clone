@@ -73,3 +73,21 @@ export const postEditComment = async (req, res) => {
     res.end();
   }
 };
+
+// Delete Comment
+
+export const postDeleteComment = async (req, res) => {
+  const {
+    params: { id: commentId },
+    body: { videoId, userId },
+  } = req;
+  try {
+    await Comment.findByIdAndRemove(commentId);
+    await Video.updateOne({ _id: videoId }, { $pull: { comments: commentId } });
+    await User.updateOne({ _id: userId }, { $pull: { comments: commentId } });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};

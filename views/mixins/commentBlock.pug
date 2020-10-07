@@ -24,5 +24,5 @@ mixin commentBlock(comment ={})
                 if loggedUser && loggedUser.id === comment.creator.id
                     span.comment__editBtn#jsCommentEdit
                         i.far.fa-edit.editBtn
-                    span.comment__deleteBtn
-                        i.far.fa-trash-alt
+                    span.comment__deleteBtn#jsCommentDelete
+                        i.far.fa-trash-alt.deleteBtn
