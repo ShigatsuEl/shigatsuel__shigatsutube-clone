@@ -7,6 +7,19 @@ let commentId;
 let userId;
 let videoId;
 
+const decreaseNumber = () => {
+  const commentNumber = document.getElementById("jsCommentNumber");
+  const commentLiteral = document.getElementById("jsLiteralComment");
+  commentNumber.textContent = parseInt(commentNumber.textContent, 10) - 1;
+  if (commentNumber.textContent <= 0) {
+    commentNumber.textContent = "0";
+  } else if (commentNumber.textContent === "1") {
+    commentLiteral.textContent = " Comment";
+  } else {
+    commentLiteral.textContent = " Comments";
+  }
+};
+
 const handleDeleteComment = () => {
   const commentBlock = document.getElementById(`${commentId}`);
   commentBlock.remove();
@@ -23,6 +36,7 @@ const handleDeleteData = async (commentId, userId, videoId) => {
   });
   if (response.status === 200) {
     handleDeleteComment();
+    decreaseNumber();
   }
 };
 
