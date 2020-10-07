@@ -7,6 +7,11 @@ let commentId;
 let userId;
 let videoId;
 
+const handleDeleteComment = () => {
+  const commentBlock = document.getElementById(`${commentId}`);
+  commentBlock.remove();
+};
+
 const handleDeleteData = async (commentId, userId, videoId) => {
   const response = await axios({
     method: "post",
@@ -17,7 +22,7 @@ const handleDeleteData = async (commentId, userId, videoId) => {
     },
   });
   if (response.status === 200) {
-    //
+    handleDeleteComment();
   }
 };
 
