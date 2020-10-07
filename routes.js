@@ -31,6 +31,7 @@ const GOOGLE_CALLBACK = "/auth/google/callback";
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/add-comment";
+const HEART_COMMENT = "/:id/heart-comment";
 const EDIT_COMMENT = "/:id/edit-comment";
 const DELETE_COMMENT = "/:id/delete-comment";
 
@@ -81,6 +82,7 @@ const routes = {
   api: API,
   registerView: REGISTER_VIEW,
   addComment: ADD_COMMENT,
+  heartComment: HEART_COMMENT,
   editComment: EDIT_COMMENT,
   deleteComment: DELETE_COMMENT,
 };

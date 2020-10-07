@@ -13,6 +13,12 @@ const CommentSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  heart: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const model = mongoose.model("Comment", CommentSchema);

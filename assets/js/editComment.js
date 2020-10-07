@@ -88,6 +88,7 @@ const handleEdit = (event) => {
 };
 
 function init() {
+  //모든 COMMENT가 SHIFT ENTER를 누르면 다음칸으로 넘어가고 저장될 수 있게 함
   for (let i = 0; i < commentText.length; i++) {
     commentText[i].innerHTML = commentText[i].innerText;
   }

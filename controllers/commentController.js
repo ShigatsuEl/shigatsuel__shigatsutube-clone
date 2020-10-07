@@ -58,6 +58,13 @@ export const postAddComment = async (req, res) => {
   }
 };
 
+// Heart Comment
+export const postHeartComment = (req, res) => {
+  const {
+    params: { id },
+  } = req;
+};
+
 // Edit Comment
 
 export const postEditComment = async (req, res) => {
