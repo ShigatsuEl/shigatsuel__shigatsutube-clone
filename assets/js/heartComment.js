@@ -9,7 +9,13 @@ let heartIcon;
 let isSelected;
 let commentBlock;
 
-const handleHeartCount = () => {};
+const handleHeartNumber = () => {
+  if(commentBlock) {
+    let heartNumber = commentBlock.querySelector("#jsHeartNumber").textContent;
+    isSelected ? heartNumber-- : heartNumber++;
+    commentBlock.querySelector("#jsHeartNumber").textContent = heartNumber;
+  }
+};
 
 const handleHeartSelected = (heartIcon) => {
   heartIcon.classList.toggle("selected");
@@ -25,9 +31,8 @@ const handleHeartData = async (commentId) => {
     },
   });
   if (response.status === 200) {
-    console.log("success");
     handleHeartSelected(heartIcon);
-    handleHeartCount();
+    handleHeartNumber();
   }
 };
 

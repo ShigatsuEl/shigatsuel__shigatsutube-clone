@@ -18,10 +18,10 @@ mixin commentBlock(comment ={})
             .comment__subinfo#jsCommentSubinfo
                 span.comment__heart
                     if loggedUser && comment.heart.includes(loggedUser.id)
-                         i.fas.fa-heart.heartBtn.selected
+                        i.fas.fa-heart.heartBtn.selected
                     else
                         i.fas.fa-heart.heartBtn
-                    span.comment__heart-number=comment.heart.length
+                    span.comment__heart-number#jsHeartNumber=comment.heart.length
                 span.comment__reply
                     i.fas.fa-reply
                 if loggedUser && loggedUser.id === comment.creator.id
