@@ -4,6 +4,7 @@ const commentContainer = document.getElementById("jsCommentContainer");
 const commentSubinfo = document.querySelector(".comment__subinfo");
 
 let commentId;
+let userId;
 let heartIcon;
 let isSelected;
 let commentBlock;
@@ -19,10 +20,12 @@ const handleHeartData = async (commentId) => {
     method: "post",
     url: `/api/${commentId}/heart-Comment`,
     data: {
+      userId,
       isSelected,
     },
   });
   if (response.status === 200) {
+    console.log("success");
     handleHeartSelected(heartIcon);
     handleHeartCount();
   }
@@ -30,18 +33,22 @@ const handleHeartData = async (commentId) => {
 
 const handleHeartBtn = (event) => {
   if (event.target.className.includes("heartBtn")) {
-    heartIcon = event.target;
     commentId =
-      event.target.parentElement.parentElement.parentElement.parentElement;
+      event.target.parentElement.parentElement.parentElement.parentElement
+        .dataset.id;
+    userId = JSON.parse(
+      document.getElementById("jsAddCommentForm").dataset.user
+    )._id;
+    heartIcon = event.target;
     commentBlock = document.getElementById(`${commentId}`);
-    handleHeartData(commentId);
     if (event.target.className.includes("selected")) {
       isSelected = true;
-      console.log(isSelected);
+      //   console.log(isSelected);
     } else {
       isSelected = false;
-      console.log(isSelected);
+      //   console.log(isSelected);
     }
+    handleHeartData(commentId);
   }
 };
 

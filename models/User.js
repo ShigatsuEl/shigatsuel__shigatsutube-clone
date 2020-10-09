@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
       ref: "Comment",
     },
   ],
-  heartComment: [
+  heartComments: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comment",

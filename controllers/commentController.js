@@ -59,10 +59,38 @@ export const postAddComment = async (req, res) => {
 };
 
 // Heart Comment
-export const postHeartComment = (req, res) => {
+export const postHeartComment = async (req, res) => {
   const {
-    params: { id },
+    params: { id: commentId },
+    body: { userId, isSelected },
   } = req;
+  // console.log(commentId, userId, isSelected);
+  console.log(isSelected);
+  try {
+    const comment = await Comment.findById(commentId);
+    const user = await User.findById(userId);
+    // comment heart && user.heartComments 가 있는지 없는지 확인하기 위한 if문
+    if(comment.heart && user.heartComments) {
+      if (!isSelected) {
+        if (comment.heart.indexOf(userId) === -1) comment.heart.push(userId);
+        if (user.heartComments.indexOf(commentId) === -1)
+          user.heartComments.push(commentId);
+        comment.save();
+        user.save();
+      } else {
+        if (comment.heart.indexOf(userId) !== -1)
+          comment.heart.splice(comment.heart.indexOf(userId), 1);
+        if (user.heartComments.indexOf(commentId) !== -1)
+          user.heartComments.splice(user.heartComments.indexOf(commentId), 1);
+        comment.save();
+        user.save();
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.end();
+  }
 };
 
 // Edit Comment
@@ -89,7 +117,7 @@ export const postDeleteComment = async (req, res) => {
     body: { videoId, userId },
   } = req;
   try {
-    await Comment.findByIdAndRemove(commentId);
+    await Comment.findByIdAndRemove({ _id: commentId });
     await Video.updateOne({ _id: videoId }, { $pull: { comments: commentId } });
     await User.updateOne({ _id: userId }, { $pull: { comments: commentId } });
   } catch (error) {
