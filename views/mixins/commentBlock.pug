@@ -32,8 +32,8 @@ mixin commentBlock(comment ={})
                         i.far.fa-trash-alt.deleteBtn
     if loggedUser
         .reply__box.hidden#jsReplyBox
-            form.reply__form
-                input.reply__input#jsAddCommentInput(type="text", placeholder="Feel free to reply comment~", name="reply", autocomplete="off", required)
+            form.reply__form#jsReplyForm
+                input.reply__input#jsReplyInput(type="text", placeholder="Feel free to reply comment~", name="reply", autocomplete="off", required)
                     
     //ul.replies__list#jsReplyList
                     each reply in comment.replies.reverse()

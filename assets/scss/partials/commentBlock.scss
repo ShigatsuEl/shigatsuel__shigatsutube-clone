@@ -139,6 +139,7 @@
     }
     .reply__box {
       display: flex;
+      margin-bottom: $first-margin;
       .reply__form {
         width: 100%;
         .reply__input {
