@@ -29,3 +29,13 @@ mixin commentBlock(comment ={})
                         i.far.fa-edit.editBtn
                     span.comment__deleteBtn#jsCommentDelete
                         i.far.fa-trash-alt.deleteBtn
+    ul.replies__list#jsReplyList
+                    each reply in comment.replies.reverse()
+                        +replyBlock({
+                            id : reply.id,
+                            creator : reply.creator,
+                            avatarUrl : reply.creator.avatarUrl,
+                            createdAt : dateFormatter(reply.createdAt),
+                            text : reply.text,
+                            heart: reply.heart
+                        })
