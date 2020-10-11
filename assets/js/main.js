@@ -5,3 +5,4 @@ import "./addComment";
 import "./heartComment";
 import "./editComment";
 import "./deleteComment";
+import "./addReplyComment";

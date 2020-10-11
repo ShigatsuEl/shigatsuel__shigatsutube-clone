@@ -23,13 +23,19 @@ mixin commentBlock(comment ={})
                         i.fas.fa-heart.heartBtn
                     span.comment__heart-number#jsHeartNumber=comment.heart.length
                 span.comment__reply
-                    i.fas.fa-reply
+                    i.fas.fa-reply.replyBtn
+                    //span.cnt#jsReplyCnt=comment.replies.length
                 if loggedUser && loggedUser.id === comment.creator.id
                     span.comment__editBtn#jsCommentEdit
                         i.far.fa-edit.editBtn
                     span.comment__deleteBtn#jsCommentDelete
                         i.far.fa-trash-alt.deleteBtn
-    ul.replies__list#jsReplyList
+    if loggedUser
+        .reply__box.hidden#jsReplyBox
+            form.reply__form
+                input.reply__input#jsAddCommentInput(type="text", placeholder="Feel free to reply comment~", name="reply", autocomplete="off", required)
+                    
+    //ul.replies__list#jsReplyList
                     each reply in comment.replies.reverse()
                         +replyBlock({
                             id : reply.id,

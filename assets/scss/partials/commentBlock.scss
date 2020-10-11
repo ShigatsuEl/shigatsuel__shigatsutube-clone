@@ -137,5 +137,20 @@
         }
       }
     }
+    .reply__box {
+      display: flex;
+      .reply__form {
+        width: 100%;
+        .reply__input {
+          border-radius: 7px;
+          padding: $third-padding;
+          width: 100%;
+          font-size: 1rem;
+        }
+      }
+    }
+    .hidden {
+      display: none;
+    }
   }
 }
