@@ -1,20 +1,20 @@
-mixin replyBlock(comment ={})
+mixin replyBlock(reply ={})
     li.reply__block(id=reply.id data-id=reply.id)
         .reply__left
-            img.reply__publish-avatar(src=`${reply.creator.avatarUrl}`)
+            img.reply__publish-avatar(src=`${reply.avatarUrl}`)
         .reply__right
             .reply__info
                 a.reply__writer(href=routes.userDetail(reply.creator.id))
                     span.reply__writer-name=reply.creator.name
                 span.reply__createdAt=reply.createdAt
             .reply__content#jsReplyContent
-                .reply__text#jsReplyText=comment.text
+                .reply__text#jsReplyText=reply.text
             .reply__editBox.hidden#jsReplyEditBox(data-id=reply.id)
                 form.reply__editForm#jsReplyEditForm
                     .reply__editInput#jsReplyEditInput(contenteditable="true", name="editReply", placeholder="Edit your reply", autocomplete="off", required)=reply.text
                     .editBtnBox
-                        button.comment__editCancelBtn#jsReplyEditCancelBtn CANCEL
-                        button.comment__editSaveBtn#jsReplyEditSaveBtn SAVE
+                        button.reply__editCancelBtn#jsReplyEditCancelBtn CANCEL
+                        button.reply__editSaveBtn#jsReplyEditSaveBtn SAVE
             .reply__subinfo#jsReplySubinfo
                 span.reply__heart
                     if loggedUser && reply.heart.includes(loggedUser.id)

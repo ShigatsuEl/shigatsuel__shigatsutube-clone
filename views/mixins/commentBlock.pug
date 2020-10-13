@@ -1,3 +1,5 @@
+include ./replyBlock
+
 mixin commentBlock(comment ={})
     li.comment__block(id=comment.id data-id=comment.id)
         .comment__left
@@ -34,14 +36,13 @@ mixin commentBlock(comment ={})
         .reply__box.hidden#jsReplyBox
             form.reply__form#jsReplyForm
                 input.reply__input#jsReplyInput(type="text", placeholder="Feel free to reply comment~", name="reply", autocomplete="off", required)
-                    
-    //ul.replies__list#jsReplyList
-                    each reply in comment.replies.reverse()
-                        +replyBlock({
-                            id : reply.id,
-                            creator : reply.creator,
-                            avatarUrl : reply.creator.avatarUrl,
-                            createdAt : dateFormatter(reply.createdAt),
-                            text : reply.text,
-                            heart: reply.heart
-                        })
+    ul.replies__list#jsReplyList
+        each reply in comment.replies
+            +replyBlock({
+                id : reply.id,
+                creator : reply.creator.id,
+                avatarUrl : reply.creator.avatarUrl,
+                createdAt : dateFormatter(reply.createdAt),
+                text : reply.text,
+                heart: reply.heart
+            })

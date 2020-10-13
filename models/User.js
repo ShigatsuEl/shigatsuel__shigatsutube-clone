@@ -28,6 +28,12 @@ const UserSchema = new mongoose.Schema({
       ref: "Comment",
     },
   ],
+  heartReplies: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Reply",
+    },
+  ],
 });
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });

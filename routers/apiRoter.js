@@ -6,6 +6,7 @@ import {
   postDeleteComment,
   postHeartComment,
 } from "../controllers/commentController";
+import { postAddReply } from "../controllers/replyController";
 import { onlyPrivate } from "../middlewares";
 import routes from "../routes";
 
@@ -16,5 +17,6 @@ apiRouter.post(routes.addComment, onlyPrivate, postAddComment);
 apiRouter.post(routes.heartComment, onlyPrivate, postHeartComment);
 apiRouter.post(routes.editComment, onlyPrivate, postEditComment);
 apiRouter.post(routes.deleteComment, onlyPrivate, postDeleteComment);
+apiRouter.post(routes.addReply, onlyPrivate, postAddReply);
 
 export default apiRouter;

@@ -69,7 +69,7 @@ export const postHeartComment = async (req, res) => {
     const comment = await Comment.findById(commentId);
     const user = await User.findById(userId);
     // comment heart && user.heartComments 가 있는지 없는지 확인하기 위한 if문
-    if(comment.heart && user.heartComments) {
+    if (comment.heart && user.heartComments) {
       if (!isSelected) {
         if (comment.heart.indexOf(userId) === -1) comment.heart.push(userId);
         if (user.heartComments.indexOf(commentId) === -1)
