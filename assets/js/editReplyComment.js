@@ -13,6 +13,28 @@ let replyEditInput;
 let replyEditCancelBtn;
 let replyEditSaveBtn;
 
+const handleEnter = async (event) => {
+  if (window.event.keyCode === 13) {
+    if (!window.event.shiftKey) {
+      event.preventDefault();
+      const newReply = replyEditInput.innerHTML;
+      const response = await axios({
+        url: `/api/${replyId}/edit-reply`,
+        method: "post",
+        data: {
+          editReply: newReply,
+        },
+      });
+      if (response.status === 200) {
+        replyContent.innerHTML = newReply;
+        replyEditInput.innerHTML = newReply;
+        replyContent.classList.toggle("hidden");
+        replyEditBox.classList.toggle("hidden");
+      }
+    }
+  }
+};
+
 const handleSave = async (event) => {
   event.preventDefault();
   const newReply = replyEditInput.innerHTML;
@@ -60,7 +82,7 @@ const handleEdit = (event) => {
     replyEditInput.focus();
     replyEditCancelBtn.addEventListener("click", handleCancle);
     replyEditForm.addEventListener("submit", handleSave);
-    // replyEditInput.addEventListener("keydown", handleEnter);
+    replyEditInput.addEventListener("keydown", handleEnter);
     replyEditSaveBtn.addEventListener("click", handleSave);
   }
 };
