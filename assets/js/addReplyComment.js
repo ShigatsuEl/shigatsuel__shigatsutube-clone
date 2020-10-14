@@ -9,6 +9,8 @@ let replyForm;
 let replyInput;
 let userId;
 let replyBox;
+let replyCancelBtn;
+let replySubmitBtn;
 
 const sendReply = async (reply) => {
   const response = await axios({
@@ -21,6 +23,11 @@ const sendReply = async (reply) => {
   if (response.status === 200) {
     //
   }
+};
+
+const handleCancel = () => {
+  replyInput.value = "";
+  replyInput.blur();
 };
 
 const handleSubmit = (event) => {
@@ -45,8 +52,14 @@ const handleReplyBtn = (event) => {
         .dataset.id;
     replyForm = comment.nextSibling.childNodes[0];
     replyInput = comment.nextSibling.childNodes[0].childNodes[0];
+    replyCancelBtn =
+      comment.nextSibling.childNodes[0].childNodes[1].childNodes[0];
+    replySubmitBtn =
+      comment.nextSibling.childNodes[0].childNodes[1].childNodes[1];
     handleReplyHidden();
     replyForm.addEventListener("submit", handleSubmit);
+    replyCancelBtn.addEventListener("click", handleCancel);
+    replySubmitBtn.addEventListener("click", handleSubmit);
   }
 };
 
