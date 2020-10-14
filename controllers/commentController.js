@@ -1,6 +1,7 @@
 import Video from "../models/Video";
 import User from "../models/User";
 import Comment from "../models/Comment";
+import Reply from "../models/Reply";
 import { dateFormatter } from "../middlewares";
 
 // Register Video View
@@ -119,6 +120,7 @@ export const postDeleteComment = async (req, res) => {
     await Comment.findByIdAndRemove({ _id: commentId });
     await Video.updateOne({ _id: videoId }, { $pull: { comments: commentId } });
     await User.updateOne({ _id: userId }, { $pull: { comments: commentId } });
+    await Reply.deleteMany({ whichComment: commentId });
   } catch (error) {
     console.log(error);
   } finally {

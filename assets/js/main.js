@@ -6,3 +6,4 @@ import "./heartComment";
 import "./editComment";
 import "./deleteComment";
 import "./addReplyComment";
+import "./editReplyComment";
