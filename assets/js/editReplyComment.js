@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const replyContainer = document.getElementById("jsReplyContainer");
 const replySubinfo = document.querySelector(".reply__subinfo");
 const replyText = document.querySelectorAll(".reply__text");
@@ -10,6 +12,30 @@ let replyEditForm;
 let replyEditInput;
 let replyEditCancelBtn;
 let replyEditSaveBtn;
+
+const handleSave = async (event) => {
+  event.preventDefault();
+  const newReply = replyEditInput.innerHTML;
+  const response = await axios({
+    url: `/api/${replyId}/edit-reply`,
+    method: "post",
+    data: {
+      editReply: newReply,
+    },
+  });
+  if (response.status === 200) {
+    replyContent.innerHTML = newReply;
+    replyEditInput.innerHTML = newReply;
+    replyContent.classList.toggle("hidden");
+    replyEditBox.classList.toggle("hidden");
+  }
+};
+
+const handleCancle = (event) => {
+  event.preventDefault();
+  replyContent.classList.toggle("hidden");
+  replyEditBox.classList.toggle("hidden");
+};
 
 const handleEdit = (event) => {
   /* console.log(event.target.parentElement.parentElement.parentElement.parentElement.dataset.id); */
@@ -32,10 +58,10 @@ const handleEdit = (event) => {
     const reply = replyContent.innerHTML;
     replyEditInput.innerHTML = reply;
     replyEditInput.focus();
-    /* replyEditCancelBtn.addEventListener("click", handleCancle);
+    replyEditCancelBtn.addEventListener("click", handleCancle);
     replyEditForm.addEventListener("submit", handleSave);
-    replyEditInput.addEventListener("keydown", handleEnter);
-    replyEditSaveBtn.addEventListener("click", handleSave); */
+    // replyEditInput.addEventListener("keydown", handleEnter);
+    replyEditSaveBtn.addEventListener("click", handleSave);
   }
 };
 

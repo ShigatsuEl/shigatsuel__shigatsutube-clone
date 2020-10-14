@@ -2,6 +2,8 @@ import Comment from "../models/Comment";
 import Reply from "../models/Reply";
 import { dateFormatter } from "../middlewares";
 
+// Add Reply Controller
+
 export const postAddReply = async (req, res) => {
   const {
     params: { id: commentId },
@@ -24,6 +26,22 @@ export const postAddReply = async (req, res) => {
       replyId: newReply.id,
     };
     res.json(parsedInfo);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};
+
+// Edit Reply Controller
+
+export const postEditReply = async (req, res) => {
+  const {
+    params: { id },
+    body: { editReply },
+  } = req;
+  try {
+    await Reply.findByIdAndUpdate({ _id: id }, { text: editReply });
   } catch (error) {
     console.log(error);
   } finally {
