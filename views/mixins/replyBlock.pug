@@ -23,9 +23,7 @@ mixin replyBlock(reply ={})
                         else
                             i.fas.fa-heart.heartBtn
                         span.reply__heart-number#jsHeartNumber=reply.heart.length
-                    span.reply__reply
-                        i.fas.fa-reply
-                    if loggedUser && loggedUser.id === reply.creator.id
+                    if loggedUser && loggedUser.id === reply.creatorId
                         span.reply__editBtn#jsReplyEdit
                             i.far.fa-edit.editBtn
                         span.reply__deleteBtn#jsReplyDelete
@@ -54,8 +52,6 @@ mixin replyBlock(reply ={})
                         else
                             i.fas.fa-heart.heartBtn
                         span.reply__heart-number#jsHeartNumber=reply.heart.length
-                    span.reply__reply
-                        i.fas.fa-reply
                     if loggedUser && loggedUser.id === reply.creator.id
                         span.reply__editBtn#jsReplyEdit
                             i.far.fa-edit.editBtn

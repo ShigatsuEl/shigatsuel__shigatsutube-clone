@@ -1,0 +1,246 @@
+.replies__view-box {
+  display: flex;
+  justify-content: flex-end;
+  .replies__list {
+    width: 90%;
+    .reply__block-owner {
+      display: flex;
+      justify-items: flex-end;
+      margin-bottom: $first-margin;
+      padding: $third-padding;
+      width: 100%;
+      background-color: rgba($color: red, $alpha: 0.2);
+      .reply__left {
+        .reply__publish-avatar {
+          margin-right: $first-margin;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .reply__right {
+        display: flex;
+        flex-direction: column;
+        .reply__info {
+          display: flex;
+          align-items: center;
+          margin-bottom: 4px;
+          .reply__writer {
+            margin-right: $first-margin;
+            color: rgba($color: blue, $alpha: 0.5);
+            font-weight: 600;
+            font-size: 1rem;
+          }
+          .reply__createdAt {
+            font-size: 0.8rem;
+          }
+        }
+        .reply__content {
+          display: flex;
+          margin-bottom: 4px;
+          width: 100%;
+          font-size: 1rem;
+        }
+        .hidden {
+          display: none;
+        }
+        .reply__editBox {
+          .reply__editForm {
+            display: flex;
+            flex-direction: column;
+            border-radius: 5px;
+            .reply__editInput {
+              margin-bottom: 5px;
+              border: 3px solid rgba($color: black, $alpha: 0.5);
+              padding: 5px;
+            }
+            .editBtnBox {
+              align-self: flex-end;
+              .reply__editCancelBtn {
+                cursor: pointer;
+                margin-right: 5px;
+                border-radius: 7px;
+                border: none;
+                padding: 5px;
+                width: 80px;
+                background-color: black;
+                color: white;
+                font-size: 0.8rem;
+              }
+              .reply__editSaveBtn {
+                cursor: pointer;
+                border-radius: 7px;
+                border: none;
+                padding: 5px;
+                width: 80px;
+                background-color: red;
+                color: white;
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
+        .reply__subinfo {
+          display: flex;
+          align-items: center;
+          .reply__heart {
+            margin-right: $first-margin;
+            cursor: pointer;
+            .fa-heart {
+              margin-right: 5px;
+              transition: all 0.3s ease-in-out;
+              &:hover,
+              &:focus {
+                transform: scale(1.3);
+                color: $red;
+              }
+            }
+          }
+          .reply__editBtn {
+            cursor: pointer;
+            margin-right: $first-margin;
+            .fa-edit {
+              transition: all 0.3s ease-in-out;
+              &:hover,
+              &:focus {
+                transform: scale(1.3);
+                color: blue;
+              }
+            }
+          }
+          .reply__deleteBtn {
+            cursor: pointer;
+            .fa-trash-alt {
+              transition: all 0.3s ease-in-out;
+              &:hover,
+              &:focus {
+                transform: scale(1.3);
+                color: red;
+              }
+            }
+          }
+        }
+      }
+    }
+    // 더 좋은 방법이 없을까..? 시간이 없어서 일단 이렇게 중복되는 코드를 만든다 ㅠ.ㅠ
+    .reply__block-visitor {
+      display: flex;
+      justify-items: flex-end;
+      margin-bottom: $first-margin;
+      padding: $third-padding;
+      width: 100%;
+      background-color: rgba($color: blue, $alpha: 0.2);
+      .reply__left {
+        .reply__publish-avatar {
+          margin-right: $first-margin;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .reply__right {
+        display: flex;
+        flex-direction: column;
+        .reply__info {
+          display: flex;
+          align-items: center;
+          margin-bottom: 4px;
+          .reply__writer {
+            margin-right: $first-margin;
+            color: rgba($color: blue, $alpha: 0.5);
+            font-weight: 600;
+            font-size: 1rem;
+          }
+          .reply__createdAt {
+            font-size: 0.8rem;
+          }
+        }
+        .reply__content {
+          display: flex;
+          margin-bottom: 4px;
+          width: 100%;
+          font-size: 1rem;
+        }
+        .hidden {
+          display: none;
+        }
+        .reply__editBox {
+          .reply__editForm {
+            display: flex;
+            flex-direction: column;
+            border-radius: 5px;
+            .reply__editInput {
+              margin-bottom: 5px;
+              border: 3px solid rgba($color: black, $alpha: 0.5);
+              padding: 5px;
+            }
+            .editBtnBox {
+              align-self: flex-end;
+              .reply__editCancelBtn {
+                cursor: pointer;
+                margin-right: 5px;
+                border-radius: 7px;
+                border: none;
+                padding: 5px;
+                width: 80px;
+                background-color: black;
+                color: white;
+                font-size: 0.8rem;
+              }
+              .reply__editSaveBtn {
+                cursor: pointer;
+                border-radius: 7px;
+                border: none;
+                padding: 5px;
+                width: 80px;
+                background-color: red;
+                color: white;
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
+        .reply__subinfo {
+          display: flex;
+          align-items: center;
+          .reply__heart {
+            margin-right: $first-margin;
+            cursor: pointer;
+            .fa-heart {
+              margin-right: 5px;
+              transition: all 0.3s ease-in-out;
+              &:hover,
+              &:focus {
+                transform: scale(1.3);
+                color: $red;
+              }
+            }
+          }
+          .reply__editBtn {
+            cursor: pointer;
+            margin-right: $first-margin;
+            .fa-edit {
+              transition: all 0.3s ease-in-out;
+              &:hover,
+              &:focus {
+                transform: scale(1.3);
+                color: blue;
+              }
+            }
+          }
+          .reply__deleteBtn {
+            cursor: pointer;
+            .fa-trash-alt {
+              transition: all 0.3s ease-in-out;
+              &:hover,
+              &:focus {
+                transform: scale(1.3);
+                color: red;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
