@@ -13,12 +13,9 @@ export const postAddReply = async (req, res) => {
       creator: req.user.id,
       whichComment: commentId,
     });
-    // newReply = await newReply.populate("creator").execPopulate();
-
     const comment = await Comment.findById(commentId);
     await comment.replies.push(newReply.id);
     comment.save();
-
     const parsedInfo = {
       name: newReply.creator.name,
       date: dateFormatter(newReply.createdAt),
@@ -27,7 +24,6 @@ export const postAddReply = async (req, res) => {
       replyId: newReply.id,
     };
     res.json(parsedInfo);
-    res.render("videoDetail", { comment });
   } catch (error) {
     console.log(error);
   } finally {

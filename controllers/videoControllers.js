@@ -62,7 +62,6 @@ export const videoDetail = async (req, res) => {
         path: "comments",
         populate: { path: "replies", populate: { path: "creator" } },
       });
-    console.log(video.comments[1].replies[0]);
     res.render("videoDetail", { pageTitle: video.title, video, user });
   } catch (error) {
     res.redirect(routes.home);

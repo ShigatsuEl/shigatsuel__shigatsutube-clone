@@ -102,6 +102,7 @@
             margin-right: $first-margin;
             cursor: pointer;
             .fa-reply {
+              margin-right: 5px;
               color: rgba($color: black, $alpha: 0.5);
               transition: all 0.3s ease-in-out;
               &:hover,

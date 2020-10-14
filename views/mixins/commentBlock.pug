@@ -26,7 +26,7 @@ mixin commentBlock(comment ={})
                     span.comment__heart-number#jsHeartNumber=comment.heart.length
                 span.comment__reply
                     i.fas.fa-reply.replyBtn
-                    //span.cnt#jsReplyCnt=comment.replies.length
+                    span.reply__count#jsReplyCnt=comment.replies.length
                 if loggedUser && loggedUser.id === comment.creator.id
                     span.comment__editBtn#jsCommentEdit
                         i.far.fa-edit.editBtn
@@ -37,10 +37,11 @@ mixin commentBlock(comment ={})
             form.reply__form#jsReplyForm
                 input.reply__input#jsReplyInput(type="text", placeholder="Feel free to reply comment~", name="reply", autocomplete="off", required)
     ul.replies__list#jsReplyList
-        each reply in comment.replies
+        each reply in comment.replies.reverse()
             +replyBlock({
                 id : reply.id,
-                creator : reply.creator.id,
+                creatorId : reply.creator.id,
+                creator: reply.creator.name,
                 avatarUrl : reply.creator.avatarUrl,
                 createdAt : dateFormatter(reply.createdAt),
                 text : reply.text,
