@@ -1,3 +1,4 @@
+import User from "../models/User";
 import Comment from "../models/Comment";
 import Reply from "../models/Reply";
 import { dateFormatter } from "../middlewares";
@@ -66,5 +67,37 @@ export const postDeleteReply = async (req, res) => {
     res.status(400);
   } finally {
     res.end();
+  }
+};
+
+// Heart Reply Controller
+
+export const postHeartReply = async (req, res) => {
+  const {
+    params: { id: replyId },
+    body: { userId, isSelected },
+  } = req;
+  console.log(replyId, userId);
+  try {
+    const reply = await Reply.findById(replyId);
+    const user = await User.findById(userId);
+    if (reply.heart && user.heartReplies) {
+      if (!isSelected) {
+        if (reply.heart.indexOf(userId) === -1) reply.heart.push(userId);
+        if (user.heartReplies.indexOf(replyId) === -1)
+          user.heartReplies.push(replyId);
+        reply.save();
+        user.save();
+      } else {
+        if (reply.heart.indexOf(userId) !== -1)
+          reply.heart.splice(reply.heart.indexOf(userId), 1);
+        if (user.heartReplies.indexOf(replyId) !== -1)
+          user.heartReplies.splice(user.heartReplies.indexOf(replyId), 1);
+        reply.save();
+        user.save();
+      }
+    }
+  } catch (error) {
+    res.status(400);
   }
 };

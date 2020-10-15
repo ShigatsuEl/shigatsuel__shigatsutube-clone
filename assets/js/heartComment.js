@@ -24,7 +24,7 @@ const handleHeartSelected = (heartIcon) => {
 const handleHeartData = async (commentId) => {
   const response = await axios({
     method: "post",
-    url: `/api/${commentId}/heart-Comment`,
+    url: `/api/${commentId}/heart-comment`,
     data: {
       userId,
       isSelected,
