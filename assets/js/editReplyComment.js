@@ -5,16 +5,14 @@ const replySubinfo = document.querySelector(".reply__subinfo");
 const replyText = document.querySelectorAll(".reply__text");
 
 let replyId;
-let replyContainer;
 let replyBlock;
 let replyContent;
 let replyEditBox;
-let replyEditForm;
 let replyEditInput;
 let replyEditCancelBtn;
 let replyEditSaveBtn;
 
-// Edit버튼을 누르고 ReplyInput(답글입력)을 Enter & Shift + Enter 입력 시 발생하는 이벤트!
+// Reply Edit버튼을 누르고 ReplyInput(답글입력)을 Enter & Shift + Enter 입력 시 발생하는 이벤트!
 
 const handleEnter = async (event) => {
   if (window.event.keyCode === 13) {
@@ -46,7 +44,7 @@ const handleEnter = async (event) => {
     }
   }
 };
-// Edit버튼을 누르고 Save 버튼을 클릭할 때 발생하는 이벤트!
+// Reply Edit버튼을 누르고 Save 버튼을 클릭할 때 발생하는 이벤트!
 
 const handleSave = async (event) => {
   if (event.target.className.includes("editSaveBtn")) {
@@ -76,7 +74,7 @@ const handleSave = async (event) => {
   }
 };
 
-// Edit버튼을 누르고 Cancel 버튼을 클릭할 때 발생하는 이벤트!
+// Reply Edit버튼을 누르고 Cancel 버튼을 클릭할 때 발생하는 이벤트!
 
 const handleCancle = (event) => {
   if (event.target.className.includes("editCancelBtn")) {
@@ -102,7 +100,6 @@ const handleEdit = (event) => {
     replyBlock = document.getElementById(`${replyId}`);
     replyContent = replyBlock.querySelector("#jsReplyContent");
     replyEditBox = replyBlock.querySelector("#jsReplyEditBox");
-    replyEditForm = replyEditBox.querySelector("#jsReplyEditForm");
     replyEditInput = replyEditBox.querySelector("#jsReplyEditInput");
     replyEditCancelBtn = replyEditBox.querySelector("#jsReplyEditCancelBtn");
     replyEditSaveBtn = replyEditBox.querySelector("#jsReplyEditSaveBtn");
@@ -114,10 +111,9 @@ const handleEdit = (event) => {
     replyEditInput.innerHTML = reply;
     replyEditInput.focus();
 
-    // replyEditForm.addEventListener("submit", handleSave);
-    replyEditInput.addEventListener("keydown", handleEnter);
-    replyEditSaveBtn.addEventListener("click", handleSave);
     replyEditCancelBtn.addEventListener("click", handleCancle);
+    replyEditSaveBtn.addEventListener("click", handleSave);
+    replyEditInput.addEventListener("keydown", handleEnter);
   }
 };
 

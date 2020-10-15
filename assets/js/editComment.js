@@ -7,16 +7,26 @@ const commentText = document.querySelectorAll(".comment__text");
 let commentId;
 let commentBlock;
 let commentContent;
-let editBox;
+let commentEditBox;
 let commentEditForm;
 let commentEditInput;
 let commentEditCancelBtn;
 let commentEditSaveBtn;
 
+// Comment Edit버튼을 누르고 ReplyInput(답글입력)을 Enter & Shift + Enter 입력 시 발생하는 이벤트!
+
 const handleEnter = async (event) => {
   if (window.event.keyCode === 13) {
     if (!window.event.shiftKey) {
       event.preventDefault();
+      commentId =
+        event.target.parentElement.parentElement.parentElement.parentElement
+          .dataset.id;
+      commentBlock = document.getElementById(`${commentId}`);
+      commentContent = commentBlock.querySelector("#jsCommentContent");
+      commentEditBox = commentBlock.querySelector("#jsCommentEditBox");
+      commentEditInput = commentEditBox.querySelector("#jsCommentEditInput");
+
       const newComment = commentEditInput.innerHTML;
       const response = await axios({
         url: `/api/${commentId}/edit-comment`,
@@ -29,34 +39,55 @@ const handleEnter = async (event) => {
         commentContent.innerHTML = newComment;
         commentEditInput.innerHTML = newComment;
         commentContent.classList.toggle("hidden");
-        editBox.classList.toggle("hidden");
+        commentEditBox.classList.toggle("hidden");
       }
     }
   }
 };
 
+// Comment Edit버튼을 누르고 Save 버튼을 클릭할 때 발생하는 이벤트!
+
 const handleSave = async (event) => {
-  event.preventDefault();
-  const newComment = commentEditInput.innerHTML;
-  const response = await axios({
-    url: `/api/${commentId}/edit-comment`,
-    method: "post",
-    data: {
-      editComment: newComment,
-    },
-  });
-  if (response.status === 200) {
-    commentContent.innerHTML = newComment;
-    commentEditInput.innerHTML = newComment;
-    commentContent.classList.toggle("hidden");
-    editBox.classList.toggle("hidden");
+  if (event.target.className.includes("commentSaveBtn")) {
+    event.preventDefault();
+    commentId =
+      event.target.parentElement.parentElement.parentElement.parentElement
+        .parentElement.dataset.id;
+    commentBlock = document.getElementById(`${commentId}`);
+    commentContent = commentBlock.querySelector("#jsCommentContent");
+    commentEditBox = commentBlock.querySelector("#jsCommentEditBox");
+
+    const newComment = commentEditInput.innerHTML;
+    const response = await axios({
+      url: `/api/${commentId}/edit-comment`,
+      method: "post",
+      data: {
+        editComment: newComment,
+      },
+    });
+    if (response.status === 200) {
+      commentContent.innerHTML = newComment;
+      commentEditInput.innerHTML = newComment;
+      commentContent.classList.toggle("hidden");
+      commentEditBox.classList.toggle("hidden");
+    }
   }
 };
 
+// Comment Edit 버튼을 누르고 Cancel 버튼을 클릭할 때 발생하는 이벤트!
+
 const handleCancle = (event) => {
-  event.preventDefault();
-  commentContent.classList.toggle("hidden");
-  editBox.classList.toggle("hidden");
+  if (event.target.className.includes("commentCancelBtn")) {
+    event.preventDefault();
+    commentId =
+      event.target.parentElement.parentElement.parentElement.parentElement
+        .parentElement.dataset.id;
+    commentBlock = document.getElementById(`${commentId}`);
+    commentContent = commentBlock.querySelector("#jsCommentContent");
+    commentEditBox = commentBlock.querySelector("#jsCommentEditBox");
+    commentContent.classList.toggle("hidden");
+    commentEditBox.classList.toggle("hidden");
+  }
 };
 
 const handleEdit = (event) => {
@@ -69,19 +100,20 @@ const handleEdit = (event) => {
         .dataset.id;
     commentBlock = document.getElementById(`${commentId}`);
     commentContent = commentBlock.querySelector("#jsCommentContent");
-    editBox = commentBlock.querySelector("#jsCommentEditBox");
-    commentEditForm = editBox.querySelector("#jsCommentEditForm");
-    commentEditInput = editBox.querySelector("#jsCommentEditInput");
-    commentEditCancelBtn = editBox.querySelector("#jsCommentEditCancelBtn");
-    commentEditSaveBtn = editBox.querySelector("#jsCommentEditSaveBtn");
+    commentEditBox = commentBlock.querySelector("#jsCommentEditBox");
+    commentEditForm = commentEditBox.querySelector("#jsCommentEditForm");
+    commentEditInput = commentEditBox.querySelector("#jsCommentEditInput");
+    commentEditCancelBtn = commentEditBox.querySelector(
+      "#jsCommentEditCancelBtn"
+    );
+    commentEditSaveBtn = commentEditBox.querySelector("#jsCommentEditSaveBtn");
 
     commentContent.classList.toggle("hidden");
-    editBox.classList.toggle("hidden");
+    commentEditBox.classList.toggle("hidden");
     const comment = commentContent.innerHTML;
     commentEditInput.innerHTML = comment;
     commentEditInput.focus();
     commentEditCancelBtn.addEventListener("click", handleCancle);
-    commentEditForm.addEventListener("submit", handleSave);
     commentEditInput.addEventListener("keydown", handleEnter);
     commentEditSaveBtn.addEventListener("click", handleSave);
   }

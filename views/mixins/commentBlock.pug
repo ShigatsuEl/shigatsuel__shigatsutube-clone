@@ -15,8 +15,8 @@ mixin commentBlock(comment ={})
                 form.comment__editForm#jsCommentEditForm
                     .comment__editInput#jsCommentEditInput(contenteditable="true", name="editComment", placeholder="Edit your comment", autocomplete="off", required)=comment.text
                     .editBtnBox
-                        button.comment__editCancelBtn#jsCommentEditCancelBtn CANCEL
-                        button.comment__editSaveBtn#jsCommentEditSaveBtn SAVE
+                        button.comment__editCancelBtn.commentCancelBtn#jsCommentEditCancelBtn CANCEL
+                        button.comment__editSaveBtn.commentSaveBtn#jsCommentEditSaveBtn SAVE
             .comment__subinfo#jsCommentSubinfo
                 span.comment__heart
                     if loggedUser && comment.heart.includes(loggedUser.id)
