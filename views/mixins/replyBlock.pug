@@ -14,8 +14,8 @@ mixin replyBlock(reply ={})
                     form.reply__editForm#jsReplyEditForm
                         .reply__editInput#jsReplyEditInput(contenteditable="true", name="editReply", placeholder="Edit your reply", autocomplete="off", required)=reply.text
                         .editBtnBox
-                            button.reply__editCancelBtn#jsReplyEditCancelBtn CANCEL
-                            button.reply__editSaveBtn#jsReplyEditSaveBtn SAVE
+                            button.reply__editCancelBtn.editCancelBtn#jsReplyEditCancelBtn CANCEL
+                            button.reply__editSaveBtn.editSaveBtn#jsReplyEditSaveBtn SAVE
                 .reply__subinfo#jsReplySubinfo
                     span.reply__heart
                         if loggedUser && reply.heart.includes(loggedUser.id)
@@ -25,7 +25,7 @@ mixin replyBlock(reply ={})
                         span.reply__heart-number#jsHeartNumber=reply.heart.length
                     if loggedUser && loggedUser.id === reply.creatorId
                         span.reply__editBtn#jsReplyEdit
-                            i.far.fa-edit.editReplyBtn
+                            i.far.fa-edit.replyEditBtn
                         span.reply__deleteBtn#jsReplyDelete
                             i.far.fa-trash-alt.deleteBtn
     else
@@ -43,8 +43,8 @@ mixin replyBlock(reply ={})
                     form.reply__editForm#jsReplyEditForm
                         .reply__editInput#jsReplyEditInput(contenteditable="true", name="editReply", placeholder="Edit your reply", autocomplete="off", required)=reply.text
                         .editBtnBox
-                            button.reply__editCancelBtn#jsReplyEditCancelBtn CANCEL
-                            button.reply__editSaveBtn#jsReplyEditSaveBtn SAVE
+                            button.reply__editCancelBtn.editCancelBtn#jsReplyEditCancelBtn CANCEL
+                            button.reply__editSaveBtn.editSaveBtn#jsReplyEditSaveBtn SAVE
                 .reply__subinfo#jsReplySubinfo
                     span.reply__heart
                         if loggedUser && reply.heart.includes(loggedUser.id)
@@ -54,6 +54,6 @@ mixin replyBlock(reply ={})
                         span.reply__heart-number#jsHeartNumber=reply.heart.length
                     if loggedUser && loggedUser.id === reply.creator.id
                         span.reply__editBtn#jsReplyEdit
-                            i.far.fa-edit.editReplyBtn
+                            i.far.fa-edit.replyEditBtn
                         span.reply__deleteBtn#jsReplyDelete
                             i.far.fa-trash-alt.deleteBtn
