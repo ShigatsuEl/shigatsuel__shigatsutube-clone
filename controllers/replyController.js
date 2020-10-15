@@ -34,6 +34,39 @@ export const postAddReply = async (req, res) => {
   }
 };
 
+// Heart Reply Controller
+
+export const postHeartReply = async (req, res) => {
+  const {
+    params: { id: replyId },
+    body: { userId, isSelected },
+  } = req;
+  try {
+    const reply = await Reply.findById(replyId);
+    const user = await User.findById(userId);
+    if (reply.heart && user.heartReplies) {
+      if (!isSelected) {
+        if (reply.heart.indexOf(userId) === -1) reply.heart.push(userId);
+        if (user.heartReplies.indexOf(replyId) === -1)
+          user.heartReplies.push(replyId);
+        reply.save();
+        user.save();
+      } else {
+        if (reply.heart.indexOf(userId) !== -1)
+          reply.heart.splice(reply.heart.indexOf(userId), 1);
+        if (user.heartReplies.indexOf(replyId) !== -1)
+          user.heartReplies.splice(user.heartReplies.indexOf(replyId), 1);
+        reply.save();
+        user.save();
+      }
+    }
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
 // Edit Reply Controller
 
 export const postEditReply = async (req, res) => {
@@ -63,39 +96,6 @@ export const postDeleteReply = async (req, res) => {
       { _id: commentId },
       { $pull: { replies: replyId } }
     );
-  } catch (error) {
-    res.status(400);
-  } finally {
-    res.end();
-  }
-};
-
-// Heart Reply Controller
-
-export const postHeartReply = async (req, res) => {
-  const {
-    params: { id: replyId },
-    body: { userId, isSelected },
-  } = req;
-  try {
-    const reply = await Reply.findById(replyId);
-    const user = await User.findById(userId);
-    if (reply.heart && user.heartReplies) {
-      if (!isSelected) {
-        if (reply.heart.indexOf(userId) === -1) reply.heart.push(userId);
-        if (user.heartReplies.indexOf(replyId) === -1)
-          user.heartReplies.push(replyId);
-        reply.save();
-        user.save();
-      } else {
-        if (reply.heart.indexOf(userId) !== -1)
-          reply.heart.splice(reply.heart.indexOf(userId), 1);
-        if (user.heartReplies.indexOf(replyId) !== -1)
-          user.heartReplies.splice(user.heartReplies.indexOf(replyId), 1);
-        reply.save();
-        user.save();
-      }
-    }
   } catch (error) {
     res.status(400);
   } finally {

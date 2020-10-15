@@ -23,6 +23,7 @@ const CokieStore = MongoStore(session);
 app.use(helmet({ contentSecurityPolicy: false }));
 app.set("view engine", "pug");
 app.use("/uploads", express.static("uploads"));
+app.use("/videos/uploads", express.static("uploads"));
 app.use("/users/uploads", express.static("uploads"));
 app.use("/static", express.static("static"));
 app.use(cookieParser());

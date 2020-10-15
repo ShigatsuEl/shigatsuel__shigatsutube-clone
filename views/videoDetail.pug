@@ -41,11 +41,15 @@ block content
                     span#jsLiteralComment   Comments
             .comments__submit-box
                 if loggedUser && loggedUser.id === user.id
-                    img.comment__loginAvatar#jsCommentLoginAvatar(src=loggedUser.avatarUrl)
+                    img.comment__loginAvatar#jsCommentLoginAvatar(src=user.avatarUrl)
                 else
                     i.fas.fa-user.comment__UnLoginAvatar#jsCommentUnloginAvatar
-                form.add__formComment#jsAddCommentForm(data-user=loggedUser.id)
-                    input.add__inputComment#jsAddCommentInput(type="text", placeholder="Please feel free to comment~", name="comment", autocomplete="off", required)
+                if loggedUser && loggedUser.id === user.id
+                    form.add__formComment#jsAddCommentForm(data-user=loggedUser.id)
+                        input.add__inputComment#jsAddCommentInput(type="text", placeholder="Please feel free to comment~", name="comment", autocomplete="off", required)
+                else
+                    form.add__formComment#jsAddCommentForm
+                        input.add__inputComment#jsAddCommentInput(type="text", placeholder="Please feel free to comment~", name="comment", autocomplete="off", required)
             .comments__btnBox.hidden#jsBtnBox
                 button.cancel__btn#jsCancelBtn(type="button") CANCEL
                 button.comment__btn#jsCommentBtn COMMENT
