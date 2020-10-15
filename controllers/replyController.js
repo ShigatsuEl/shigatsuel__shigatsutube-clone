@@ -77,7 +77,6 @@ export const postHeartReply = async (req, res) => {
     params: { id: replyId },
     body: { userId, isSelected },
   } = req;
-  console.log(replyId, userId);
   try {
     const reply = await Reply.findById(replyId);
     const user = await User.findById(userId);
@@ -99,5 +98,7 @@ export const postHeartReply = async (req, res) => {
     }
   } catch (error) {
     res.status(400);
+  } finally {
+    res.end();
   }
 };
