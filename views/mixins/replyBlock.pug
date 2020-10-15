@@ -19,9 +19,9 @@ mixin replyBlock(reply ={})
                 .reply__subinfo#jsReplySubinfo
                     span.reply__heart
                         if loggedUser && reply.heart.includes(loggedUser.id)
-                            i.fas.fa-heart.heartBtn.selected
+                            i.fas.fa-heart.replyHeartBtn.selected
                         else
-                            i.fas.fa-heart.heartBtn
+                            i.fas.fa-heart.replyHeartBtn
                         span.reply__heart-number#jsHeartNumber=reply.heart.length
                     if loggedUser && loggedUser.id === reply.creatorId
                         span.reply__editBtn#jsReplyEdit
@@ -48,9 +48,9 @@ mixin replyBlock(reply ={})
                 .reply__subinfo#jsReplySubinfo
                     span.reply__heart
                         if loggedUser && reply.heart.includes(loggedUser.id)
-                            i.fas.fa-heart.heartBtn.selected
+                            i.fas.fa-heart.replyHeartBtn.selected
                         else
-                            i.fas.fa-heart.heartBtn
+                            i.fas.fa-heart.replyHeartBtn
                         span.reply__heart-number#jsHeartNumber=reply.heart.length
                     if loggedUser && loggedUser.id === reply.creator.id
                         span.reply__editBtn#jsReplyEdit

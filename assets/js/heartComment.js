@@ -10,7 +10,7 @@ let isSelected;
 let commentBlock;
 
 const handleHeartNumber = () => {
-  if(commentBlock) {
+  if (commentBlock) {
     let heartNumber = commentBlock.querySelector("#jsHeartNumber").textContent;
     isSelected ? heartNumber-- : heartNumber++;
     commentBlock.querySelector("#jsHeartNumber").textContent = heartNumber;
@@ -41,9 +41,7 @@ const handleHeartBtn = (event) => {
     commentId =
       event.target.parentElement.parentElement.parentElement.parentElement
         .dataset.id;
-    userId = JSON.parse(
-      document.getElementById("jsAddCommentForm").dataset.user
-    )._id;
+    userId = document.getElementById("jsAddCommentForm").dataset.user;
     heartIcon = event.target;
     commentBlock = document.getElementById(`${commentId}`);
     if (event.target.className.includes("selected")) {

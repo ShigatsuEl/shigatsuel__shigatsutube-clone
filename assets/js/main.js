@@ -8,3 +8,4 @@ import "./deleteComment";
 import "./addReplyComment";
 import "./editReplyComment";
 import "./deleteReplyComment";
+import "./heartReplyComment";

@@ -97,6 +97,9 @@
                 color: $red;
               }
             }
+            .selected {
+              color: red;
+            }
           }
           .comment__reply {
             margin-right: $first-margin;
