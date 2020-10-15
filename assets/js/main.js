@@ -7,3 +7,4 @@ import "./editComment";
 import "./deleteComment";
 import "./addReplyComment";
 import "./editReplyComment";
+import "./deleteReplyComment";

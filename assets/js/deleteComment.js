@@ -1,5 +1,4 @@
 import axios from "axios";
-import { json } from "body-parser";
 
 const commentContainer = document.getElementById("jsCommentContainer");
 const commentSubinfo = document.querySelector(".comment__subinfo");
