@@ -88,7 +88,7 @@ export const postHeartComment = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
+    res.status(400);
   } finally {
     res.end();
   }
@@ -104,7 +104,7 @@ export const postEditComment = async (req, res) => {
   try {
     await Comment.findByIdAndUpdate({ _id: id }, { text: editComment });
   } catch (error) {
-    console.log(error);
+    res.status(400);
   } finally {
     res.end();
   }
@@ -123,7 +123,7 @@ export const postDeleteComment = async (req, res) => {
     await User.updateOne({ _id: userId }, { $pull: { comments: commentId } });
     await Reply.deleteMany({ whichComment: commentId });
   } catch (error) {
-    console.log(error);
+    res.status(400);
   } finally {
     res.end();
   }

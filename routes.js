@@ -36,6 +36,7 @@ const EDIT_COMMENT = "/:id/edit-comment";
 const DELETE_COMMENT = "/:id/delete-comment";
 const ADD_REPLY = "/:id/add-reply";
 const EDIT_REPLY = "/:id/edit-reply";
+const DELETE_REPLY = "/:id/delete-reply";
 
 const routes = {
   home: HOME,
@@ -89,6 +90,7 @@ const routes = {
   deleteComment: DELETE_COMMENT,
   addReply: ADD_REPLY,
   editReply: EDIT_REPLY,
+  deleteReply: DELETE_REPLY,
 };
 
 export default routes;

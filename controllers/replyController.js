@@ -48,3 +48,23 @@ export const postEditReply = async (req, res) => {
     res.end();
   }
 };
+
+// Delete Reply Controller
+
+export const postDeleteReply = async (req, res) => {
+  const {
+    params: { id: replyId },
+    body: { commentId },
+  } = req;
+  try {
+    await Reply.findByIdAndRemove({ _id: replyId });
+    await Comment.updateOne(
+      { _id: commentId },
+      { $pull: { replies: replyId } }
+    );
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
