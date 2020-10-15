@@ -62,6 +62,39 @@ const addCommentBlock = (parsedInfo) => {
   info.append(address);
   info.append(createdAt);
 
+  // Comment Content
+  const content = document.createElement("div");
+  content.classList.add("comment__content");
+  content.id = "jsCommentContent";
+  const text = document.createElement("div");
+  text.classList.add("comment__text");
+  text.textContent = parsedInfo.comment;
+  content.append(text);
+  right.append(content);
+
+  // Comment Edit Box(hidden)
+  const editBox = document.createElement("div");
+  editBox.classList.add("comment__editBox", "hidden");
+  editBox.id = "jsCommentEditBox";
+  editBox.dataset.id = parsedInfo.commentId;
+  right.append(editBox);
+
+  const editForm = document.createElement("form");
+  editForm.classList.add("comment__editForm");
+  editForm.id = "jsCommentEditForm";
+  editBox.append(editForm);
+
+  const editInput = document.createElement("div");
+  editInput.classList.add("comment__editInput");
+  editInput.id = "jsCommentEditInput";
+  editInput.contentEditable = true;
+  editInput.setAttribute("name", "editComment");
+  editInput.setAttribute("placeholder", "Edit your comment");
+  editInput.setAttribute("autocomplete", "off");
+  editInput.setAttribute("required", "true");
+  editInput.textContent = parsedInfo.comment;
+  editForm.append(editInput);
+
   increaseNumber();
 };
 
