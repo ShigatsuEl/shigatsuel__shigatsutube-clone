@@ -48,6 +48,7 @@ export const postAddComment = async (req, res) => {
       name: user.name,
       date: dateFormatter(newComment.createdAt),
       avatarUrl: user.avatarUrl,
+      href: user.id,
       comment,
       commentId: newComment.id,
     };

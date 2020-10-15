@@ -21,15 +21,47 @@ const increaseNumber = () => {
   }
 };
 
-const addComment = (parsedInfo) => {
-  const li = document.createElement("li");
-  const span = document.createElement("span");
+const addCommentBlock = (parsedInfo) => {
+  // CommentBlock Element
+  const commentBlock = document.createElement("li");
+  commentBlock.classList.add("comment__block");
+  commentBlock.id = parsedInfo.commentId;
+  commentBlock.dataset.id = parsedInfo.commentId;
+  commentList.prepend(commentBlock);
+
+  // Left Element
+  const left = document.createElement("div");
+  left.classList.add("comment__left");
   const img = document.createElement("img");
-  span.innerHTML = parsedInfo.comment;
+  img.classList.add("comment__publish-avatar");
   img.src = parsedInfo.avatarUrl;
-  li.appendChild(img);
-  li.appendChild(span);
-  commentList.prepend(li);
+  left.append(img);
+  commentBlock.append(left);
+
+  // Right Element
+  const right = document.createElement("div");
+  right.classList.add("comment__right");
+  commentBlock.append(right);
+
+  // Comment Info
+  const info = document.createElement("div");
+  info.classList.add("comment__info");
+  right.append(info);
+
+  // Comment Writer & createdAt
+  const address = document.createElement("a");
+  address.classList.add("comment__writer");
+  address.href = `/users/${parsedInfo.href}`;
+  const writerName = document.createElement("span");
+  writerName.classList.add("comment__writer-name");
+  writerName.textContent = parsedInfo.name;
+  const createdAt = document.createElement("span");
+  createdAt.classList.add("comment__createdAt");
+  createdAt.textContent = parsedInfo.date;
+  address.append(writerName);
+  info.append(address);
+  info.append(createdAt);
+
   increaseNumber();
 };
 
@@ -44,7 +76,7 @@ const sendComment = async (comment) => {
   });
   if (response.status === 200) {
     console.log(response.data);
-    addComment(response.data);
+    addCommentBlock(response.data);
   }
 };
 
