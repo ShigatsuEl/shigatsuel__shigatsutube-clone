@@ -11,11 +11,12 @@ export const postAddReply = async (req, res) => {
     body: { reply },
   } = req;
   try {
-    const newReply = await Reply.create({
+    let newReply = await Reply.create({
       text: reply,
       creator: req.user.id,
       whichComment: commentId,
     });
+    newReply = await newReply.populate("creator").execPopulate();
     const comment = await Comment.findById(commentId);
     await comment.replies.push(newReply.id);
     comment.save();

@@ -12,6 +12,29 @@ let replyCancelBtn;
 let replySubmitBtn;
 let replyList;
 
+const addReplyComment = (parsedInfo) => {
+  // CommentBlock Element
+  const replyBlock = document.createElement("li");
+  replyBlock.classList.add("reply__block-owner");
+  replyBlock.id = parsedInfo.replyId;
+  replyBlock.dataset.id = parsedInfo.replyId;
+  replyList.prepend(replyBlock);
+
+  // Left Element
+  const left = document.createElement("div");
+  left.classList.add("reply__left");
+  const img = document.createElement("img");
+  img.classList.add("reply__publish-avatar");
+  img.src = parsedInfo.avatarUrl;
+  left.append(img);
+  replyBlock.append(left);
+
+  // Right Element
+  const right = document.createElement("div");
+  right.classList.add("reply__right");
+  replyBlock.append(right);
+};
+
 const sendReply = async (reply) => {
   const response = await axios({
     url: `/api/${commentId}/add-reply`,
