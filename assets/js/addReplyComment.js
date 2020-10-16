@@ -52,6 +52,55 @@ const addReplyComment = (parsedInfo) => {
   address.append(writerName);
   info.append(address);
   info.append(createdAt);
+
+  // Reply Content
+  const content = document.createElement("div");
+  content.classList.add("reply__content");
+  content.id = "jsReplyContent";
+  const text = document.createElement("div");
+  text.classList.add("reply__text");
+  text.textContent = parsedInfo.reply;
+  content.append(text);
+  right.append(content);
+
+  // Reply Edit Box(hidden)
+  const editBox = document.createElement("div");
+  editBox.classList.add("reply__editBox", "hidden");
+  editBox.id = "jsReplyEditBox";
+  editBox.dataset.id = parsedInfo.replyId;
+  right.append(editBox);
+
+  const editForm = document.createElement("form");
+  editForm.classList.add("reply__editForm");
+  editForm.id = "jsReplyEditForm";
+  editBox.append(editForm);
+
+  const editInput = document.createElement("div");
+  editInput.classList.add("reply__editInput");
+  editInput.id = "jsReplyEditInput";
+  editInput.contentEditable = true;
+  editInput.setAttribute("name", "editReply");
+  editInput.setAttribute("placeholder", "Edit your reply");
+  editInput.setAttribute("autocomplete", "off");
+  editInput.setAttribute("required", "true");
+  editInput.textContent = parsedInfo.reply;
+  editForm.append(editInput);
+
+  const editBtnBox = document.createElement("div");
+  editBtnBox.classList.add("editBtnBox");
+  editForm.append(editBtnBox);
+
+  const editCancelBtn = document.createElement("button");
+  editCancelBtn.classList.add("reply__editCancelBtn", "replyCancelBtn");
+  editCancelBtn.id = "jsReplyEditCancelBtn";
+  editCancelBtn.textContent = "CANCEL";
+  editBtnBox.append(editCancelBtn);
+
+  const editSaveBtn = document.createElement("button");
+  editSaveBtn.classList.add("reply__editSaveBtn", "replySaveBtn");
+  editSaveBtn.id = "jsReplyEditSaveBtn";
+  editSaveBtn.textContent = "SAVE";
+  editBtnBox.append(editSaveBtn);
 };
 
 const sendReply = async (reply) => {
