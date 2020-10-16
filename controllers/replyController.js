@@ -27,6 +27,7 @@ export const postAddReply = async (req, res) => {
       href: newReply.creator.id,
       reply,
       replyId: newReply.id,
+      replyHeart: newReply.heart.length,
     };
     res.json(parsedInfo);
   } catch (error) {

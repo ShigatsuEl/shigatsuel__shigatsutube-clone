@@ -101,6 +101,47 @@ const addReplyComment = (parsedInfo) => {
   editSaveBtn.id = "jsReplyEditSaveBtn";
   editSaveBtn.textContent = "SAVE";
   editBtnBox.append(editSaveBtn);
+
+  // Subinfo
+  // Subinfo Heart
+  const subInfo = document.createElement("div");
+  subInfo.classList.add("reply__subinfo");
+  subInfo.id = "jsReplySubinfo";
+  right.append(subInfo);
+
+  const replyHeart = document.createElement("span");
+  replyHeart.classList.add("reply__heart");
+  subInfo.append(replyHeart);
+
+  const heartIcon = document.createElement("i");
+  heartIcon.classList.add("fas", "fa-heart", "replyHeartBtn");
+  replyHeart.append(heartIcon);
+
+  const heartNumber = document.createElement("span");
+  heartNumber.classList.add("reply__heart-number");
+  heartNumber.id = "jsReplyHeartNumber";
+  heartNumber.textContent = parsedInfo.replyHeart;
+  replyHeart.append(heartNumber);
+
+  // Subinfo Reply Edit
+  const replyEdit = document.createElement("span");
+  replyEdit.classList.add("reply__editBtn");
+  replyEdit.id = "jsReplyEdit";
+  subInfo.append(replyEdit);
+
+  const replyEditBtn = document.createElement("i");
+  replyEditBtn.classList.add("far", "fa-edit", "replyEditBtn");
+  replyEdit.append(replyEditBtn);
+
+  // Subinfo Reply Delete
+  const replyDelete = document.createElement("span");
+  replyDelete.classList.add("reply__deleteBtn");
+  replyDelete.id = "jsReplyDelete";
+  subInfo.append(replyDelete);
+
+  const replyDeleteBtn = document.createElement("i");
+  replyDeleteBtn.classList.add("far", "fa-trash-alt", "replyDeleteBtn");
+  replyDelete.append(replyDeleteBtn);
 };
 
 const sendReply = async (reply) => {

@@ -112,7 +112,7 @@ const addCommentBlock = (parsedInfo) => {
   editBtnBox.append(editSaveBtn);
 
   // Subinfo
-  // Subminfo Heart
+  // Subinfo Heart
   const subInfo = document.createElement("div");
   subInfo.classList.add("comment__subinfo");
   subInfo.id = "jsCommentSubinfo";
