@@ -50,6 +50,7 @@ export const postAddComment = async (req, res) => {
       avatarUrl: user.avatarUrl,
       href: user.id,
       comment,
+      commentHeart: newComment.heart.length,
       commentId: newComment.id,
     };
     res.json(parsedInfo);

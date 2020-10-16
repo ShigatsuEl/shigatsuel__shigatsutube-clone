@@ -95,6 +95,41 @@ const addCommentBlock = (parsedInfo) => {
   editInput.textContent = parsedInfo.comment;
   editForm.append(editInput);
 
+  const editBtnBox = document.createElement("div");
+  editForm.append(editBtnBox);
+
+  const editCancelBtn = document.createElement("button");
+  editCancelBtn.classList.add("comment__editCancelBtn", "commentCancelBtn");
+  editCancelBtn.id = "jsCommentEditCancelBtn";
+  editCancelBtn.textContent = "CANCEL";
+  editBtnBox.append(editCancelBtn);
+
+  const editSaveBtn = document.createElement("button");
+  editSaveBtn.classList.add("comment__editSaveBtn", "commentSaveBtn");
+  editSaveBtn.id = "jsCommentEditSaveBtn";
+  editSaveBtn.textContent = "SAVE";
+  editBtnBox.append(editSaveBtn);
+
+  // Subinfo
+  const subInfo = document.createElement("div");
+  subInfo.classList.add("comment__subinfo");
+  subInfo.id = "jsCommentSubinfo";
+  right.append(subInfo);
+
+  const commentHeart = document.createElement("span");
+  commentHeart.classList.add("comment__heart");
+  subInfo.append(commentHeart);
+
+  const heartIcon = document.createElement("i");
+  heartIcon.classList.add("fas", "fa-heart", "heartBtn");
+  commentHeart.append(heartIcon);
+
+  const heartNumber = document.createElement("span");
+  heartNumber.classList.add("comment__heart-number");
+  heartNumber.id = "jsHeartNumber";
+  heartNumber.textContent = parsedInfo.commentHeart;
+  commentHeart.append(heartNumber);
+
   increaseNumber();
 };
 
