@@ -51,6 +51,7 @@ export const postAddComment = async (req, res) => {
       href: user.id,
       comment,
       commentHeart: newComment.heart.length,
+      commentReplies: newComment.replies.length,
       commentId: newComment.id,
     };
     res.json(parsedInfo);

@@ -96,6 +96,7 @@ const addCommentBlock = (parsedInfo) => {
   editForm.append(editInput);
 
   const editBtnBox = document.createElement("div");
+  editBtnBox.classList.add("editBtnBox");
   editForm.append(editBtnBox);
 
   const editCancelBtn = document.createElement("button");
@@ -111,6 +112,7 @@ const addCommentBlock = (parsedInfo) => {
   editBtnBox.append(editSaveBtn);
 
   // Subinfo
+  // Subminfo Heart
   const subInfo = document.createElement("div");
   subInfo.classList.add("comment__subinfo");
   subInfo.id = "jsCommentSubinfo";
@@ -129,6 +131,41 @@ const addCommentBlock = (parsedInfo) => {
   heartNumber.id = "jsHeartNumber";
   heartNumber.textContent = parsedInfo.commentHeart;
   commentHeart.append(heartNumber);
+
+  // Subinfo Comment Reply
+  const commentReply = document.createElement("span");
+  commentReply.classList.add("comment__reply");
+  subInfo.append(commentReply);
+
+  const commentReplyBtn = document.createElement("i");
+  commentReplyBtn.classList.add("fas", "fa-reply", "replyBtn");
+  commentReply.append(commentReplyBtn);
+
+  const commentReplyCount = document.createElement("span");
+  commentReplyCount.classList.add("reply__count");
+  commentReplyCount.id = "jsCommentEdit";
+  commentReplyCount.textContent = parsedInfo.commentReplies;
+  commentReply.append(commentReplyCount);
+
+  // Subinfo Comment Edit
+  const commentEdit = document.createElement("span");
+  commentEdit.classList.add("comment__editBtn");
+  commentEdit.id = "jsCommentEdit";
+  subInfo.append(commentEdit);
+
+  const commentEditBtn = document.createElement("i");
+  commentEditBtn.classList.add("far", "fa-edit", "editBtn");
+  commentEdit.append(commentEditBtn);
+
+  // Subinfo Comment Delete
+  const commentDelete = document.createElement("span");
+  commentDelete.classList.add("comment__deleteBtn");
+  commentDelete.id = "jsCommentDelete";
+  subInfo.append(commentDelete);
+
+  const commentDeleteBtn = document.createElement("i");
+  commentDeleteBtn.classList.add("far", "fa-trash-alt", "deleteBtn");
+  commentDelete.append(commentDeleteBtn);
 
   increaseNumber();
 };
