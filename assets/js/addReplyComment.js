@@ -13,7 +13,7 @@ let replySubmitBtn;
 let replyList;
 
 const addReplyComment = (parsedInfo) => {
-  // CommentBlock Element
+  // ReplyBlock Element
   const replyBlock = document.createElement("li");
   replyBlock.classList.add("reply__block-owner");
   replyBlock.id = parsedInfo.replyId;
@@ -33,6 +33,25 @@ const addReplyComment = (parsedInfo) => {
   const right = document.createElement("div");
   right.classList.add("reply__right");
   replyBlock.append(right);
+
+  // Reply Info
+  const info = document.createElement("div");
+  info.classList.add("reply__info");
+  right.append(info);
+
+  // Reply Writer & createdAt
+  const address = document.createElement("a");
+  address.classList.add("reply__writer");
+  address.href = `/users/${parsedInfo.href}`;
+  const writerName = document.createElement("span");
+  writerName.classList.add("reply__writer-name");
+  writerName.textContent = parsedInfo.name;
+  const createdAt = document.createElement("span");
+  createdAt.classList.add("reply__createdAt");
+  createdAt.textContent = parsedInfo.date;
+  address.append(writerName);
+  info.append(address);
+  info.append(createdAt);
 };
 
 const sendReply = async (reply) => {

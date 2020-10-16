@@ -24,6 +24,7 @@ export const postAddReply = async (req, res) => {
       name: newReply.creator.name,
       date: dateFormatter(newReply.createdAt),
       avatarUrl: newReply.creator.avatarUrl,
+      href: newReply.creator.id,
       reply,
       replyId: newReply.id,
     };
