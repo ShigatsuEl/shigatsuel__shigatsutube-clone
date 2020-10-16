@@ -37,8 +37,8 @@ mixin commentBlock(comment ={})
             form.reply__form#jsReplyForm
                 input.reply__input#jsReplyInput(type="text", placeholder="Feel free to reply comment~", name="reply", autocomplete="off", required)
                 .reply__btnBox#jsBtnBox
-                    button.cancel__btn#jsCancelBtn(type="button") CANCEL
-                    button.comment__btn#jsCommentBtn COMMENT
+                    button.cancel__btn.replyCancelBtn#jsCancelBtn(type="button") CANCEL
+                    button.comment__btn.replySaveBtn#jsCommentBtn COMMENT
     .replies__view-box#jsReplyContainer
         ul.replies__list#jsReplyList
             each reply in comment.replies.reverse()
