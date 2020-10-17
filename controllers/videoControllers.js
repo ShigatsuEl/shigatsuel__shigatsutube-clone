@@ -4,7 +4,13 @@ import Video from "../models/Video";
 // Home
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({}).sort({ _id: -1 }).skip(1);
+    let videos = await Video.find({}).sort({ _id: -1 }).skip(1);
+    videos = videos
+      .sort(function (a, b) {
+        return a.views > b.views ? -1 : a.views < b.views ? 1 : 0;
+      })
+      .slice(1);
+    console.log(videos);
     const lastVideo = await Video.find({}).sort({ _id: -1 }).limit(1);
     const bestVideo = await Video.find({}).sort({ views: -1 }).limit(1);
     res.render("home", { pageTitle: "Home", videos, lastVideo, bestVideo });
