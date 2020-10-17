@@ -4,8 +4,10 @@ import Video from "../models/Video";
 // Home
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({}).sort({ _id: -1 });
-    res.render("home", { pageTitle: "Home", videos });
+    const videos = await Video.find({}).sort({ _id: -1 }).skip(1);
+    const lastVideo = await Video.find({}).sort({ _id: -1 }).limit(1);
+    const bestVideo = await Video.find({}).sort({ views: -1 }).limit(1);
+    res.render("home", { pageTitle: "Home", videos, lastVideo, bestVideo });
   } catch (error) {
     console.log(error);
     res.render("home", { pageTitle: "Home", videos: [] });
