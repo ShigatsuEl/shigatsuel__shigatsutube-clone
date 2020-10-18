@@ -4,7 +4,10 @@ import Video from "../models/Video";
 // Home
 export const home = async (req, res) => {
   try {
-    let videos = await Video.find({}).sort({ _id: -1 }).skip(1);
+    let videos = await Video.find({})
+      .populate("creator")
+      .sort({ _id: -1 })
+      .skip(1);
     videos = videos
       .sort(function (a, b) {
         return a.views > b.views ? -1 : a.views < b.views ? 1 : 0;
