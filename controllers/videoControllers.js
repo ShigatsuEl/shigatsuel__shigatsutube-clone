@@ -10,7 +10,6 @@ export const home = async (req, res) => {
         return a.views > b.views ? -1 : a.views < b.views ? 1 : 0;
       })
       .slice(1);
-    console.log(videos);
     const lastVideo = await Video.find({}).sort({ _id: -1 }).limit(1);
     const bestVideo = await Video.find({}).sort({ views: -1 }).limit(1);
     res.render("home", { pageTitle: "Home", videos, lastVideo, bestVideo });

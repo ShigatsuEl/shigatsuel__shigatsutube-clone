@@ -1,14 +1,70 @@
 .videos {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20%, 25%));
+  grid-auto-rows: minmax(20px, auto);
+  gap: 10px;
   flex-wrap: wrap;
-  margin-top: $second-margin;
-  .videoBlock {
-    margin-left: 35px;
-    margin-bottom: $first-margin;
-    a {
+  padding: $fourth-padding 40px 40px 40px;
+  background-color: black;
+  color: white;
+  .latest__video-box {
+    grid-column: 1/3;
+    grid-row: 1;
+  }
+  .best__view__video-box {
+    grid-column: 3/5;
+    grid-row: 1;
+  }
+  .latest__video-box,
+  .best__view__video-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // box-shadow: 0px 0px 10px 3px rgba(184, 0, 184, 1);
+    .latest__video-text,
+    .best__view__video-text {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      .video__category {
+        justify-self: start;
+        width: 70%;
+        font-size: 1.5rem;
+      }
+    }
+    .latest__video,
+    .best__view__video {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       .videoBlock__thumbnail {
         margin-bottom: 10px;
-        width: 350px;
+        width: 70%;
+      }
+      .videoBlock__info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 70%;
+        color: white;
+        .videoBlock__title,
+        .videoBlock__views {
+          margin-bottom: 5px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .upload__videos {
+    grid-column: 1/5;
+    grid-row: 2;
+  }
+  .videoBlock {
+    a {
+      color: white;
+      .videoBlock__thumbnail {
+        margin-bottom: 10px;
+        width: 100%;
         height: auto;
       }
       .videoBlock__title,
@@ -17,5 +73,41 @@
         font-size: 16px;
       }
     }
+  }
+  .latest__video-box,
+  .best__view__video-box,
+  .videoBlock {
+    transition: transform 300ms ease-in-out;
+  }
+  .latest__video-box:hover,
+  .best__view__video-box:hover,
+  .videoBlock:hover {
+    transform: scale(1.1);
+    background-color: white;
+  }
+  .latest__video:hover .videoBlock__info,
+  .best__view__video:hover .videoBlock__info,
+  .videoBlock:hover a {
+    color: black;
+  }
+  .latest__video-box::after,
+  .best__view__video-box::after,
+  .videoBlock::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    content: "";
+    border-radius: 4px;
+    box-shadow: 0px 0px 50px -4px rgba($color: white, $alpha: 0.75);
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+  }
+  .latest__video-box:hover::after,
+  .best__view__video-box:hover::after,
+  .videoBlock:hover::after {
+    opacity: 1;
   }
 }
