@@ -5,7 +5,7 @@ block content
     .videos
         .latest__video-box
             .latest__video-text
-                .video__category The Latest Video
+                h3.video__category The Latest Video
             a.latest__video(href=routes.videoDetail(lastVideo[0].id))
                 video.videoBlock__thumbnail(src=lastVideo[0].fileUrl)
                 .videoBlock__info
@@ -13,7 +13,7 @@ block content
                     h6.videoBlock__views=`VIEWS ${lastVideo[0].views} · ${dateFormatter(lastVideo[0].createdAt)}`
         .best__view__video-box
             .best__view__video-text
-                .video__category Best Views Video
+                h3.video__category Best Views Video
             a.best__view__video(href=routes.videoDetail(bestVideo[0].id))
                 video.videoBlock__thumbnail(src=bestVideo[0].fileUrl)
                 .videoBlock__info
