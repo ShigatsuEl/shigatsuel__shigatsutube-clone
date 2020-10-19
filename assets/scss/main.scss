@@ -9,13 +9,13 @@ body {
   background-color: $grey;
 }
 
-.sub__main {
-  background-color: $grey;
-}
-
 main {
   margin: 0;
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
+}
+
+#mainGrey {
+  background-color: $grey;
 }

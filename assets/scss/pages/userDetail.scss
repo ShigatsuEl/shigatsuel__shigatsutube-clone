@@ -1,8 +1,10 @@
 .userDetail__wrapper {
-  display: flex;
-  justify-content: space-around;
-  padding-top: $first-padding;
-  height: 100vh;
+  display: grid;
+  grid-template-columns: 3fr 1fr 3fr;
+  grid-auto-rows: minmax(20px, auto);
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: $five-padding 40px 40px 40px;
   .user-profile__container {
     .user-profile {
       .user-profile__header {
@@ -19,6 +21,7 @@
           margin-bottom: $third-margin;
           font-weight: 600;
           font-size: 25px;
+          color: white;
         }
       }
       .user-profile__btns {
