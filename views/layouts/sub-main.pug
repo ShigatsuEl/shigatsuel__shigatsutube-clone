@@ -5,8 +5,9 @@ html
         link(rel="shortcut icon", href="data:image/x-icon;", type="image/x-icon")
         link(rel="stylesheet", href="/static/styles.css")
         title #{pageTitle} | #{siteName}
-    body
+        script(defer src="/static/main.js")
+    body.sub__main
         include ../partials/header.pug
         main
             block content
-        script(src="/static/main.js")
+        

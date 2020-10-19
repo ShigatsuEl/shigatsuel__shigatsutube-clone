@@ -1,0 +1,15 @@
+.search {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20%, 25%));
+  grid-auto-rows: minmax(20px, auto);
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: $first-padding 40px 40px 40px;
+  background-color: black;
+  color: white;
+  .search__header {
+    grid-column: 1/5;
+    grid-row: 1;
+    font-size: 1.5rem;
+  }
+}
