@@ -5,6 +5,60 @@
   gap: 10px;
   flex-wrap: wrap;
   padding: $five-padding 40px 40px 40px;
+  height: 95vh;
+  .uploaded-videos__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50%, 100%));
+    grid-auto-rows: minmax(20px, auto);
+    gap: 10px;
+    flex-wrap: wrap;
+    background-color: black;
+    color: white;
+    .videos__category {
+      color: white;
+      font-size: 1.2rem;
+    }
+    .uploaded__videos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(45%, 49%));
+      gap: 5px;
+      padding: $third-padding $third-padding;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      .videoBlock {
+        a {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          color: white;
+          .videoBlock__thumbnail {
+            margin-bottom: 10px;
+            width: 100%;
+            height: auto;
+          }
+          .videoBlock__description {
+            display: flex;
+            .left .videoBlock__img {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              margin-right: $first-margin;
+            }
+            .right {
+              display: flex;
+              flex-direction: column;
+              .videoBlock__title,
+              .videoBlock__creator,
+              .videoBlock__views {
+                margin-bottom: 5px;
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   .user-profile__container {
     .user-profile {
       .user-profile__header {
@@ -34,7 +88,7 @@
             border-radius: 8px;
             border: none;
             padding: 10px 10px;
-            width: 350px;
+            width: 250px;
             color: $white;
             &:hover {
               border: 3px solid rgba($color: $light-blue, $alpha: 0.5);
