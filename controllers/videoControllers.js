@@ -23,7 +23,7 @@ export const home = async (req, res) => {
       .limit(1);
     res.render("home", { pageTitle: "Home", videos, lastVideo, bestVideo });
   } catch (error) {
-    console.log(error);
+    res.status(400);
     res.render("home", { pageTitle: "Home", videos: [] });
   }
 };
@@ -37,9 +37,11 @@ export const search = async (req, res) => {
   try {
     videos = await Video.find({
       title: { $regex: searchingBy, $options: "i" },
-    }).populate("creator");
+    })
+      .populate("creator")
+      .sort({ _id: -1 });
   } catch (error) {
-    console.log(error);
+    res.status(400);
   }
   res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
@@ -97,7 +99,7 @@ export const getEditVideo = async (req, res) => {
       res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
     }
   } catch (error) {
-    console.log(error);
+    res.status(400);
     res.redirect(routes.home);
   }
 };
@@ -130,7 +132,7 @@ export const deleteVideo = async (req, res) => {
       req.user.save();
     }
   } catch (error) {
-    console.log(error);
+    res.status(400);
   }
   res.redirect(routes.home);
 };
