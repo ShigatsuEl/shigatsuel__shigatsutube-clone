@@ -15,6 +15,7 @@
     font-size: 1.5rem;
   }
   .videoBlock {
+    transition: transform 300ms ease-in-out;
     a {
       display: flex;
       flex-direction: column;
@@ -45,5 +46,28 @@
         }
       }
     }
+  }
+  .videoBlock:hover {
+    transform: scale(1.1);
+    background-color: white;
+  }
+  .videoBlock:hover a {
+    color: black;
+  }
+  .videoBlock::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    content: "";
+    border-radius: 4px;
+    box-shadow: 0px 0px 50px -4px rgba($color: white, $alpha: 0.75);
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+  }
+  .videoBlock:hover::after {
+    opacity: 1;
   }
 }
