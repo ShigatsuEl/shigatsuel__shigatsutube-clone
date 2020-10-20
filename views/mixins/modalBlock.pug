@@ -1,0 +1,14 @@
+mixin modalBlock
+    .modalBlock.hidden#jsModalBlock
+        .modalLayout#jsModalLayout
+        .modal
+            .modalTitle
+                h3 Guidance Message 
+            .modalContent
+                p Please sign in or login
+            .modalButton
+                button.modalCancel#jsModalCancelBtn CANCEL
+                button.modalLogin#jsModalLoginBtn 
+                    a#jsModalLoginLink(href='/login') LOGIN
+                button.modalJoin#jsModalJoinBtn 
+                    a#jsModalJoinLink(href='/join') JOIN

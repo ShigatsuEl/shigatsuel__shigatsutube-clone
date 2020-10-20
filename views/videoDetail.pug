@@ -1,9 +1,12 @@
 extends layouts/subMain.pug
 include mixins/videoPlayer
 include mixins/commentBlock
+include mixins/modalBlock
 
 block content
     .video__wrapper
+        if !loggedUser
+            +modalBlock
         .video__container#jsVideoContainer
             .video__edit-box
                 if loggedUser && video.creator.id === loggedUser.id
