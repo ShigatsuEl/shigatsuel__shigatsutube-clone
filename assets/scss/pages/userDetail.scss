@@ -105,3 +105,48 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .userDetail__wrapper {
+    padding: $five-padding 30px 30px 30px;
+    .uploaded-videos__container {
+      grid-template-columns: repeat(auto-fill, minmax(100%, 100%));
+      gap: 7px;
+      .videos__category {
+        font-size: 1rem;
+      }
+      .uploaded__videos {
+        grid-template-columns: repeat(auto-fill, minmax(100%, 100%));
+        padding: 7px 7px;
+        .videoBlock a {
+          .videoBlock__thumbnail {
+            margin-bottom: 7px;
+          }
+          .videoBlock__description {
+            .left .videoBlock__img {
+              width: 30px;
+              height: 30px;
+              margin-right: 7px;
+            }
+          }
+        }
+      }
+    }
+    .user-profile__container {
+      .user-profile {
+        .user-profile__header {
+          img {
+            width: 175px;
+            height: 175px;
+          }
+          h4 {
+            font-size: 1.2rem;
+          }
+        }
+        .user-profile__btns a button {
+          width: 200px;
+        }
+      }
+    }
+  }
+}

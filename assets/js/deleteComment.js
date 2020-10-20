@@ -47,7 +47,7 @@ const handleDelteBtn = (event) => {
     commentId =
       event.target.parentElement.parentElement.parentElement.parentElement
         .dataset.id;
-    userId = document.getElementById("jsAddCommentForm").dataset.user.id;
+    userId = document.getElementById("jsAddCommentForm").dataset.id;
     videoId = document.getElementById("jsVideo").dataset.id;
     handleDeleteData(commentId, userId, videoId);
   }

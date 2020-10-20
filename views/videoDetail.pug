@@ -45,7 +45,7 @@ block content
                 else
                     i.fas.fa-user.comment__UnLoginAvatar#jsCommentUnloginAvatar
                 if loggedUser && loggedUser.id === user.id
-                    form.add__formComment#jsAddCommentForm(data-user=loggedUser.id)
+                    form.add__formComment#jsAddCommentForm(data-id=loggedUser.id)
                         input.add__inputComment#jsAddCommentInput(type="text", placeholder="Please feel free to comment~", name="comment", autocomplete="off", required)
                 else
                     form.add__formComment#jsAddCommentForm
