@@ -33,13 +33,17 @@ const clickLikingBtn = (event) => {
   isLikeBtn = !clickedBtn.className.includes("dislike");
   //true -> likebtn /false -> dislikebtn
   if (isLikeBtn) {
+    // likebtn이 맞으면 ->
     isSelected = videoLikeBtn.className.includes("selected");
     if (!isSelected) {
+      // likebtn이 맞고 선택되지 않았을 때 dislikebtn이 선택되어있는 상태라면 -> isSwitching=true
       isSwitching = !!videoDislikeBtn.className.includes("selected");
     }
   } else {
+    // dislikebtn이 맞으면 ->
     isSelected = videoDislikeBtn.className.includes("selected");
     if (!isSelected) {
+      // dislikebtn이 맞고 선택되지 않았을 때 likebtn이 선택되어있는 상태라면 -> isSwitching=true
       isSwitching = !!videoLikeBtn.className.includes("selected");
     }
   }

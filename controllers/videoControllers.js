@@ -1,5 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video";
+import User from "../models/User";
 
 // Home
 export const home = async (req, res) => {
@@ -137,9 +138,54 @@ export const deleteVideo = async (req, res) => {
   res.redirect(routes.home);
 };
 
-export const postLikeVideo = (req, res) => {
+// Like or Dislike Video
+export const postLikeVideo = async (req, res) => {
   const {
     params: { id: videoId },
-    body: { userId, isSelected },
+    body: { isLikeBtn, isSelected, isSwitching, userId },
   } = req;
+  try {
+    const video = await Video.findById(videoId);
+    const user = await User.findById(userId);
+    const { likeVideos } = user;
+    const { dislikeVideos } = user;
+    // likebtn이 맞고 선택되어있는 상태라면 클릭하면 like를 삭제
+    // likebtn이 맞고 선택되어있는 상태에서 스위칭 상태가 맞으면 like++ dislike--
+    // likebtn이 맞고 선택되지 않은 상태라면 like를 추가
+    if (isLikeBtn) {
+      if (isSelected) {
+        video.like--;
+        likeVideos.splice(likeVideos.indexOf(videoId), 1);
+      } else if (isSwitching) {
+        video.like++;
+        video.dislike--;
+        if (likeVideos.indexOf(videoId) === -1) likeVideos.push(videoId);
+        dislikeVideos.splice(dislikeVideos.indexOf(videoId), 1);
+      } else {
+        video.like++;
+        if (likeVideos.indexOf(videoId) === -1) likeVideos.push(videoId);
+      }
+      // dislikebtn이 맞고 선택되어있는 상태라면 클릭하면 dislike를 삭제
+      // dislikebtn이 맞고 선택되어있는 상태에서 스위칭 상태가 맞으면 dislike++ like--
+      // dislikebtn이 맞고 선택되지 않은 상태라면 dislike를 추가
+    } else if (isSelected) {
+      video.dislike--;
+      dislikeVideos.splice(dislikeVideos.indexOf(videoId), 1);
+    } else if (isSwitching) {
+      video.dislike++;
+      video.like--;
+      if (dislikeVideos.indexOf(videoId) === -1) dislikeVideos.push(videoId);
+      likeVideos.splice(likeVideos.indexOf(videoId), 1);
+    } else {
+      video.dislike++;
+      if (dislikeVideos.indexOf(videoId) === -1) dislikeVideos.push(videoId);
+    }
+    video.save();
+    user.save();
+  } catch (error) {
+    console.log(error);
+    res.status(400);
+  } finally {
+    res.end();
+  }
 };
