@@ -5,6 +5,7 @@ const commentSubinfo = document.querySelector(".comment__subinfo");
 
 let comment;
 let commentId;
+let userId;
 let replyForm;
 let replyInput;
 let replyBox;
@@ -189,7 +190,6 @@ const handleCancel = (event) => {
       event.target.parentElement.parentElement.parentElement.previousSibling
         .dataset.id;
     replyInput = comment.nextSibling.childNodes[0].childNodes[0];
-
     replyInput.value = "";
     replyInput.blur();
     handleReplyHidden();
@@ -203,17 +203,21 @@ const handleReplyBtn = (event) => {
     commentId =
       event.target.parentElement.parentElement.parentElement.parentElement
         .dataset.id;
-    replyForm = comment.nextSibling.childNodes[0];
-    replyInput = comment.nextSibling.childNodes[0].childNodes[0];
-    replyCancelBtn =
-      comment.nextSibling.childNodes[0].childNodes[1].childNodes[0];
-    replySubmitBtn =
-      comment.nextSibling.childNodes[0].childNodes[1].childNodes[1];
-    replyList = comment.nextSibling.nextSibling.childNodes[0];
-    handleReplyHidden();
-    replyForm.addEventListener("submit", handleSubmit);
-    replyCancelBtn.addEventListener("click", handleCancel);
-    replySubmitBtn.addEventListener("click", handleSubmit);
+    userId = document.getElementById("jsAddCommentForm").dataset.id;
+    // 로그인 되어있을 시 ->
+    if (userId) {
+      replyForm = comment.nextSibling.childNodes[0];
+      replyInput = comment.nextSibling.childNodes[0].childNodes[0];
+      replyCancelBtn =
+        comment.nextSibling.childNodes[0].childNodes[1].childNodes[0];
+      replySubmitBtn =
+        comment.nextSibling.childNodes[0].childNodes[1].childNodes[1];
+      replyList = comment.nextSibling.nextSibling.childNodes[0];
+      handleReplyHidden();
+      replyForm.addEventListener("submit", handleSubmit);
+      replyCancelBtn.addEventListener("click", handleCancel);
+      replySubmitBtn.addEventListener("click", handleSubmit);
+    }
   }
 };
 

@@ -51,7 +51,10 @@ const handleHeartBtn = (event) => {
       isSelected = false;
       //   console.log(isSelected);
     }
-    handleHeartData(commentId);
+    // 로그인 되어있을 시 ->
+    if (userId) {
+      handleHeartData(commentId);
+    }
   }
 };
 

@@ -193,6 +193,10 @@ const handleSubmit = (event) => {
   addCommentInput.blur();
 };
 
+const handleBlurInput = (event) => {
+  addCommentInput.blur();
+};
+
 const handleFocusInput = () => {
   buttonBox.classList.remove("hidden");
 };
@@ -203,10 +207,18 @@ const handleCancelBtn = () => {
 };
 
 function init() {
-  addCommentForm.addEventListener("submit", handleSubmit);
-  addCommentInput.addEventListener("click", handleFocusInput);
-  cancelBtn.addEventListener("click", handleCancelBtn);
-  commentBtn.addEventListener("click", handleSubmit);
+  const userId = addCommentForm.dataset.id;
+  // 로그인 되어있을 시 ->
+  if (userId) {
+    addCommentForm.addEventListener("submit", handleSubmit);
+    addCommentInput.addEventListener("click", handleFocusInput);
+    cancelBtn.addEventListener("click", handleCancelBtn);
+    commentBtn.addEventListener("click", handleSubmit);
+  }
+  // 미 로그인 시 ->
+  else {
+    addCommentInput.addEventListener("click", handleBlurInput);
+  }
 }
 
 if (addCommentForm) {

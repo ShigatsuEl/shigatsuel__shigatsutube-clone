@@ -69,7 +69,6 @@ export const postHeartComment = async (req, res) => {
     params: { id: commentId },
     body: { userId, isSelected },
   } = req;
-  // console.log(commentId, userId, isSelected);
   try {
     const comment = await Comment.findById(commentId);
     const user = await User.findById(userId);

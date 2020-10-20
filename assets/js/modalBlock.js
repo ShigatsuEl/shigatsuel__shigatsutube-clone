@@ -6,12 +6,16 @@ const modalLayout = document.getElementById("jsModalLayout");
 const modalCancleBtn = document.getElementById("jsModalCancelBtn");
 const commentList = document.getElementById("jsCommentList");
 
-let likeCommentBtns;
-let replyCommentBtns;
+let heartCommentBtns;
+let addReplyBtns;
+let replyHeartBtns;
 
+// Exit Modal
 const exitModal = () => {
   modalBlock.classList.add("hidden");
 };
+
+// Enter Modal
 const enterModal = () => {
   modalBlock.classList.remove("hidden");
 };
@@ -24,6 +28,20 @@ function init() {
     commentInput.addEventListener("click", enterModal);
     modalLayout.addEventListener("click", exitModal);
     modalCancleBtn.addEventListener("click", exitModal);
+    if (commentList && commentList.childElementCount !== 0) {
+      heartCommentBtns = document.querySelectorAll(".heartBtn");
+      addReplyBtns = document.querySelectorAll(".replyBtn");
+      replyHeartBtns = document.querySelectorAll(".replyHeartBtn");
+      heartCommentBtns.forEach((ele) =>
+        ele.addEventListener("click", enterModal)
+      );
+      addReplyBtns.forEach((ele) => {
+        ele.addEventListener("click", enterModal);
+      });
+      replyHeartBtns.forEach((ele) =>
+        ele.addEventListener("click", enterModal)
+      );
+    }
   }
 }
 
