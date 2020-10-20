@@ -10,3 +10,4 @@ import "./addReplyComment";
 import "./editReplyComment";
 import "./deleteReplyComment";
 import "./heartReplyComment";
+import "./modalBlock";
