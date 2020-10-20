@@ -34,6 +34,18 @@ const UserSchema = new mongoose.Schema({
       ref: "Reply",
     },
   ],
+  likeVideos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video",
+    },
+  ],
+  dislikeVideos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video",
+    },
+  ],
 });
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });

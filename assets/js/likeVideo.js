@@ -1,20 +1,24 @@
 import axios from "axios";
 
-const videoContainer = document.getElementById("jsVideoContainer");
 const videoInfo = document.getElementById("jsVideoInfo");
+const videoLikeBtn = document.getElementById("jsVideoLikeBtn");
+const videoDislikeBtn = document.getElementById("jsVideoDislikeBtn");
 
 let videoId;
 let userId;
-let likeIcon;
+let isLikeBtn;
 let isSelected;
+let isSwitching;
 
-const handleLikeData = async (videoId, userId, isSelected) => {
+const handleLikeData = async () => {
   const response = await axios({
     method: "post",
     url: `/api/${videoId}/like-video`,
     data: {
-      userId,
+      isLikeBtn,
       isSelected,
+      isSwitching,
+      userId,
     },
   });
   if (response.status === 200) {
@@ -24,25 +28,32 @@ const handleLikeData = async (videoId, userId, isSelected) => {
   }
 };
 
-const handleLikeBtn = (event) => {
-  if (event.target.className.includes("likeBtn")) {
-    videoId = document.getElementById("jsVideo").dataset.id;
-    userId = document.getElementById("jsAddCommentForm").dataset.id;
-    likeIcon = event.target;
-    // console.log(videoId, userId);
-    if (event.target.className.includes("selected")) {
-      isSelected = true;
-      //   console.log(isSelected);
-    } else {
-      isSelected = false;
-      console.log(isSelected);
+const clickLikingBtn = (event) => {
+  const clickedBtn = event.currentTarget;
+  isLikeBtn = !clickedBtn.className.includes("dislike");
+  //true -> likebtn /false -> dislikebtn
+  if (isLikeBtn) {
+    isSelected = videoLikeBtn.className.includes("selected");
+    if (!isSelected) {
+      isSwitching = !!videoDislikeBtn.className.includes("selected");
     }
-    handleLikeData(videoId, userId);
+  } else {
+    isSelected = videoDislikeBtn.className.includes("selected");
+    if (!isSelected) {
+      isSwitching = !!videoLikeBtn.className.includes("selected");
+    }
   }
+  // console.log('isLikeBtn:', isLikeBtn, 'isSelected:', isSelected, 'isSwitching:', isSwitching);
+  handleLikeData();
 };
 
 function init() {
-  videoContainer.addEventListener("click", handleLikeBtn);
+  videoId = document.getElementById("jsVideo").dataset.id;
+  userId = document.getElementById("jsAddCommentForm").dataset.id;
+  if (userId) {
+    videoLikeBtn.addEventListener("click", clickLikingBtn);
+    videoDislikeBtn.addEventListener("click", clickLikingBtn);
+  }
 }
 
 if (videoInfo) {

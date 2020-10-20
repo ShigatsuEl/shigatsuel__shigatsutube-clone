@@ -28,6 +28,14 @@ const VideoSchema = new mongoose.Schema({
       ref: "Comment",
     },
   ],
+  like: {
+    type: Number,
+    default: 0,
+  },
+  dislike: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const model = mongoose.model("Video", VideoSchema);

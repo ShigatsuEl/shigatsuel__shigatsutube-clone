@@ -18,12 +18,22 @@ block content
                 .video__subtitle
                     .video__views=`VIEWS ${video.views} · ${dateFormatter(video.createdAt)}`
                     .video__likes
-                        span.video__like
-                            i.fas.fa-thumbs-up.likeBtn
-                            | 0
-                        span.video__dislike
-                            i.fas.fa-thumbs-down
-                            | 0
+                        if loggedUser && loggedUser.likeVideos.includes(video.id)
+                            span.like.selected#jsVideoLikeBtn
+                                i.fas.fa-thumbs-up  
+                                span.cnt#jsVideoLikeCount=video.like
+                        else 
+                            span.like#jsVideoLikeBtn
+                                i.fas.fa-thumbs-up  
+                                span.cnt#jsVideoLikeCount=video.like
+                        if loggedUser && loggedUser.dislikeVideos.includes(video.id)
+                            span.dislike.selected#jsVideoDislikeBtn
+                                i.fas.fa-thumbs-down  
+                                span.cnt#jsVideoDislikeCount=video.dislike
+                        else
+                            span.dislike#jsVideoDislikeBtn     
+                                i.fas.fa-thumbs-down  
+                                span.cnt#jsVideoDislikeCount=video.dislike
             .video__info-two
                 h5.video__creator Uploaded by
                     if loggedUser && video.creator.id === loggedUser.id
