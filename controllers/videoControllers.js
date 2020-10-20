@@ -136,3 +136,10 @@ export const deleteVideo = async (req, res) => {
   }
   res.redirect(routes.home);
 };
+
+export const postLikeVideo = (req, res) => {
+  const {
+    params: { id: videoId },
+    body: { userId, isSelected },
+  } = req;
+};

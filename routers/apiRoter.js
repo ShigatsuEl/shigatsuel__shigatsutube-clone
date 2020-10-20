@@ -1,4 +1,5 @@
 import express from "express";
+import { postLikeVideo } from "../controllers/videoControllers";
 import {
   postAddComment,
   postRegisterView,
@@ -17,6 +18,7 @@ import routes from "../routes";
 
 const apiRouter = express.Router();
 
+apiRouter.post(routes.likeVideo, onlyPrivate, postLikeVideo);
 apiRouter.post(routes.registerView, postRegisterView);
 apiRouter.post(routes.addComment, onlyPrivate, postAddComment);
 apiRouter.post(routes.heartComment, onlyPrivate, postHeartComment);

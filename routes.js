@@ -29,6 +29,7 @@ const GOOGLE_CALLBACK = "/auth/google/callback";
 
 // API
 const API = "/api";
+const LIKE_VIDEO = "/:id/like-video";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/add-comment";
 const HEART_COMMENT = "/:id/heart-comment";
@@ -84,6 +85,7 @@ const routes = {
   googleCallback: GOOGLE_CALLBACK,
   me: ME,
   api: API,
+  likeVideo: LIKE_VIDEO,
   registerView: REGISTER_VIEW,
   addComment: ADD_COMMENT,
   heartComment: HEART_COMMENT,
