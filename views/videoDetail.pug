@@ -4,7 +4,7 @@ include mixins/commentBlock
 
 block content
     .video__wrapper
-        .video__container
+        .video__container#jsVideoContainer
             .video__edit-box
                 if loggedUser && video.creator.id === loggedUser.id
                     a(href=routes.editVideo(video.id)) 
@@ -13,13 +13,13 @@ block content
                 src:video.fileUrl,
                 id:video.id
             })
-            .video__info-one
+            .video__info-one#jsVideoInfo
                 h5.video__title=video.title
                 .video__subtitle
                     .video__views=`VIEWS ${video.views} · ${dateFormatter(video.createdAt)}`
                     .video__likes
                         span.video__like
-                            i.fas.fa-thumbs-up
+                            i.fas.fa-thumbs-up.likeBtn
                             | 0
                         span.video__dislike
                             i.fas.fa-thumbs-down

@@ -41,7 +41,7 @@ const handleHeartBtn = (event) => {
     commentId =
       event.target.parentElement.parentElement.parentElement.parentElement
         .dataset.id;
-    userId = document.getElementById("jsAddCommentForm").dataset.user;
+    userId = document.getElementById("jsAddCommentForm").dataset.id;
     heartIcon = event.target;
     commentBlock = document.getElementById(`${commentId}`);
     if (event.target.className.includes("selected")) {
