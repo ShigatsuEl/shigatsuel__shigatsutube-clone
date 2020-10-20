@@ -150,7 +150,7 @@ export const postLikeVideo = async (req, res) => {
     const { likeVideos } = user;
     const { dislikeVideos } = user;
     // likebtn이 맞고 선택되어있는 상태라면 클릭하면 like를 삭제
-    // likebtn이 맞고 선택되어있는 상태에서 스위칭 상태가 맞으면 like++ dislike--
+    // likebtn이 맞고 선택되어있지 않은 상태에서 스위칭 상태가 맞으면 like++ dislike--
     // likebtn이 맞고 선택되지 않은 상태라면 like를 추가
     if (isLikeBtn) {
       if (isSelected) {
@@ -166,7 +166,7 @@ export const postLikeVideo = async (req, res) => {
         if (likeVideos.indexOf(videoId) === -1) likeVideos.push(videoId);
       }
       // dislikebtn이 맞고 선택되어있는 상태라면 클릭하면 dislike를 삭제
-      // dislikebtn이 맞고 선택되어있는 상태에서 스위칭 상태가 맞으면 dislike++ like--
+      // dislikebtn이 맞고 선택되어있지 않은 상태에서 스위칭 상태가 맞으면 dislike++ like--
       // dislikebtn이 맞고 선택되지 않은 상태라면 dislike를 추가
     } else if (isSelected) {
       video.dislike--;

@@ -47,13 +47,22 @@
           margin-bottom: $first-margin;
           font-size: 18px;
         }
-        .video__likes {
-        }
-        .video__likes span {
+        .video__likes .like,
+        .video__likes .dislike {
+          cursor: pointer;
           margin-right: $first-margin;
           i {
+            color: rgba($color: black, $alpha: 0.5);
             padding-right: $third-padding;
+            transition: color 0.3s ease-in-out;
           }
+          i:hover {
+            color: black;
+          }
+        }
+        .video__likes .selected .fa-thumbs-up,
+        .video__likes .selected .fa-thumbs-down {
+          color: black;
         }
       }
     }
