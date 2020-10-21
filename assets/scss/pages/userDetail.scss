@@ -348,5 +348,33 @@
         }
       }
     }
+    .liked-videos__container {
+      gap: 5px;
+      .videos__category {
+        font-size: 1rem;
+      }
+      .liked__videos {
+        padding: 5px 5px;
+        .videoBlock a {
+          .videoBlock__thumbnail {
+            margin-bottom: 5px;
+          }
+          .videoBlock__description {
+            .left .videoBlock__img {
+              width: 20px;
+              height: 20px;
+              margin-right: 5px;
+            }
+            .right {
+              .videoBlock__title,
+              .videoBlock__creator,
+              .videoBlock__views {
+                font-size: 0.6rem;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
