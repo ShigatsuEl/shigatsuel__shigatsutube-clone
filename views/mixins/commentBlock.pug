@@ -34,7 +34,7 @@ mixin commentBlock(comment ={})
                         i.far.fa-trash-alt.deleteBtn
     if loggedUser
         .reply__box.hidden#jsReplyBox
-            form.reply__form#jsReplyForm
+            form.reply__form.replyForm#jsReplyForm
                 input.reply__input#jsReplyInput(type="text", placeholder="Feel free to reply comment~", name="reply", autocomplete="off", required)
                 .reply__btnBox#jsBtnBox
                     button.cancel__btn.replyCancelBtn#jsCancelBtn(type="button") CANCEL

@@ -169,20 +169,22 @@ const handleReplyHidden = () => {
 
 const handleSubmit = (event) => {
   if (event.target.className.includes("replySaveBtn")) {
-    event.preventDefault();
     comment =
       event.target.parentElement.parentElement.parentElement.previousSibling;
     commentId =
       event.target.parentElement.parentElement.parentElement.previousSibling
         .dataset.id;
     replyInput = comment.nextSibling.childNodes[0].childNodes[0];
-
-    event.preventDefault();
-    const reply = replyInput.value;
-    sendReply(reply);
-    replyInput.value = "";
-    replyInput.blur();
+  } else if (event.target.className.includes("replyForm")) {
+    comment = event.target.parentElement.previousSibling;
+    commentId = event.target.parentElement.previousSibling.dataset.id;
+    replyInput = comment.nextSibling.childNodes[0].childNodes[0];
   }
+  event.preventDefault();
+  const reply = replyInput.value;
+  sendReply(reply);
+  replyInput.value = "";
+  replyInput.blur();
 };
 
 const handleCancel = (event) => {

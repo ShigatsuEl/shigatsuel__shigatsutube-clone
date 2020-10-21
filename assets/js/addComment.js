@@ -14,6 +14,8 @@ let replyInput;
 let replyBtnBox;
 let replyCancelBtn;
 let replySubmitBtn;
+let replyViewBox;
+let replyList;
 
 const increaseNumber = () => {
   const commentNumber = document.getElementById("jsCommentNumber");
@@ -179,13 +181,10 @@ const addCommentBlock = (parsedInfo) => {
   replyBox = document.createElement("div");
   replyBox.classList.add("reply__box", "hidden");
   replyBox.id = "jsReplyBox";
-  // commentList에 commentBlock & replyBox를 둘 다 추가하고
-  // commentBlock을 replyBox보다 앞에 넣는다.
   commentList.prepend(replyBox);
-  commentList.insertBefore(commentBlock, replyBox);
 
   replyForm = document.createElement("form");
-  replyForm.classList.add("reply__form");
+  replyForm.classList.add("reply__form", "replyForm");
   replyForm.id = "jsReplyForm";
   replyBox.append(replyForm);
 
@@ -196,7 +195,7 @@ const addCommentBlock = (parsedInfo) => {
   replyInput.setAttribute("name", "reply");
   replyInput.setAttribute("placeholder", "Feel free to reply comment~");
   replyInput.setAttribute("autocomplete", "off");
-  replyInput.setAttribute("required", "true");
+  replyInput.setAttribute("required", "required");
   replyForm.append(replyInput);
 
   replyBtnBox = document.createElement("div");
@@ -217,6 +216,21 @@ const addCommentBlock = (parsedInfo) => {
   replySubmitBtn.setAttribute("type", "button");
   replySubmitBtn.textContent = "COMMENT";
   replyBtnBox.append(replySubmitBtn);
+
+  // Replies View Box
+  replyViewBox = document.createElement("div");
+  replyViewBox.classList.add("replies__view-box");
+  replyViewBox.id = "jsReplyContainer";
+  commentList.prepend(replyViewBox);
+  // commentList에 commentBlock & replyBox & replyViewBox를 셋 다 추가하고
+  // commentBlock / replyBox / replyViewBox 순서로 넣는다.(순서가 중요!)
+  commentList.insertBefore(replyBox, replyViewBox);
+  commentList.insertBefore(commentBlock, replyBox);
+
+  replyList = document.createElement("ul");
+  replyList.classList.add("replies__list");
+  replyList.id = "jsReplyList";
+  replyViewBox.append(replyList);
 };
 
 const sendComment = async (comment) => {
