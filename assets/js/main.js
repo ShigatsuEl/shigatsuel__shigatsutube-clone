@@ -11,3 +11,4 @@ import "./editReplyComment";
 import "./deleteReplyComment";
 import "./heartReplyComment";
 import "./modalBlock";
+import "./notificationModal";
