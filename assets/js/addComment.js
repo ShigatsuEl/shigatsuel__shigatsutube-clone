@@ -7,6 +7,13 @@ const cancelBtn = document.getElementById("jsCancelBtn");
 const commentBtn = document.getElementById("jsCommentBtn");
 const commentList = document.getElementById("jsCommentList");
 
+let replyBox;
+let replyForm;
+let replyInput;
+let replyBtnBox;
+let replyCancelBtn;
+let replySubmitBtn;
+
 const increaseNumber = () => {
   const commentNumber = document.getElementById("jsCommentNumber");
   const commentLiteral = document.getElementById("jsLiteralComment");
@@ -167,7 +174,48 @@ const addCommentBlock = (parsedInfo) => {
   commentDeleteBtn.classList.add("far", "fa-trash-alt", "deleteBtn");
   commentDelete.append(commentDeleteBtn);
 
-  increaseNumber();
+  // Reply Box
+  replyBox = document.createElement("div");
+  replyBox.classList.add("reply__box", "hidden");
+  replyBox.id = "jsReplyBox";
+  // commentList에 commentBlock & replyBox를 둘 다 추가하고
+  // commentBlock을 replyBox보다 앞에 넣는다.
+  commentList.prepend(replyBox);
+  commentList.insertBefore(commentBlock, replyBox);
+
+  replyForm = document.createElement("form");
+  replyForm.classList.add("reply__form");
+  replyForm.id = "jsReplyForm";
+  replyBox.append(replyForm);
+
+  replyInput = document.createElement("input");
+  replyInput.classList.add("reply__input");
+  replyInput.id = "jsReplyInput";
+  replyInput.setAttribute("type", "text");
+  replyInput.setAttribute("name", "reply");
+  replyInput.setAttribute("placeholder", "Feel free to reply comment~");
+  replyInput.setAttribute("autocomplete", "off");
+  replyInput.setAttribute("required", "true");
+  replyForm.append(replyInput);
+
+  replyBtnBox = document.createElement("div");
+  replyBtnBox.classList.add("reply__btnBox");
+  replyBtnBox.id = "jsBtnBox";
+  replyForm.append(replyBtnBox);
+
+  replyCancelBtn = document.createElement("button");
+  replyCancelBtn.classList.add("cancel__btn", "replyCancelBtn");
+  replyCancelBtn.id = "jsCancelBtn";
+  replyCancelBtn.setAttribute("type", "button");
+  replyCancelBtn.textContent = "CANCEL";
+  replyBtnBox.append(replyCancelBtn);
+
+  replySubmitBtn = document.createElement("button");
+  replySubmitBtn.classList.add("comment__btn", "replySaveBtn");
+  replySubmitBtn.id = "jsCommentBtn";
+  replySubmitBtn.setAttribute("type", "button");
+  replySubmitBtn.textContent = "COMMENT";
+  replyBtnBox.append(replySubmitBtn);
 };
 
 const sendComment = async (comment) => {
@@ -180,8 +228,8 @@ const sendComment = async (comment) => {
     },
   });
   if (response.status === 200) {
-    console.log(response.data);
     addCommentBlock(response.data);
+    increaseNumber();
   }
 };
 
