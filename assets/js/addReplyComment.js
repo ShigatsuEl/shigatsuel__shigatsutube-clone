@@ -1,4 +1,5 @@
 import axios from "axios";
+import { addNotificationModal } from "./notificationModal";
 
 const commentContainer = document.getElementById("jsCommentContainer");
 const commentSubinfo = document.querySelector(".comment__subinfo");
@@ -155,6 +156,9 @@ const sendReply = async (reply) => {
   });
   if (response.status === 200) {
     addReplyComment(response.data);
+    addNotificationModal("Successfully", "added", "reply");
+  } else {
+    addNotificationModal("Failed to", "added", "reply");
   }
 };
 

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { addNotificationModal } from "./notificationModal";
 
 const commentContainer = document.getElementById("jsCommentContainer");
 const commentSubinfo = document.querySelector(".comment__subinfo");
@@ -40,6 +41,9 @@ const handleEnter = async (event) => {
         commentEditInput.innerHTML = newComment;
         commentContent.classList.toggle("hidden");
         commentEditBox.classList.toggle("hidden");
+        addNotificationModal("Successfully", "fixed", "comment");
+      } else {
+        addNotificationModal("Failed to", "fixed", "comment");
       }
     }
   }

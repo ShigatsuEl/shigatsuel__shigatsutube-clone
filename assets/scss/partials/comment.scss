@@ -12,7 +12,7 @@
     padding: 10px;
     position: absolute;
     top: 10px;
-    right: 15px;
+    right: 0px;
     font-size: 1.2rem;
     background-color: rgba($color: red, $alpha: 0.4);
     color: white;
@@ -72,5 +72,22 @@
   }
   .hidden {
     display: none;
+  }
+  @keyframes notificationAnimation {
+    0% {
+      transform: translateX(350px);
+    }
+    20% {
+      transform: none;
+    }
+    80% {
+      transform: none;
+    }
+    100% {
+      transform: translateX(350px);
+    }
+  }
+  .transition {
+    animation: notificationAnimation 2s ease-in-out;
   }
 }

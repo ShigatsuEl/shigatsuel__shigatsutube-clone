@@ -1,4 +1,5 @@
 import axios from "axios";
+import { addNotificationModal } from "./notificationModal";
 
 const commentContainer = document.getElementById("jsCommentContainer");
 const commentSubinfo = document.querySelector(".comment__subinfo");
@@ -38,6 +39,9 @@ const handleDeleteData = async (commentId, userId, videoId) => {
   if (response.status === 200) {
     handleDeleteComment();
     decreaseNumber();
+    addNotificationModal("Successfully", "delete", "comment");
+  } else {
+    addNotificationModal("Failed to", "delete", "comment");
   }
 };
 
