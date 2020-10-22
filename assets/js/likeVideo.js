@@ -1,4 +1,5 @@
 import axios from "axios";
+import { addLikingModal } from "./notificationModal";
 
 const videoInfo = document.getElementById("jsVideoInfo");
 const videoLikeBtn = document.getElementById("jsVideoLikeBtn");
@@ -35,12 +36,14 @@ const handleLikePainting = () => {
       videoDislikeCount--;
       videoLikeCountBox.innerHTML = videoLikeCount;
       videoDislikeCountBox.innerHTML = videoDislikeCount;
+      addLikingModal("liked");
     } else {
       //색변경
       videoLikeBtn.classList.add("selected");
       //숫자변경
       videoLikeCount++;
       videoLikeCountBox.innerHTML = videoLikeCount;
+      addLikingModal("liked");
     }
     // dislikebtn이 맞고 선택되어있는 상태라면 클릭하면 dislike를 삭제
     // dislikebtn이 맞고 선택되어있지 않은 상태에서 스위칭 상태가 맞으면 dislike++ like--
@@ -60,12 +63,14 @@ const handleLikePainting = () => {
     videoDislikeCount++;
     videoLikeCountBox.innerHTML = videoLikeCount;
     videoDislikeCountBox.innerHTML = videoDislikeCount;
+    addLikingModal("disliked");
   } else {
     //색변경
     videoDislikeBtn.classList.add("selected");
     //숫자변경
     videoDislikeCount++;
     videoDislikeCountBox.innerHTML = videoDislikeCount;
+    addLikingModal("disliked");
   }
 };
 
