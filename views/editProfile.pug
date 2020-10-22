@@ -2,8 +2,8 @@ extends layouts/mainGrey.pug
 
 block content
     .form-container
+        h3 Edit Profile
         form(action=`/users${routes.editProfile}`, method="post", enctype="multipart/form-data")
-            label(for="avatar") Avatar
             input(type="file", name="avatar", accept="image/*")
             input(type="text", placeholder="Name" name="name" value=loggedUser.name)
             input(type="email", placeholder="Email" name="email" value=loggedUser.email)

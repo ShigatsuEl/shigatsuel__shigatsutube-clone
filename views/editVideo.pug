@@ -2,6 +2,7 @@ extends layouts/mainGrey.pug
 
 block content
     .form-container
+        h3 Edit Video
         form(action=routes.editVideo(video.id), method="post")
             input(type="text", name="title", placeholder="Tiltle", value=video.title)
             textarea(name="description", placeholder="Please write the video description within 20 Characters")=video.description
