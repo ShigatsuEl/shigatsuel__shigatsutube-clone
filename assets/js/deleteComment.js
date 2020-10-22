@@ -7,6 +7,9 @@ const commentSubinfo = document.querySelector(".comment__subinfo");
 let commentId;
 let userId;
 let videoId;
+let commentBlock;
+let replyBox;
+let replyViewBox;
 
 const decreaseNumber = () => {
   const commentNumber = document.getElementById("jsCommentNumber");
@@ -23,8 +26,12 @@ const decreaseNumber = () => {
 };
 
 const handleDeleteComment = () => {
-  const commentBlock = document.getElementById(`${commentId}`);
+  commentBlock = document.getElementById(`${commentId}`);
+  replyBox = commentBlock.nextSibling;
+  replyViewBox = commentBlock.nextSibling.nextSibling;
   commentBlock.remove();
+  replyBox.remove();
+  replyViewBox.remove();
 };
 
 const handleDeleteData = async (commentId, userId, videoId) => {
