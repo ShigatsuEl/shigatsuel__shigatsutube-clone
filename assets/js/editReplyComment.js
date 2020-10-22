@@ -1,4 +1,5 @@
 import axios from "axios";
+import { addNotificationModal } from "./notificationModal";
 
 const commentContainer = document.getElementById("jsCommentContainer");
 const replySubinfo = document.querySelector(".reply__subinfo");
@@ -40,6 +41,9 @@ const handleEnter = async (event) => {
         replyEditInput.innerHTML = newReply;
         replyContent.classList.toggle("hidden");
         replyEditBox.classList.toggle("hidden");
+        addNotificationModal("Successfully", "fixed", "reply");
+      } else {
+        addNotificationModal("Failed to", "fixed", "reply");
       }
     }
   }
