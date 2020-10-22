@@ -29,6 +29,18 @@ function handleVideoPlayer() {
   }
 }
 
+function handlePlaySpace(event) {
+  if (videoPlayer.paused) {
+    if (event.keyCode === 32) {
+      videoPlayer.play();
+      playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    }
+  } else if (event.keyCode === 32) {
+    videoPlayer.pause();
+    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+  }
+}
+
 function handlePlayClick() {
   if (videoPlayer.paused) {
     videoPlayer.play();
@@ -145,7 +157,7 @@ function handleMobileProgress() {
   const max = Math.floor(videoPlayer.duration);
   const current = Math.floor(videoPlayer.currentTime);
   const percent = 100 * (current / max);
-  newFilledBar.style.width = percent + "%";
+  newFilledBar.style.width = `${percent}%`;
 }
 
 function handleProgressSeek(event) {
@@ -194,6 +206,7 @@ function mediaMatch() {
 function init() {
   videoPlayer.volume = 1;
   videoPlayer.addEventListener("play", handleVideoPlayer);
+  document.addEventListener("keydown", handlePlaySpace);
   videoPlayer.addEventListener("click", handlePlayClick);
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
