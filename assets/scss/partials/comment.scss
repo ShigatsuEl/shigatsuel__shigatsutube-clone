@@ -38,11 +38,11 @@
     }
     .add__formComment {
       display: flex;
-      width: 90%;
+      width: 95%;
       .add__inputComment {
         border-radius: 7px;
         padding: $third-padding;
-        width: 90%;
+        width: 95%;
         font-size: 18px;
       }
     }
@@ -50,8 +50,8 @@
   .comments__btnBox {
     display: flex;
     justify-content: flex-end;
-    margin-right: 10%;
     margin-bottom: $first-margin;
+    width: 95%;
     .cancel__btn {
       margin-right: 1rem;
       border-radius: 7px;

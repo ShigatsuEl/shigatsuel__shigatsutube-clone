@@ -9,9 +9,10 @@ block content
             +modalBlock
         .video__container#jsVideoContainer
             .video__edit-box
-                if loggedUser && video.creator.id === loggedUser.id
-                    a(href=routes.editVideo(video.id)) 
-                        button Edit Video
+                .video__edit-center
+                    if loggedUser && video.creator.id === loggedUser.id
+                        a(href=routes.editVideo(video.id)) 
+                            button Edit Video
             +videoPlayer({
                 src:video.fileUrl,
                 id:video.id
