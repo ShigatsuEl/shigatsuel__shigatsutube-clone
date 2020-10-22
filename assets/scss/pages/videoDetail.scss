@@ -133,6 +133,9 @@
     .video__container {
       max-width: none;
       margin-bottom: $first-margin;
+      .video__edit-box .video__edit-center a button {
+        font-size: 2rem;
+      }
       .videoPlayer {
         max-width: none;
         video {
@@ -141,12 +144,17 @@
       }
       .video__info-one,
       .video__info-two {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
       .video__info-one {
-        .video__title,
+        .video__title {
+          font-size: 2rem;
+        }
         .video__subtitle {
-          font-size: 1.8rem;
+          .video__views,
+          .video__likes {
+            font-size: 2rem;
+          }
         }
       }
     }
