@@ -8,8 +8,20 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    position: relative;
     width: 100%;
     padding: 0 15px;
+    .addCompleteModalVideo {
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+      padding: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 1.2rem;
+      background-color: rgba($color: red, $alpha: 0.4);
+      color: white;
+    }
     .video__edit-box {
       padding: 0px 0px 5px 0px;
       display: flex;
@@ -81,6 +93,26 @@
       .video__despription {
       }
     }
+    .hidden {
+      display: none;
+    }
+    @keyframes notificationAnimationTwo {
+      0% {
+        transform: translateX(-350px);
+      }
+      20% {
+        transform: none;
+      }
+      80% {
+        transform: none;
+      }
+      100% {
+        transform: translateX(-350px);
+      }
+    }
+    .transitionTwo {
+      animation: notificationAnimationTwo 2s ease-in-out;
+    }
   }
 }
 
@@ -133,6 +165,9 @@
     .video__container {
       max-width: none;
       margin-bottom: $first-margin;
+      .addCompleteModalVideo {
+        font-size: 2rem;
+      }
       .video__edit-box .video__edit-center a button {
         font-size: 2rem;
       }

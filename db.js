@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_PROD_URL, {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,

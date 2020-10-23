@@ -1,53 +1,105 @@
 include ./replyBlock
 
 mixin commentBlock(comment ={})
-    li.comment__block(id=comment.id data-id=comment.id)
-        .comment__left
-            img.comment__publish-avatar(src=`${comment.creator.avatarUrl}`)
-        .comment__right
-            .comment__info
-                a.comment__writer(href=routes.userDetail(comment.creator.id))
-                    span.comment__writer-name=comment.creator.name
-                span.comment__createdAt=comment.createdAt
-            .comment__content#jsCommentContent
-                .comment__text#jsCommentText=comment.text
-            .comment__editBox.hidden#jsCommentEditBox(data-id=comment.id)
-                form.comment__editForm#jsCommentEditForm
-                    .comment__editInput#jsCommentEditInput(contenteditable="true", name="editComment", placeholder="Edit your comment", autocomplete="off", required)=comment.text
-                    .editBtnBox
-                        button.comment__editCancelBtn.commentCancelBtn#jsCommentEditCancelBtn CANCEL
-                        button.comment__editSaveBtn.commentSaveBtn#jsCommentEditSaveBtn SAVE
-            .comment__subinfo#jsCommentSubinfo
-                span.comment__heart
-                    if loggedUser && comment.heart.includes(loggedUser.id)
-                        i.fas.fa-heart.heartBtn.selected
-                    else
-                        i.fas.fa-heart.heartBtn
-                    span.comment__heart-number#jsHeartNumber=comment.heart.length
-                span.comment__reply
-                    i.fas.fa-reply.replyBtn
-                    span.reply__count#jsReplyCnt=comment.replies.length
-                if loggedUser && loggedUser.id === comment.creator.id
-                    span.comment__editBtn#jsCommentEdit
-                        i.far.fa-edit.editBtn
-                    span.comment__deleteBtn#jsCommentDelete
-                        i.far.fa-trash-alt.deleteBtn
-    if loggedUser
-        .reply__box.hidden#jsReplyBox
-            form.reply__form.replyForm#jsReplyForm
-                input.reply__input#jsReplyInput(type="text", placeholder="Feel free to reply comment~", name="reply", autocomplete="off", required)
-                .reply__btnBox#jsBtnBox
-                    button.cancel__btn.replyCancelBtn#jsCancelBtn(type="button") CANCEL
-                    button.comment__btn.replySaveBtn#jsCommentBtn COMMENT
-    .replies__view-box#jsReplyContainer
-        ul.replies__list#jsReplyList
-            each reply in comment.replies.reverse()
-                +replyBlock({
-                    id : reply.id,
-                    creatorId : reply.creator.id,
-                    creator: reply.creator.name,
-                    avatarUrl : reply.creator.avatarUrl,
-                    createdAt : dateFormatter(reply.createdAt),
-                    text : reply.text,
-                    heart: reply.heart
-                })
+    if loggedUser && loggedUser.id === comment.creatorId
+        li.comment__block-owner(id=comment.id data-id=comment.id)
+            .comment__left
+                img.comment__publish-avatar(src=`${comment.creator.avatarUrl}`)
+            .comment__right
+                .comment__info
+                    a.comment__writer(href=routes.userDetail(comment.creator.id))
+                        span.comment__writer-name=comment.creator.name
+                    span.comment__createdAt=comment.createdAt
+                .comment__content#jsCommentContent
+                    .comment__text#jsCommentText=comment.text
+                .comment__editBox.hidden#jsCommentEditBox(data-id=comment.id)
+                    form.comment__editForm#jsCommentEditForm
+                        .comment__editInput#jsCommentEditInput(contenteditable="true", name="editComment", placeholder="Edit your comment", autocomplete="off", required)=comment.text
+                        .editBtnBox
+                            button.comment__editCancelBtn.commentCancelBtn#jsCommentEditCancelBtn CANCEL
+                            button.comment__editSaveBtn.commentSaveBtn#jsCommentEditSaveBtn SAVE
+                .comment__subinfo#jsCommentSubinfo
+                    span.comment__heart
+                        if loggedUser && comment.heart.includes(loggedUser.id)
+                            i.fas.fa-heart.heartBtn.selected
+                        else
+                            i.fas.fa-heart.heartBtn
+                        span.comment__heart-number#jsHeartNumber=comment.heart.length
+                    span.comment__reply
+                        i.fas.fa-reply.replyBtn
+                        span.reply__count#jsReplyCnt=comment.replies.length
+                    if loggedUser && loggedUser.id === comment.creator.id
+                        span.comment__editBtn#jsCommentEdit
+                            i.far.fa-edit.editBtn
+                        span.comment__deleteBtn#jsCommentDelete
+                            i.far.fa-trash-alt.deleteBtn
+        if loggedUser
+            .reply__box.hidden#jsReplyBox
+                form.reply__form.replyForm#jsReplyForm
+                    input.reply__input#jsReplyInput(type="text", placeholder="Feel free to reply comment~", name="reply", autocomplete="off", required)
+                    .reply__btnBox#jsBtnBox
+                        button.cancel__btn.replyCancelBtn#jsCancelBtn(type="button") CANCEL
+                        button.comment__btn.replySaveBtn#jsCommentBtn COMMENT
+        .replies__view-box#jsReplyContainer
+            ul.replies__list#jsReplyList
+                each reply in comment.replies.reverse()
+                    +replyBlock({
+                        id : reply.id,
+                        creatorId : reply.creator.id,
+                        creator: reply.creator.name,
+                        avatarUrl : reply.creator.avatarUrl,
+                        createdAt : dateFormatter(reply.createdAt),
+                        text : reply.text,
+                        heart: reply.heart
+                    })
+    else
+        li.comment__block-visitor(id=comment.id data-id=comment.id)
+            .comment__left
+                img.comment__publish-avatar(src=`${comment.creator.avatarUrl}`)
+            .comment__right
+                .comment__info
+                    a.comment__writer(href=routes.userDetail(comment.creator.id))
+                        span.comment__writer-name=comment.creator.name
+                    span.comment__createdAt=comment.createdAt
+                .comment__content#jsCommentContent
+                    .comment__text#jsCommentText=comment.text
+                .comment__editBox.hidden#jsCommentEditBox(data-id=comment.id)
+                    form.comment__editForm#jsCommentEditForm
+                        .comment__editInput#jsCommentEditInput(contenteditable="true", name="editComment", placeholder="Edit your comment", autocomplete="off", required)=comment.text
+                        .editBtnBox
+                            button.comment__editCancelBtn.commentCancelBtn#jsCommentEditCancelBtn CANCEL
+                            button.comment__editSaveBtn.commentSaveBtn#jsCommentEditSaveBtn SAVE
+                .comment__subinfo#jsCommentSubinfo
+                    span.comment__heart
+                        if loggedUser && comment.heart.includes(loggedUser.id)
+                            i.fas.fa-heart.heartBtn.selected
+                        else
+                            i.fas.fa-heart.heartBtn
+                        span.comment__heart-number#jsHeartNumber=comment.heart.length
+                    span.comment__reply
+                        i.fas.fa-reply.replyBtn
+                        span.reply__count#jsReplyCnt=comment.replies.length
+                    if loggedUser && loggedUser.id === comment.creator.id
+                        span.comment__editBtn#jsCommentEdit
+                            i.far.fa-edit.editBtn
+                        span.comment__deleteBtn#jsCommentDelete
+                            i.far.fa-trash-alt.deleteBtn
+        if loggedUser
+            .reply__box.hidden#jsReplyBox
+                form.reply__form.replyForm#jsReplyForm
+                    input.reply__input#jsReplyInput(type="text", placeholder="Feel free to reply comment~", name="reply", autocomplete="off", required)
+                    .reply__btnBox#jsBtnBox
+                        button.cancel__btn.replyCancelBtn#jsCancelBtn(type="button") CANCEL
+                        button.comment__btn.replySaveBtn#jsCommentBtn COMMENT
+        .replies__view-box#jsReplyContainer
+            ul.replies__list#jsReplyList
+                each reply in comment.replies.reverse()
+                    +replyBlock({
+                        id : reply.id,
+                        creatorId : reply.creator.id,
+                        creator: reply.creator.name,
+                        avatarUrl : reply.creator.avatarUrl,
+                        createdAt : dateFormatter(reply.createdAt),
+                        text : reply.text,
+                        heart: reply.heart
+                    })

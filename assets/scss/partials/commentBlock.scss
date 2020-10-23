@@ -5,12 +5,18 @@
   flex: 1;
   .comments__list {
     width: 98%;
-    .comment__block {
+    .comment__block-owner {
+      background-color: rgba($color: red, $alpha: 0.4);
+    }
+    .comment__block-visitor {
+      background-color: rgba($color: blue, $alpha: 0.4);
+    }
+    .comment__block-owner,
+    .comment__block-visitor {
       display: flex;
       margin-bottom: $first-margin;
       padding: $third-padding;
       width: 100%;
-      background-color: rgba($color: red, $alpha: 0.4);
       .comment__left {
         .comment__publish-avatar {
           margin-right: $first-margin;

@@ -20,10 +20,10 @@ export const addNotificationModal = (success, action, type) => {
 
 // 비디오를 like or dislike 할 시 발생하는 모달메시지
 export const addLikingModal = (type) => {
-  const notificationModal = document.getElementById("jsNotificationModal");
+  const notificationModal = document.getElementById("jsNotificationModalVideo");
   notificationModal.textContent = `You ${type} this video!`;
   notificationModal.classList.remove("hidden");
-  notificationModal.classList.add("transition");
+  notificationModal.classList.add("transitionTwo");
   if (type === "liked") {
     notificationModal.style.backgroundColor = "rgba(255,0,0,0.4)";
   } else if (type === "disliked") {
@@ -31,6 +31,6 @@ export const addLikingModal = (type) => {
   }
   setTimeout(() => {
     notificationModal.classList.add("hidden");
-    notificationModal.classList.remove("transition");
+    notificationModal.classList.remove("transitionTwo");
   }, 2000);
 };

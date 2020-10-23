@@ -8,6 +8,7 @@ block content
         if !loggedUser
             +modalBlock
         .video__container#jsVideoContainer
+            .addCompleteModalVideo.hidden#jsNotificationModalVideo
             .video__edit-box
                 .video__edit-center
                     if loggedUser && video.creator.id === loggedUser.id
@@ -74,6 +75,7 @@ block content
                         +commentBlock({
                             id : comment.id,
                             creator : comment.creator,
+                            creatorId : comment.creator.id,
                             avatarUrl : comment.creator.avatarUrl,
                             createdAt : dateFormatter(comment.createdAt),
                             text : comment.text,
