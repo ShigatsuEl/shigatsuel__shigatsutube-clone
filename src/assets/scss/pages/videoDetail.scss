@@ -39,6 +39,10 @@
           border: 4px solid rgba($color: $light-blue, $alpha: 0.7);
         }
       }
+      .nonEditBox {
+        width: 100%;
+        height: 38px;
+      }
     }
     .video__info-one,
     .video__info-two {

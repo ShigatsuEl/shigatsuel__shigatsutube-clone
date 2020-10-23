@@ -43,6 +43,14 @@ function handlePlaySpace(event) {
   }
 }
 
+function handleMouseOver() {
+  document.addEventListener("keydown", handlePlaySpace);
+}
+
+function handleMouseLeave() {
+  document.removeEventListener("keydown", handlePlaySpace);
+}
+
 function handlePlayClick() {
   if (videoPlayer.paused) {
     videoPlayer.play();
@@ -119,17 +127,8 @@ function getCurrentTime() {
 }
 
 async function setTotalTime() {
-  let duration;
-  if (!isFinite(videoPlayer.duration)) {
-    const blob = await fetch(videoPlayer.src).then((response) =>
-      response.blob()
-    );
-    duration = await getBlobDuration(blob);
-    // console.log('if', blob, duration);
-  } else {
-    duration = videoPlayer.duration;
-    // console.log('else', duration);
-  }
+  const blob = await fetch(videoPlayer.src).then((response) => response.blob());
+  const duration = await getBlobDuration(blob);
   const totalTimeString = formatDate(duration);
   totalTime.innerHTML = totalTimeString;
   setInterval(getCurrentTime, 1000);
@@ -219,7 +218,8 @@ function mediaMatch() {
 function init() {
   videoPlayer.volume = 1;
   videoPlayer.addEventListener("play", handleVideoPlayer);
-  document.addEventListener("keydown", handlePlaySpace);
+  videoPlayer.addEventListener("mouseover", handleMouseOver);
+  videoPlayer.addEventListener("mouseleave", handleMouseLeave);
   videoPlayer.addEventListener("click", handlePlayClick);
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
