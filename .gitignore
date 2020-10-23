@@ -1,3 +1,9 @@
+/node_modules
+/src/uploads/videos
+/src/uploads/avatar
+/src/static
+/build
+
 # Logs
 logs
 *.log
@@ -77,3 +83,5 @@ typings/
 package-lock.json 
 uploads
 static
+node_modules
+build
