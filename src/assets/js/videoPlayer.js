@@ -236,6 +236,7 @@ function init() {
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
   if (videoPlayer.readyState >= 1) {
     setTotalTime();
+    handleVideoPlayer();
   }
   videoPlayer.addEventListener("ended", handleEnded);
   volumeRange.addEventListener("input", handleVolumeRange);
