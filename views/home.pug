@@ -6,27 +6,29 @@ block content
         .latest__video-box
             .latest__video-text
                 h3.video__category The Latest Video
-            a.latest__video(href=routes.videoDetail(lastVideo[0].id))
-                video.videoBlock__thumbnail(src=lastVideo[0].fileUrl)
-                .videoBlock__description
-                    .left
-                        img.videoBlock__img(src=lastVideo[0].creator.avatarUrl)
-                    .right
-                        h6.videoBlock__title=lastVideo[0].title
-                        h6.videoBlock__creator=`Uploaded by ${lastVideo[0].creator.name}`
-                        h6.videoBlock__views=`VIEWS ${lastVideo[0].views} · ${dateFormatter(lastVideo[0].createdAt)}`
+            if lastVideo.length > 0
+                a.latest__video(href=routes.videoDetail(lastVideo[0].id))
+                    video.videoBlock__thumbnail(src=lastVideo[0].fileUrl)
+                    .videoBlock__description
+                        .left
+                            img.videoBlock__img(src=lastVideo[0].creator.avatarUrl)
+                        .right
+                            h6.videoBlock__title=lastVideo[0].title
+                            h6.videoBlock__creator=`Uploaded by ${lastVideo[0].creator.name}`
+                            h6.videoBlock__views=`VIEWS ${lastVideo[0].views} · ${dateFormatter(lastVideo[0].createdAt)}`
         .best__view__video-box
             .best__view__video-text
                 h3.video__category Best Views Video
-            a.best__view__video(href=routes.videoDetail(bestVideo[0].id))
-                video.videoBlock__thumbnail(src=bestVideo[0].fileUrl)
-                .videoBlock__description
-                    .left
-                        img.videoBlock__img(src=bestVideo[0].creator.avatarUrl)
-                    .right
-                        h6.videoBlock__title=bestVideo[0].title
-                        h6.videoBlock__creator=`Uploaded by ${bestVideo[0].creator.name}`
-                        h6.videoBlock__views=`VIEWS ${bestVideo[0].views} · ${dateFormatter(bestVideo[0].createdAt)}`
+            if bestVideo.length > 0
+                a.best__view__video(href=routes.videoDetail(bestVideo[0].id))
+                    video.videoBlock__thumbnail(src=bestVideo[0].fileUrl)
+                    .videoBlock__description
+                        .left
+                            img.videoBlock__img(src=bestVideo[0].creator.avatarUrl)
+                        .right
+                            h6.videoBlock__title=bestVideo[0].title
+                            h6.videoBlock__creator=`Uploaded by ${bestVideo[0].creator.name}`
+                            h6.videoBlock__views=`VIEWS ${bestVideo[0].views} · ${dateFormatter(bestVideo[0].createdAt)}`
         .upload__videos Upload Videos
         each item in videos
             +videoBlock({
