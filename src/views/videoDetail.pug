@@ -10,10 +10,12 @@ block content
         .video__container#jsVideoContainer
             .addCompleteModalVideo.hidden#jsNotificationModalVideo
             .video__edit-box
-                .video__edit-center
-                    if loggedUser && video.creator.id === loggedUser.id
+                if loggedUser && video.creator.id === loggedUser.id
+                    .video__edit-center
                         a(href=routes.editVideo(video.id)) 
                             button Edit Video
+                else
+                    .nonEditBox
             +videoPlayer({
                 src:video.fileUrl,
                 id:video.id
