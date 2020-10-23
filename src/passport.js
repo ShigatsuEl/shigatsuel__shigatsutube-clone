@@ -16,7 +16,7 @@ passport.use(
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: process.env.PRODUCTION
-        ? `https://enigmatic-spire-78020.herokuapp.com/${routes.githubCallback}`
+        ? `https://enigmatic-spire-78020.herokuapp.com${routes.githubCallback}`
         : `http://localhost:4000${routes.githubCallback}`,
     },
     githubLoginCallback
@@ -29,7 +29,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: process.env.PRODUCTION
-        ? `https://enigmatic-spire-78020.herokuapp.com/${routes.githubCallback}`
+        ? `https://enigmatic-spire-78020.herokuapp.com${routes.githubCallback}`
         : `http://localhost:4000${routes.githubCallback}`,
     },
     googleLoginCallback
