@@ -1,10 +1,10 @@
 .videos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20%, 25%));
+  grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: minmax(20px, auto);
   gap: 10px;
   flex-wrap: wrap;
-  padding: $five-padding 40px 40px 40px;
+  padding: 65px 40px 40px 40px;
   background-color: black;
   color: white;
   .latest__video-box {
@@ -41,6 +41,7 @@
       .videoBlock__thumbnail {
         margin-bottom: 10px;
         width: 70%;
+        background-color: black;
       }
       .videoBlock__description {
         display: flex;
@@ -149,7 +150,7 @@
 
 @media (max-width: 1024px) {
   .videos {
-    grid-template-columns: repeat(auto-fill, minmax(33.33%, 33.33%));
+    grid-template-columns: repeat(3, 1fr);
     .latest__video-box {
       grid-column: 1/4;
       grid-row: 1;
@@ -194,7 +195,7 @@
 
 @media (max-width: 720px) {
   .videos {
-    grid-template-columns: repeat(auto-fill, minmax(50%, 50%));
+    grid-template-columns: repeat(2, 1fr);
     .latest__video-box {
       grid-column: 1/3;
       grid-row: 1;
