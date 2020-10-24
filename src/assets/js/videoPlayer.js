@@ -10,11 +10,14 @@ const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
 const progressBar = document.getElementById("jsProgressBarFilled");
 const filledBar = document.getElementById("jsFilledBar");
+const controlBar = document.getElementById("jsControlBar");
 
 // Match Media(JS)
 const element = document.querySelector(".videoPlayer__Bar");
 const newProgressBar = document.createElement("div");
 const newFilledBar = document.createElement("div");
+
+let timer;
 
 const registerView = () => {
   const videoId = window.location.href.split("/videos/")[1];
@@ -73,8 +76,43 @@ function handleVolumeClick() {
   }
 }
 
+// 비디오에 마우스가 올라가면 3초 후에 발생하는 이벤트
+function handleTransparent() {
+  controlBar.style.opacity = "0";
+  videoPlayer.style.cursor = "none";
+  progressBar.style.opacity = "0";
+}
+
+function handleVideoStart() {
+  controlBar.style.opacity = "1";
+  progressBar.style.opacity = "1";
+  clearTimeout(timer);
+  timer = setTimeout(handleTransparent, 3000);
+}
+// 비디오에 마우스가 올라가면 3초동안 발생하는 이벤트
+function handleMouse() {
+  controlBar.style.opacity = "1";
+  videoPlayer.style.cursor = "pointer";
+  progressBar.style.opacity = "1";
+  clearTimeout(timer);
+  timer = setTimeout(handleTransparent, 3000);
+}
+
+// Full Screen 상태에서 상태변화를 감지하면 발생하는 이벤트
+function exitHandler() {
+  if (
+    !document.fullscreenElement &&
+    !document.webkitIsFullScreen &&
+    !document.mozFullScreen &&
+    !document.msFullscreenElement
+  ) {
+    ///fire your event
+    fullScreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+    fullScreenBtn.addEventListener("click", goFullScreen);
+  }
+}
+
 function exitFullScreen() {
-  videoPlayer.style.cssText = "max-width: $first-width; max-height: 490px";
   fullScreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
   fullScreenBtn.addEventListener("click", goFullScreen);
   if (document.exitFullScreen) {
@@ -98,10 +136,13 @@ function goFullScreen() {
   } else if (videoContainer.msRequestFullscreen) {
     videoContainer.msRequestFullscreen();
   }
-  videoPlayer.style.cssText = "max-width: 100%; max-height: 100%";
   fullScreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
   fullScreenBtn.removeEventListener("click", goFullScreen);
   fullScreenBtn.addEventListener("click", exitFullScreen);
+  document.addEventListener("fullscreenchange", exitHandler);
+  document.addEventListener("webkitfullscreenchange", exitHandler);
+  document.addEventListener("mozfullscreenchange", exitHandler);
+  document.addEventListener("MSFullscreenChange", exitHandler);
 }
 
 const formatDate = (seconds) => {
@@ -133,10 +174,10 @@ async function setTotalTime() {
       response.blob()
     );
     duration = await getBlobDuration(blob);
-    console.log("if", blob, duration);
+    // console.log("if", blob, duration);
   } else {
     duration = videoPlayer.duration;
-    console.log("else", duration);
+    // console.log("else", duration);
   }
   const totalTimeString = formatDate(duration);
   totalTime.innerHTML = totalTimeString;
@@ -237,7 +278,9 @@ function init() {
   if (videoPlayer.readyState >= 1) {
     setTotalTime();
     handleVideoPlayer();
+    handleVideoStart();
   }
+  videoPlayer.addEventListener("mousemove", handleMouse);
   videoPlayer.addEventListener("ended", handleEnded);
   volumeRange.addEventListener("input", handleVolumeRange);
   mediaMatch();
