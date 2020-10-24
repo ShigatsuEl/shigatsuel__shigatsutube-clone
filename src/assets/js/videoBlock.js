@@ -9,7 +9,7 @@ function init() {
   videoBlock.forEach((ele) =>
     ele.addEventListener("loadedmetadata", handleCurrentPlus)
   );
-  if (videoBlock.forEach((ele) => ele.readyState >= 1)) {
+  if (videoBlock.forEach((ele) => ele.readyState >= 4)) {
     handleCurrentPlus();
   }
 }
