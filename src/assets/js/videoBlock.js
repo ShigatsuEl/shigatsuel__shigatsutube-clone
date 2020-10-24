@@ -1,5 +1,3 @@
-const { HttpRequest } = require("aws-sdk");
-
 const videos = document.querySelector(".videos");
 const videoBlock = document.querySelectorAll(".videoBlock__thumbnail");
 
@@ -11,10 +9,8 @@ function init() {
   videoBlock.forEach((ele) =>
     ele.addEventListener("loadedmetadata", handleCurrentPlus)
   );
-  if (HttpRequest.readyState === 4) {
-    if (HttpRequest.status === 200) {
-      videoBlock.forEach((ele) => handleCurrentPlus());
-    }
+  if (videoBlock.forEach((ele) => ele.readyState >= 1)) {
+    handleCurrentPlus();
   }
 }
 
