@@ -8,7 +8,9 @@ const fullScreenBtn = document.getElementById("jsFullScreen");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
-const progressBar = document.getElementById("jsProgressBarFilled");
+const progressBar = document.getElementById("jsProgressRangeBar");
+const leftBtn = document.getElementById("jsLeftBtn");
+const rightBtn = document.getElementById("jsRightBtn");
 const filledBar = document.getElementById("jsFilledBar");
 const controlBar = document.getElementById("jsControlBar");
 
@@ -224,7 +226,6 @@ function handleMobileProgress() {
 
 function handleProgressSeek(event) {
   const seekTotal = parseInt(progressBar.offsetWidth, 10);
-  console.log(progressBar.offsetWidth);
   const seekX = event.offsetX;
   const seekPercent = 100 * (seekX / seekTotal);
   progressBar.value = seekPercent;
@@ -238,6 +239,27 @@ function handleProgress() {
   const current = Math.floor(videoPlayer.currentTime);
   const percent = 100 * (current / max);
   progressBar.value = percent;
+  progressBar.setAttribute("value", percent);
+}
+
+// Right Btn을 누를 시 발생하는 이벤트
+function handleRightBtn() {
+  const max = Math.floor(videoPlayer.duration);
+  videoPlayer.currentTime += 10;
+  const current = Math.floor(videoPlayer.currentTime);
+  const percent = 100 * (current / max);
+  progressBar.value = percent;
+  progressBar.setAttribute("value", percent);
+}
+
+// Left Btn을 누를 시 발생하는 이벤트
+function handleLeftBtn() {
+  const max = Math.floor(videoPlayer.duration);
+  videoPlayer.currentTime -= 10;
+  const current = Math.floor(videoPlayer.currentTime);
+  const percent = 100 * (current / max);
+  progressBar.value = percent;
+  progressBar.setAttribute("value", percent);
 }
 
 function mediaMatch() {
@@ -245,9 +267,10 @@ function mediaMatch() {
   window.matchMedia(
     "only screen and (max-device-width: 900px) and (-webkit-device-pixel-ratio:1)"
   );
+  // Width가 900px이하면 적용되는 자바스크립트 구문
   const mql = window.matchMedia("(max-width:900px)");
   if (mql.matches) {
-    element.removeChild(jsProgressBarFilled);
+    element.removeChild(progressBar);
     newProgressBar.classList.add("videoPlayer__progressBar");
     newProgressBar.id = "jsProgressBarFilled";
     element.prepend(newProgressBar);
@@ -258,31 +281,48 @@ function mediaMatch() {
     videoPlayer.addEventListener("timeupdate", handleMobileProgress);
     newProgressBar.addEventListener("click", handleMobileProgressSeek);
     newProgressBar.addEventListener("dragover", handleMobileProgressSeek);
+    rightBtn.addEventListener("click", handleRightBtn);
+    leftBtn.addEventListener("click", handleLeftBtn);
   } else {
     videoPlayer.addEventListener("timeupdate", handleProgress);
     progressBar.addEventListener("click", handleProgressSeek);
     progressBar.addEventListener("dragover", handleProgressSeek);
+    rightBtn.addEventListener("click", handleRightBtn);
+    leftBtn.addEventListener("click", handleLeftBtn);
+  }
+
+  // 모바일 Width가 1024px 이하면 발생하는 이벤트
+  const mqlTwo = window.matchMedia("(max-device-width:1024px)");
+  if (mqlTwo.matches) {
+    videoPlayer.removeEventListener("click", handlePlayClick);
   }
 }
 
 function init() {
   videoPlayer.volume = 1;
   videoPlayer.addEventListener("play", handleVideoPlayer);
-  videoPlayer.addEventListener("mouseover", handleMouseOver);
-  videoPlayer.addEventListener("mouseleave", handleMouseLeave);
+  videoContainer.addEventListener("mouseover", handleMouseOver);
+  videoContainer.addEventListener("mouseleave", handleMouseLeave);
   videoPlayer.addEventListener("click", handlePlayClick);
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   fullScreenBtn.addEventListener("click", goFullScreen);
+  videoContainer.addEventListener("mousemove", handleMouse);
+  videoPlayer.addEventListener("ended", handleEnded);
+  volumeRange.addEventListener("input", handleVolumeRange);
+
+  // 배포 후 혹시나 loadedmetadata가 작동 시 발생하는 이벤트
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  videoPlayer.addEventListener("loadedmetadata", handleVideoStart);
+
+  // 배포 후 loadedmetadata 이벤트가 작용하지 않음 -> readyState로 해결
   if (videoPlayer.readyState >= 1) {
     setTotalTime();
     handleVideoPlayer();
     handleVideoStart();
   }
-  videoPlayer.addEventListener("mousemove", handleMouse);
-  videoPlayer.addEventListener("ended", handleEnded);
-  volumeRange.addEventListener("input", handleVolumeRange);
+
+  // 모바일에서 적용되는 스크롤바 Media Match
   mediaMatch();
 }
 

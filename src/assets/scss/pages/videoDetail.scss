@@ -168,17 +168,27 @@
     grid-template-rows: auto minmax(50%, auto);
     flex-wrap: wrap;
     .video__container {
-      max-width: 870px;
+      margin: 0;
+      max-width: none;
       margin-bottom: $first-margin;
       .addCompleteModalVideo {
         font-size: 2rem;
       }
-      .video__edit-box .video__edit-center a button {
-        font-size: 2rem;
+      .video__edit-box {
+        .video__edit-center {
+          max-width: none;
+        }
+        .video__edit-center a button {
+          font-size: 2rem;
+        }
       }
       .videoPlayer {
         max-width: none;
         video {
+          max-width: none;
+        }
+        .videoPlayer__Bar .videoPlayer__progressBar,
+        .videoPlayer__Bar .videoPlayer__controls {
           max-width: none;
         }
       }
