@@ -48,14 +48,6 @@ function handlePlaySpace(event) {
   }
 }
 
-function handleMouseOver() {
-  document.addEventListener("keydown", handlePlaySpace);
-}
-
-function handleMouseLeave() {
-  document.removeEventListener("keydown", handlePlaySpace);
-}
-
 function handlePlayClick() {
   if (videoPlayer.paused) {
     videoPlayer.play();
@@ -242,6 +234,30 @@ function handleProgress() {
   progressBar.setAttribute("value", percent);
 }
 
+// 화살표 -> 누를 시 발생하는 이벤트
+function handleArrowRight(event) {
+  if (event.keyCode === 39) {
+    const max = Math.floor(videoPlayer.duration);
+    videoPlayer.currentTime += 10;
+    const current = Math.floor(videoPlayer.currentTime);
+    const percent = 100 * (current / max);
+    progressBar.value = percent;
+    progressBar.setAttribute("value", percent);
+  }
+}
+
+// 화살표 <- 누를 시 발생하는 이벤트
+function handleArrowLeft(event) {
+  if (event.keyCode === 37) {
+    const max = Math.floor(videoPlayer.duration);
+    videoPlayer.currentTime -= 10;
+    const current = Math.floor(videoPlayer.currentTime);
+    const percent = 100 * (current / max);
+    progressBar.value = percent;
+    progressBar.setAttribute("value", percent);
+  }
+}
+
 // Right Btn을 누를 시 발생하는 이벤트
 function handleRightBtn() {
   const max = Math.floor(videoPlayer.duration);
@@ -260,6 +276,18 @@ function handleLeftBtn() {
   const percent = 100 * (current / max);
   progressBar.value = percent;
   progressBar.setAttribute("value", percent);
+}
+
+function handleMouseOver() {
+  document.addEventListener("keydown", handlePlaySpace);
+  document.addEventListener("keydown", handleArrowRight);
+  document.addEventListener("keydown", handleArrowLeft);
+}
+
+function handleMouseLeave() {
+  document.removeEventListener("keydown", handlePlaySpace);
+  document.removeEventListener("keydown", handleArrowRight);
+  document.removeEventListener("keydown", handleArrowLeft);
 }
 
 function mediaMatch() {
