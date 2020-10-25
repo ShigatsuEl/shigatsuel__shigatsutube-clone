@@ -7,6 +7,7 @@ const commentSubinfo = document.querySelector(".comment__subinfo");
 let comment;
 let commentId;
 let userId;
+let videoId;
 let replyBox;
 let replyForm;
 let replyInput;
@@ -17,7 +18,11 @@ let replyList;
 const addReplyComment = (parsedInfo) => {
   // ReplyBlock Element
   const replyBlock = document.createElement("li");
-  replyBlock.classList.add("reply__block-owner");
+  if (parsedInfo.videoCreator === parsedInfo.replyCreator) {
+    replyBlock.classList.add("reply__block-owner");
+  } else {
+    replyBlock.classList.add("reply__block-visitor");
+  }
   replyBlock.id = parsedInfo.replyId;
   replyBlock.dataset.id = parsedInfo.replyId;
   replyList.prepend(replyBlock);
@@ -146,12 +151,13 @@ const addReplyComment = (parsedInfo) => {
   replyDelete.append(replyDeleteBtn);
 };
 
-const sendReply = async (reply) => {
+const sendReply = async (reply, videoId) => {
   const response = await axios({
     url: `/api/${commentId}/add-reply`,
     method: "POST",
     data: {
       reply,
+      videoId,
     },
   });
   if (response.status === 200) {
@@ -174,15 +180,17 @@ const handleSubmit = (event) => {
     commentId =
       event.target.parentElement.parentElement.parentElement.previousSibling
         .dataset.id;
+    videoId = document.getElementById("jsVideo").dataset.id;
     replyInput = comment.nextSibling.childNodes[0].childNodes[0];
   } else if (event.target.className.includes("replyForm")) {
     comment = event.target.parentElement.previousSibling;
     commentId = event.target.parentElement.previousSibling.dataset.id;
     replyInput = comment.nextSibling.childNodes[0].childNodes[0];
+    videoId = document.getElementById("jsVideo").dataset.id;
   }
   event.preventDefault();
   const reply = replyInput.value;
-  sendReply(reply);
+  sendReply(reply, videoId);
   replyInput.value = "";
   replyInput.blur();
 };
@@ -210,6 +218,7 @@ const handleReplyBtn = (event) => {
       event.target.parentElement.parentElement.parentElement.parentElement
         .dataset.id;
     userId = document.getElementById("jsAddCommentForm").dataset.id;
+    videoId = document.getElementById("jsVideo").dataset.id;
     // 로그인 되어있을 시 ->
     if (userId) {
       replyForm = comment.nextSibling.childNodes[0];

@@ -31,12 +31,13 @@ export const postAddComment = async (req, res) => {
     body: { comment },
   } = req;
   try {
-    const newComment = await Comment.create({
+    let newComment = await Comment.create({
       text: comment,
       creator: req.user.id,
     });
+    newComment = await newComment.populate("creator").execPopulate();
 
-    const video = await Video.findById(id);
+    const video = await Video.findById(id).populate("creator");
     video.comments.push(newComment.id);
     video.save();
 
@@ -45,6 +46,7 @@ export const postAddComment = async (req, res) => {
     user.save();
 
     const parsedInfo = {
+      videoCreator: video.creator.id,
       name: user.name,
       date: dateFormatter(newComment.createdAt),
       avatarUrl: user.avatarUrl,
@@ -53,6 +55,7 @@ export const postAddComment = async (req, res) => {
       commentHeart: newComment.heart.length,
       commentReplies: newComment.replies.length,
       commentId: newComment.id,
+      commentCreator: newComment.creator.id,
     };
     res.json(parsedInfo);
   } catch (error) {

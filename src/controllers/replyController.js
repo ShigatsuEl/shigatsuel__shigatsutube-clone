@@ -1,3 +1,4 @@
+import Video from "../models/Video";
 import User from "../models/User";
 import Comment from "../models/Comment";
 import Reply from "../models/Reply";
@@ -8,7 +9,7 @@ import { dateFormatter } from "../middlewares";
 export const postAddReply = async (req, res) => {
   const {
     params: { id: commentId },
-    body: { reply },
+    body: { reply, videoId },
   } = req;
   try {
     let newReply = await Reply.create({
@@ -20,7 +21,11 @@ export const postAddReply = async (req, res) => {
     const comment = await Comment.findById(commentId);
     await comment.replies.push(newReply.id);
     comment.save();
+
+    const video = await Video.findById(videoId).populate("creator");
+
     const parsedInfo = {
+      videoCreator: video.creator.id,
       name: newReply.creator.name,
       date: dateFormatter(newReply.createdAt),
       avatarUrl: newReply.creator.avatarUrl,
@@ -28,6 +33,7 @@ export const postAddReply = async (req, res) => {
       reply,
       replyId: newReply.id,
       replyHeart: newReply.heart.length,
+      replyCreator: newReply.creator.id,
     };
     res.json(parsedInfo);
   } catch (error) {

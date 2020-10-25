@@ -34,7 +34,11 @@ const increaseNumber = () => {
 const addCommentBlock = (parsedInfo) => {
   // CommentBlock Element
   const commentBlock = document.createElement("li");
-  commentBlock.classList.add("comment__block-owner");
+  if (parsedInfo.videoCreator === parsedInfo.commentCreator) {
+    commentBlock.classList.add("comment__block-owner");
+  } else {
+    commentBlock.classList.add("comment__block-visitor");
+  }
   commentBlock.classList.add("comment__block");
   commentBlock.id = parsedInfo.commentId;
   commentBlock.dataset.id = parsedInfo.commentId;

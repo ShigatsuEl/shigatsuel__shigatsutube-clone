@@ -1,5 +1,5 @@
 mixin replyBlock(reply ={})
-    if loggedUser && loggedUser.id === reply.creatorId
+    if video.creator.id === reply.creatorId
         li.reply__block-owner(id=reply.id data-id=reply.id)
             .reply__left
                 img.reply__publish-avatar(src=`${reply.avatarUrl}`)
@@ -52,7 +52,7 @@ mixin replyBlock(reply ={})
                         else
                             i.fas.fa-heart.replyHeartBtn
                         span.reply__heart-number#jsReplyHeartNumber=reply.heart.length
-                    if loggedUser && loggedUser.id === reply.creator.id
+                    if loggedUser && loggedUser.id === reply.creatorId
                         span.reply__editBtn#jsReplyEdit
                             i.far.fa-edit.replyEditBtn
                         span.reply__deleteBtn#jsReplyDelete

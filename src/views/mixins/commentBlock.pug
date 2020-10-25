@@ -1,7 +1,7 @@
 include ./replyBlock
 
 mixin commentBlock(comment ={})
-    if loggedUser && loggedUser.id === comment.creatorId
+    if video.creator.id === comment.creatorId
         li.comment__block-owner(id=comment.id data-id=comment.id)
             .comment__left
                 img.comment__publish-avatar(src=`${comment.creator.avatarUrl}`)
