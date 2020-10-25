@@ -9,6 +9,7 @@ export const postJoin = async (req, res, next) => {
     body: { name, email, password, password2 },
   } = req;
   if (password !== password2) {
+    req.flash("error", "Failed to Sign Up, Check your emial or password");
     res.status(400);
     res.render("join", { pageTitle: "Join" });
   } else {
@@ -32,9 +33,14 @@ export const getLogin = (req, res) =>
 export const postLogin = passport.authenticate("local", {
   failureRedirect: routes.login,
   successRedirect: routes.home,
+  successFlash: "Welcome to ShigatsuTube!",
+  failureFlash: "Failed to Log In, Check your email or password",
 });
 
-export const githubLogin = passport.authenticate("github");
+export const githubLogin = passport.authenticate("github", {
+  successFlash: "Welcome to ShigatsuTube!",
+  failureFlash: "Failed to Log In, Check your email or password",
+});
 
 export const githubLoginCallback = async (_, __, profile, cb) => {
   const {
@@ -66,6 +72,8 @@ export const postGithubLogIn = (req, res) => {
 
 export const googleLogin = passport.authenticate("google", {
   scope: ["profile", "email"],
+  successFlash: "Welcome to ShigatsuTube!",
+  failureFlash: "Failed to Log In, Check your email or password",
 });
 
 export const googleLoginCallback = async (_, __, profile, cb) => {
@@ -146,8 +154,10 @@ export const postEditProfile = async (req, res) => {
       email,
       avatarUrl: file ? file.location : req.user.avatarUrl,
     });
+    req.flash("success", "Successfully edit your profile!");
     res.redirect(routes.me);
   } catch (error) {
+    req.flash("error", "Failed to edit your profile");
     res.redirect(routes.editProfile);
   }
 };
@@ -160,11 +170,16 @@ export const postChangePassword = async (req, res) => {
   } = req;
   try {
     if (newPassword !== newPassword1) {
+      req.flash(
+        "error",
+        "Failed to change password, Make sure the passwords match"
+      );
       res.status(400);
       res.redirect(`/users${routes.changePassword}`);
       return;
     }
     await req.user.changePassword(oldPassword, newPassword);
+    req.flash("success", "Successfully change your password!");
     res.redirect(routes.me);
   } catch (error) {
     res.status(400);

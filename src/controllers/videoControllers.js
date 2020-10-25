@@ -113,8 +113,10 @@ export const postEditVideo = async (req, res) => {
   } = req;
   try {
     await Video.findOneAndUpdate({ _id: id }, { title, description });
+    req.flash("success", "Successfully edit your video!");
     res.redirect(routes.videoDetail(id));
   } catch (error) {
+    req.flash("error", "Failed to edit your video");
     res.redirect(routes.home);
   }
 };
@@ -133,7 +135,9 @@ export const deleteVideo = async (req, res) => {
       req.user.videos.pop(id);
       req.user.save();
     }
+    req.flash("error", "Successfully delete your video!");
   } catch (error) {
+    req.flash("error", "Failed to delete your video");
     res.status(400);
   }
   res.redirect(routes.home);
