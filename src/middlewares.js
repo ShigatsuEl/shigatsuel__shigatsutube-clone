@@ -14,6 +14,7 @@ const multerVideo = multer({
     acl: "public-read",
     bucket: "shigatsutube/video",
   }),
+  limits: { fileSize: 100 * 1024 * 1024 },
 });
 const multerAvatar = multer({
   storage: multerS3({
@@ -21,6 +22,7 @@ const multerAvatar = multer({
     acl: "public-read",
     bucket: "shigatsutube/avatar",
   }),
+  limits: { fileSize: 10 * 1024 * 1024 },
 });
 
 export const localsMiddleware = (req, res, next) => {

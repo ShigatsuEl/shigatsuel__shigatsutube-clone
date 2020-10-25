@@ -57,15 +57,21 @@ export const postUpload = async (req, res) => {
     file: { location },
   } = req;
   console.log(req.file);
-  const newVideo = await Video.create({
-    creator: req.user.id,
-    fileUrl: location,
-    title,
-    description,
-  });
-  req.user.videos.push(newVideo.id);
-  req.user.save();
-  res.redirect(routes.videoDetail(newVideo.id));
+  try {
+    const newVideo = await Video.create({
+      creator: req.user.id,
+      fileUrl: location,
+      title,
+      description,
+    });
+    req.user.videos.push(newVideo.id);
+    req.user.save();
+    req.flash("success", "Successfully upload video!");
+    res.redirect(routes.videoDetail(newVideo.id));
+  } catch (error) {
+    req.flash("error", "Failed to upload video");
+    res.status(400);
+  }
 };
 
 // Video Detail
