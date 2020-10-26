@@ -17,25 +17,32 @@ let replySubmitBtn;
 let replyViewBox;
 let replyList;
 
+// Comment가 추가 & 삭제되면 Comment 수를 실시간으로 보여주는 이벤트함수
 const increaseNumber = () => {
   const commentNumber = document.getElementById("jsCommentNumber");
   const commentLiteral = document.getElementById("jsLiteralComment");
   commentNumber.textContent = parseInt(commentNumber.textContent, 10) + 1;
+  // Comment 수가 0보다 작아지는 일이 없게 방지
   if (commentNumber.textContent <= 0) {
     commentNumber.textContent = "0";
     commentLiteral.textContent = " Comments";
+    // Comment 수가 "1"이 되면 Comments가 아닌 Comment로 변경
   } else if (commentNumber.textContent === "1") {
     commentLiteral.textContent = " Comment";
+    // 그 외는 Comments로 변경
   } else {
     commentLiteral.textContent = " Comments";
   }
 };
 
+// Comment 입력을 마치면 실시간처럼 Comment가 생기는 Fake 함수
 const addCommentBlock = (parsedInfo) => {
   // CommentBlock Element
   const commentBlock = document.createElement("li");
+  // 비디오 크리에이터와 커멘트 크리에이트가 같다면 owner 블락을 생성
   if (parsedInfo.videoCreator === parsedInfo.commentCreator) {
     commentBlock.classList.add("comment__block-owner");
+    // 비디오 크리에이터와 커멘트 크리에이트가 다르다면 visitor 블락을 생성
   } else {
     commentBlock.classList.add("comment__block-visitor");
   }
@@ -238,6 +245,7 @@ const addCommentBlock = (parsedInfo) => {
   replyViewBox.append(replyList);
 };
 
+// Add Comment Form이 제출되면 백엔드에 데이터를 요청하는 AXIOS(AJAX) 함수
 const sendComment = async (comment) => {
   const videoId = window.location.href.split("/videos/")[1];
   const response = await axios({
@@ -248,14 +256,17 @@ const sendComment = async (comment) => {
     },
   });
   if (response.status === 200) {
+    // 클라이언트가 서버에 요청을 하고 요청이 정상적으로 승인된 후 브라우저에 응답이 정상적으로 이루어질 경우 발생하는 조건문
     addCommentBlock(response.data);
     increaseNumber();
     addNotificationModal("Successfully", "added", "comment");
+    // 클라이언트가 서버에 요청을 했으나 요청이 정상적으로 이루어지지 않아 브라우저에 에러를 보낼 때 발생하는 조건문
   } else {
     addNotificationModal("Failed to", "added", "comment");
   }
 };
 
+// Add Comment Form이 제출되면 실행되는 함수
 const handleSubmit = (event) => {
   event.preventDefault();
   const comment = addCommentInput.value;
@@ -264,14 +275,17 @@ const handleSubmit = (event) => {
   addCommentInput.blur();
 };
 
+// 미 로그인 시 Add Comment Inpurt을 클릭하면 실행되는 함수
 const handleBlurInput = (event) => {
   addCommentInput.blur();
 };
 
+// 로그인 되어있을 시 Add Comment Input을 클릭하면 실행되는 함수
 const handleFocusInput = () => {
   buttonBox.classList.remove("hidden");
 };
 
+// 로그인 되어있을 시 Add Comment Form의 Cancel 버튼을 클릭하면 실행되는 함수
 const handleCancelBtn = () => {
   addCommentInput.value = "";
   addCommentInput.blur();

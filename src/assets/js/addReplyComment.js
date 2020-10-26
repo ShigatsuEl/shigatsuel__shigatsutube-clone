@@ -14,11 +14,14 @@ let replyCancelBtn;
 let replySubmitBtn;
 let replyList;
 
+// Reply 입력을 마치면 실시간처럼 Reply가 생기는 Fake 함수
 const addReplyComment = (parsedInfo) => {
   // ReplyBlock Element
   const replyBlock = document.createElement("li");
+  // 비디오 크리에이터와 리플라이 크리에이트가 같다면 owner 블락을 생성
   if (parsedInfo.videoCreator === parsedInfo.replyCreator) {
     replyBlock.classList.add("reply__block-owner");
+    // 비디오 크리에이터와 리플라이 크리에이트가 다르다면 visitor 블락을 생성
   } else {
     replyBlock.classList.add("reply__block-visitor");
   }
@@ -150,6 +153,7 @@ const addReplyComment = (parsedInfo) => {
   replyDelete.append(replyDeleteBtn);
 };
 
+// Add Reply Form이 제출되면 백엔드에 데이터를 요청하는 AXIOS(AJAX) 함수
 const sendReply = async (reply, videoId) => {
   const response = await axios({
     url: `/api/${commentId}/add-reply`,
@@ -159,9 +163,11 @@ const sendReply = async (reply, videoId) => {
       videoId,
     },
   });
+  // 클라이언트가 서버에 요청을 하고 요청이 정상적으로 승인된 후 브라우저에 응답이 정상적으로 이루어질 경우 발생하는 조건문
   if (response.status === 200) {
     addReplyComment(response.data);
     addNotificationModal("Successfully", "added", "reply");
+    // 클라이언트가 서버에 요청을 했으나 요청이 정상적으로 이루어지지 않아 브라우저에 에러를 보낼 때 발생하는 조건문
   } else {
     addNotificationModal("Failed to", "added", "reply");
   }
@@ -172,6 +178,8 @@ const handleReplyHidden = () => {
   replyBox.classList.toggle("hidden");
 };
 
+// 로그인 되어있을 시 Add Reply Form이 제출되면 실행되는 함수
+// 버튼에 Id를 달지 않았기 때문에 Add Reply Save Btn을 클릭할 시 어떤 Reply인지 모르기 때문에 id를 새로 입력해줘야하는 문제점이 발생함
 const handleSubmit = (event) => {
   if (event.target.className.includes("replySaveBtn")) {
     comment =
@@ -194,6 +202,8 @@ const handleSubmit = (event) => {
   replyInput.blur();
 };
 
+// 로그인 되어있을 시 Add Reply Form의 Cancel 버튼을 클릭하면 실행되는 함수
+// 버튼에 Id를 달지 않았기 때문에 Add Reply Cancel Btn을 클릭할 시 어떤 Reply인지 모르기 때문에 id를 새로 입력해줘야하는 문제점이 발생함
 const handleCancel = (event) => {
   if (event.target.className.includes("replyCancelBtn")) {
     event.preventDefault();
@@ -209,7 +219,12 @@ const handleCancel = (event) => {
   }
 };
 
+// Reply Btn을 누르면 발생하는 이벤트 함수
 const handleReplyBtn = (event) => {
+  // Reply Btn을 누르면 Comment Block & CommentId & UserId & VideoId를 받아온다.
+  // 만약에 이렇게 하려는 분이 있다면 추천할 만한 방법이 아님
+  // 차라리 버튼에 Id를 때려박는게 더 좋은 방법이라고 생각함!
+  // 왜 그런지는 위의 함수에서 설명하겠음
   if (event.target.className.includes("replyBtn")) {
     comment =
       event.target.parentElement.parentElement.parentElement.parentElement;
