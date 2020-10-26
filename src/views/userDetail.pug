@@ -21,7 +21,7 @@ block content
             .user-profile
                 .user-profile__header
                     img.avatar(src=user.avatarUrl)
-                    h4.profile__username=user.name
+                    h4.profile__username#jsUserName=user.name
                 if loggedUser && user.id === loggedUser.id
                     .user-profile__btns
                         a(href=`/users${routes.editProfile}`)

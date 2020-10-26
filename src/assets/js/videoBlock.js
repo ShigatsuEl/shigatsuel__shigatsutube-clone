@@ -1,4 +1,5 @@
 const videos = document.querySelector(".videos");
+const userName = document.getElementById("jsUserName");
 const videoBlock = document.querySelectorAll(".videoBlock__thumbnail");
 
 function handleCurrentPlus() {
@@ -15,5 +16,7 @@ function init() {
 }
 
 if (videos) {
+  init();
+} else if (userName) {
   init();
 }
