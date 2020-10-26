@@ -56,7 +56,7 @@ export const postUpload = async (req, res) => {
     body: { title, description },
     file: { location },
   } = req;
-  console.log(req.file);
+  // console.log(req.file);
   try {
     const newVideo = await Video.create({
       creator: req.user.id,
@@ -194,7 +194,6 @@ export const postLikeVideo = async (req, res) => {
     video.save();
     user.save();
   } catch (error) {
-    console.log(error);
     res.status(400);
   } finally {
     res.end();

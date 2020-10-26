@@ -37,7 +37,7 @@ export const postAddReply = async (req, res) => {
     };
     res.json(parsedInfo);
   } catch (error) {
-    console.log(error);
+    res.status(400);
   } finally {
     res.end();
   }
@@ -86,7 +86,7 @@ export const postEditReply = async (req, res) => {
   try {
     await Reply.findByIdAndUpdate({ _id: id }, { text: editReply });
   } catch (error) {
-    console.log(error);
+    res.status(400);
   } finally {
     res.end();
   }

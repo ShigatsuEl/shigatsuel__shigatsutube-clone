@@ -2,6 +2,8 @@ import passport from "passport";
 import routes from "../routes";
 import User from "../models/User";
 
+// Join Controller
+
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 
 export const postJoin = async (req, res, next) => {
@@ -21,11 +23,13 @@ export const postJoin = async (req, res, next) => {
       await User.register(user, password);
       next();
     } catch (error) {
-      console.log(error);
+      res.status(400);
       res.redirect(routes.home);
     }
   }
 };
+
+// Local Login Controller
 
 export const getLogin = (req, res) =>
   res.render("login", { pageTitle: "Log In" });
@@ -36,6 +40,8 @@ export const postLogin = passport.authenticate("local", {
   successFlash: "Welcome to ShigatsuTube!",
   failureFlash: "Failed to Log In, Check your email or password",
 });
+
+// Github Login Controller
 
 export const githubLogin = passport.authenticate("github", {
   successFlash: "Welcome to ShigatsuTube!",
@@ -51,7 +57,7 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
     if (user) {
       user.githubId = id;
       user.save();
-      console.log(user);
+      // console.log(user);
       return cb(null, user);
     }
     const newUser = await User.create({
@@ -70,6 +76,8 @@ export const postGithubLogIn = (req, res) => {
   res.redirect(routes.home);
 };
 
+// Google Login Controller
+
 export const googleLogin = passport.authenticate("google", {
   scope: ["profile", "email"],
   successFlash: "Welcome to ShigatsuTube!",
@@ -85,7 +93,7 @@ export const googleLoginCallback = async (_, __, profile, cb) => {
     if (user) {
       user.googleId = id;
       user.save();
-      console.log(user);
+      // console.log(user);
       return cb(null, user);
     }
     const newUser = await User.create({
@@ -104,10 +112,14 @@ export const postGoogleLogIn = (req, res) => {
   res.redirect(routes.home);
 };
 
+// Logout Controller
+
 export const logout = (req, res) => {
   req.logout();
   res.redirect(routes.home);
 };
+
+// Get Me Controoler
 
 export const getMe = async (req, res) => {
   try {
@@ -122,6 +134,8 @@ export const getMe = async (req, res) => {
     res.redirect(routes.home);
   }
 };
+
+// User Detail Controller
 
 export const userDetail = async (req, res) => {
   const {
@@ -139,6 +153,8 @@ export const userDetail = async (req, res) => {
     res.redirect(routes.home);
   }
 };
+
+// Edit Controller
 
 export const getEditProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "Edit Profile" });
@@ -161,6 +177,8 @@ export const postEditProfile = async (req, res) => {
     res.redirect(routes.editProfile);
   }
 };
+
+// Change Password Controller
 
 export const getChangePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change Password" });

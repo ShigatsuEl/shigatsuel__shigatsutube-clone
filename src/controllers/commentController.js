@@ -16,7 +16,6 @@ export const postRegisterView = async (req, res) => {
     video.save();
     res.status(200);
   } catch (error) {
-    console.log(error);
     res.status(400);
   } finally {
     res.end();
