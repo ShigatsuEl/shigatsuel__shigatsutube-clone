@@ -75,11 +75,16 @@ function handleTransparent() {
   controlBar.style.opacity = "0";
   videoPlayer.style.cursor = "none";
   progressBar.style.opacity = "0";
+  //모바일 버전 newProgressBar
+  newProgressBar.style.opacity = "0";
 }
 
+// 비디오가 로드되고 3초동안 발생하는 이벤트
 function handleVideoStart() {
   controlBar.style.opacity = "1";
   progressBar.style.opacity = "1";
+  //모바일 버전 newProgressBar
+  newProgressBar.style.opacity = "1";
   clearTimeout(timer);
   timer = setTimeout(handleTransparent, 3000);
 }
@@ -88,6 +93,8 @@ function handleMouse() {
   controlBar.style.opacity = "1";
   videoPlayer.style.cursor = "pointer";
   progressBar.style.opacity = "1";
+  //모바일 버전 newProgressBar
+  newProgressBar.style.opacity = "1";
   clearTimeout(timer);
   timer = setTimeout(handleTransparent, 3000);
 }
@@ -291,12 +298,8 @@ function handleMouseLeave() {
 }
 
 function mediaMatch() {
-  window.matchMedia("screen and (orientation:portrait)");
-  window.matchMedia(
-    "only screen and (max-device-width: 900px) and (-webkit-device-pixel-ratio:1)"
-  );
-  // Width가 900px이하면 적용되는 자바스크립트 구문
-  const mql = window.matchMedia("(max-width:900px)");
+  // Width가 720px이하면 적용되는 자바스크립트 구문
+  const mql = window.matchMedia("(max-width:720px)");
   if (mql.matches) {
     element.removeChild(progressBar);
     newProgressBar.classList.add("videoPlayer__progressBar");
@@ -323,6 +326,19 @@ function mediaMatch() {
   const mqlTwo = window.matchMedia("(max-device-width:1024px)");
   if (mqlTwo.matches) {
     videoPlayer.removeEventListener("click", handlePlayClick);
+    element.removeChild(progressBar);
+    newProgressBar.classList.add("videoPlayer__progressBar");
+    newProgressBar.id = "jsProgressBarFilled";
+    element.prepend(newProgressBar);
+    newFilledBar.classList.add("videoPlayer__filledBar");
+    newFilledBar.id = "jsFilledBar";
+    newFilledBar.style.width = 0;
+    newProgressBar.prepend(newFilledBar);
+    videoPlayer.addEventListener("timeupdate", handleMobileProgress);
+    newProgressBar.addEventListener("click", handleMobileProgressSeek);
+    newProgressBar.addEventListener("dragover", handleMobileProgressSeek);
+    rightBtn.addEventListener("click", handleRightBtn);
+    leftBtn.addEventListener("click", handleLeftBtn);
   }
 }
 
