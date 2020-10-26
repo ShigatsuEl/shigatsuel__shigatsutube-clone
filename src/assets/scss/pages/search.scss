@@ -1,3 +1,4 @@
+// Search Template SCSS
 .search {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20%, 25%));
@@ -72,6 +73,7 @@
   }
 }
 
+// Media Query 1024px 이하인 경우 적용되는 SCSS
 @media (max-width: 1024px) {
   .search {
     grid-template-columns: repeat(auto-fill, minmax(33.33%, 33.33%));
@@ -87,6 +89,7 @@
   }
 }
 
+// Media Query 720px 이하인 경우 적용되는 SCSS
 @media (max-width: 720px) {
   .search {
     grid-template-columns: repeat(auto-fill, minmax(50%, 50%));

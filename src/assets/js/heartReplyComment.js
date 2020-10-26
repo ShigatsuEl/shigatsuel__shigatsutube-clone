@@ -8,7 +8,7 @@ let replyHeartIcon;
 let isSelected;
 let replyBlock;
 
-// 실시간으로 하트 넘버를 볼 수 있는 함수이다.
+// Heart Comment를 클릭하면 실시간으로 하트 수가 반영되는 Fake 함수
 
 const handleHeartNumber = () => {
   if (replyBlock) {
@@ -19,13 +19,13 @@ const handleHeartNumber = () => {
   }
 };
 
-// 실시간으로 하트 선택을 볼 수 있는 함수이다.
+// Heart Comment를 클릭하면 선택되었는지 확인할 수 있는 selected 클래스를 토글함
 
 const handleHeartSelected = (replyHeartIcon) => {
   replyHeartIcon.classList.toggle("selected");
 };
 
-// replyId & userId & isSelecte를 백엔드에 요청한다.
+// Heart Comment를 클릭하면 백엔드에 데이터를 요청하는 AXIOS(AJAX) 함수
 
 const handleHeartData = async (replyId) => {
   const response = await axios({
@@ -46,6 +46,10 @@ const handleHeartData = async (replyId) => {
 // Reply Heart 아이콘을 클릭하면 replyId & userId를 얻어오고 isSelected(선택되었는지?)를 알려주는 boolean값도 얻는다.
 
 const handleHeartBtn = (event) => {
+  // 어떤 답글의 Heart Btn인지 확인하고 replytId & userId & replytBlock을 받아온다.
+  // 만약에 이렇게 하려는 분이 있다면 추천할 만한 방법이 아님
+  // 차라리 버튼에 Id를 때려박는게 더 좋은 방법이라고 생각함!
+  // 버튼에 Id를 달지 않았기 때문에 Reply Heart Btn을 클릭할 시 어떤 Reply인지 모르기 때문에 id를 새로 입력해줘야하는 문제점이 발생함
   if (event.target.className.includes("replyHeartBtn")) {
     replyId =
       event.target.parentElement.parentElement.parentElement.parentElement

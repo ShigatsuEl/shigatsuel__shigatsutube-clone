@@ -22,12 +22,19 @@ const enterModal = () => {
 
 function init() {
   const userId = document.getElementById("jsAddCommentForm").dataset.id;
+  // 원래는 함수를 쪼개야 하는데 챌린지 하느라 시간이 없는 관계로 급하게 하다보니...
+  // 미 로그인 시 보여지는 모달 함수->
   if (!userId) {
+    // 비디오를 좋아요 & 싫어요 누를 때 발생하는 이벤트 함수
     videoLikeBtn.addEventListener("click", enterModal);
     videoDislikeBtn.addEventListener("click", enterModal);
+    // 댓글 입력을 하려고 할 시 발생하는 이벤트 함수
     commentInput.addEventListener("click", enterModal);
+    // 모달 바깥을 클릭하면 발생하는 이벤트 함수
     modalLayout.addEventListener("click", exitModal);
+    // 모달 Cancel 버튼을 클릭하면 발생하는 이벤트 함수
     modalCancleBtn.addEventListener("click", exitModal);
+    // CommentList가 존재하고 댓글이 존재한다면 --> 하트와 답글 그리고 댓글 다는 것을 모달로 막음
     if (commentList && commentList.childElementCount !== 0) {
       heartCommentBtns = document.querySelectorAll(".heartBtn");
       addReplyBtns = document.querySelectorAll(".replyBtn");

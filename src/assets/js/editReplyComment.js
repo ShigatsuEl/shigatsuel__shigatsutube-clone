@@ -21,7 +21,7 @@ const handleEnter = async (event) => {
       replyId =
         event.target.parentElement.parentElement.parentElement.parentElement
           .dataset.id;
-      console.log(replyId);
+      // console.log(replyId);
       replyBlock = document.getElementById(`${replyId}`);
       replyContent = replyBlock.querySelector("#jsReplyContent");
       replyEditBox = replyBlock.querySelector("#jsReplyEditBox");

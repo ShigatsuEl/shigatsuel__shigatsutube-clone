@@ -21,6 +21,7 @@ const newFilledBar = document.createElement("div");
 
 let timer;
 
+// 비디오를 끝까지 재생하면 백엔드에 데이터를 요청하는 API
 const registerView = () => {
   const videoId = window.location.href.split("/videos/")[1];
   fetch(`/api/${videoId}/view`, {
@@ -28,6 +29,7 @@ const registerView = () => {
   });
 };
 
+// 맨 처음 비디오가 로드되었을 때 재생상태이면 pause버튼을 아니라면 play버튼을 보여주게 함!
 function handleVideoPlayer() {
   if (videoPlayer.played) {
     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
@@ -36,6 +38,7 @@ function handleVideoPlayer() {
   }
 }
 
+// Video Player에 마우스가 올라가 있는 상태에서 스페이스바를 누르면 발생하는 이벤트 함수
 function handlePlaySpace(event) {
   if (videoPlayer.paused) {
     if (event.keyCode === 32) {
@@ -48,6 +51,7 @@ function handlePlaySpace(event) {
   }
 }
 
+// 재생버튼을 클릭하면 발생하는 이벤트 함수
 function handlePlayClick() {
   if (videoPlayer.paused) {
     videoPlayer.play();
@@ -58,6 +62,7 @@ function handlePlayClick() {
   }
 }
 
+// Volume버튼을 클릭하면 발생하는 이벤트 함수
 function handleVolumeClick() {
   if (videoPlayer.muted) {
     videoPlayer.muted = false;
@@ -107,12 +112,13 @@ function exitHandler() {
     !document.mozFullScreen &&
     !document.msFullscreenElement
   ) {
-    ///fire your event
+    // ESC키를 누르면 전체화면버튼으로 바뀜
     fullScreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
     fullScreenBtn.addEventListener("click", goFullScreen);
   }
 }
 
+// 원래화면버튼을 누르면 발생하는 이벤트함수
 function exitFullScreen() {
   fullScreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
   fullScreenBtn.addEventListener("click", goFullScreen);
@@ -127,6 +133,7 @@ function exitFullScreen() {
   }
 }
 
+// 전체화면버튼을 누르면 발생하는 이벤트함수
 function goFullScreen() {
   if (videoContainer.requestFullscreen) {
     videoContainer.requestFullscreen();
@@ -146,6 +153,7 @@ function goFullScreen() {
   document.addEventListener("MSFullscreenChange", exitHandler);
 }
 
+// 비디오 시간을 알맞게 조정해주는 함수
 const formatDate = (seconds) => {
   const secondsNumber = parseInt(seconds, 10);
   let hours = Math.floor(secondsNumber / 3600);
@@ -164,10 +172,12 @@ const formatDate = (seconds) => {
   return `${hours}:${minutes}:${totalSeconds}`;
 };
 
+// 비디오 현재 진행 시간을 구하는 함수
 function getCurrentTime() {
   currentTime.innerHTML = formatDate(Math.ceil(videoPlayer.currentTime));
 }
 
+// 비디오 총 시간을 구하는 함수
 async function setTotalTime() {
   let duration;
   if (!isFinite(videoPlayer.duration)) {
@@ -182,15 +192,18 @@ async function setTotalTime() {
   }
   const totalTimeString = formatDate(duration);
   totalTime.innerHTML = totalTimeString;
+  // setInterval 함수로 1초마다 비디오 현재 진행 시간을 보여줌
   setInterval(getCurrentTime, 1000);
 }
 
+// 비디오 재생이 끝나면 발생하는 함수
 function handleEnded() {
   registerView();
   videoPlayer.currentTime = 0;
   playBtn.innerHTML = '<i class="fas fa-play"></i>';
 }
 
+// Volume을 원하는 곳으로 옮길 때 발생하는 이벤트 함수
 function handleVolumeRange(event) {
   const {
     target: { value },
@@ -207,6 +220,7 @@ function handleVolumeRange(event) {
   }
 }
 
+// ProgressBar를 원하는 곳으로 클릭 or 드래그 시 발생하는 함수
 function handleMobileProgressSeek(event) {
   const seekTotal = parseInt(newProgressBar.offsetWidth, 10);
   const seekX = event.offsetX;
@@ -216,6 +230,7 @@ function handleMobileProgressSeek(event) {
   videoPlayer.currentTime = seekMove;
 }
 
+// 작은 화면 or 모바일에서 ProgressBar가 Time Update가 될 때마다 발생하는 함수(시간에 맞게 ProgressBar가 채워짐)
 function handleMobileProgress() {
   const max = Math.floor(videoPlayer.duration);
   const current = Math.floor(videoPlayer.currentTime);
@@ -223,6 +238,7 @@ function handleMobileProgress() {
   newFilledBar.style.width = `${percent}%`;
 }
 
+// Range바를 원하는 곳으로 클릭 or 드래그 시 발생하는 함수
 function handleProgressSeek(event) {
   const seekTotal = parseInt(progressBar.offsetWidth, 10);
   const seekX = event.offsetX;
@@ -233,6 +249,7 @@ function handleProgressSeek(event) {
   videoPlayer.currentTime = seekMove;
 }
 
+// Range바가 Time Update가 될 때마다 발생하는 함수(시간에 맞게 Range바가 채워짐)
 function handleProgress() {
   const max = Math.floor(videoPlayer.duration);
   const current = Math.floor(videoPlayer.currentTime);
@@ -285,12 +302,14 @@ function handleLeftBtn() {
   progressBar.setAttribute("value", percent);
 }
 
+// Video Player에서 마우스가 올라오면 발생하는 함수
 function handleMouseOver() {
   document.addEventListener("keydown", handlePlaySpace);
   document.addEventListener("keydown", handleArrowRight);
   document.addEventListener("keydown", handleArrowLeft);
 }
 
+// Video Player에서 마우스가 떠나면 발생하는 함수
 function handleMouseLeave() {
   document.removeEventListener("keydown", handlePlaySpace);
   document.removeEventListener("keydown", handleArrowRight);
@@ -301,6 +320,9 @@ function mediaMatch() {
   // Width가 720px이하면 적용되는 자바스크립트 구문
   const mql = window.matchMedia("(max-width:720px)");
   if (mql.matches) {
+    // input="range"가 작은 화면에선 작동하지 못하는 현상을 발견
+    // 새로운 progressBar를 만듬
+    // 아직도 왜 작동 안하는지 이유를 찾지 못함
     element.removeChild(progressBar);
     newProgressBar.classList.add("videoPlayer__progressBar");
     newProgressBar.id = "jsProgressBarFilled";
@@ -314,6 +336,7 @@ function mediaMatch() {
     newProgressBar.addEventListener("dragover", handleMobileProgressSeek);
     rightBtn.addEventListener("click", handleRightBtn);
     leftBtn.addEventListener("click", handleLeftBtn);
+    // Width가 720px 이상이면 적용되는 자바스크립트 구문
   } else {
     videoPlayer.addEventListener("timeupdate", handleProgress);
     progressBar.addEventListener("click", handleProgressSeek);
@@ -324,6 +347,9 @@ function mediaMatch() {
 
   // 모바일 Width가 1024px 이하면 발생하는 이벤트
   const mqlTwo = window.matchMedia("(max-device-width:1024px)");
+  // input="range"가 모바일에선 작동하지 못하는 현상을 발견
+  // 새로운 progressBar를 만듬
+  // 아직도 왜 작동 안하는지 이유를 찾지 못함
   if (mqlTwo.matches) {
     videoPlayer.removeEventListener("click", handlePlayClick);
     element.removeChild(progressBar);

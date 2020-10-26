@@ -1,3 +1,4 @@
+// Video Detail Template SCSS
 .video__wrapper {
   display: grid;
   grid-template-columns: 58% 42%;
@@ -100,6 +101,7 @@
     .hidden {
       display: none;
     }
+    // Video 좋아요 & 싫어요 Animation
     @keyframes notificationAnimationTwo {
       0% {
         transform: translateX(-350px);

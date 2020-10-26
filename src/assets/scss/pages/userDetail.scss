@@ -1,3 +1,4 @@
+// User Detail Template SCSS
 .userDetail__wrapper {
   display: grid;
   grid-template-columns: 3fr 1fr 3fr;
@@ -58,6 +59,7 @@
         }
       }
     }
+    // Upload Videos Container Scroll Bar SCSS
     .uploaded__videos {
       scrollbar-color: #ff9a9e #f5f5f5;
     }
@@ -193,6 +195,7 @@
         }
       }
     }
+    // like Videos Container Scroll Bar SCSS
     .liked__videos {
       scrollbar-color: #ff9a9e #f5f5f5;
     }
@@ -233,6 +236,7 @@
   }
 }
 
+// Media Query 1024px 이하인 경우 적용되는 SCSS
 @media (max-width: 1024px) {
   .userDetail__wrapper {
     padding: $five-padding 30px 30px 30px;
@@ -301,6 +305,7 @@
   }
 }
 
+// Media Query 720px 이하인 경우 적용되는 SCSS
 @media (max-width: 720px) {
   .userDetail__wrapper {
     padding: $five-padding 20px 20px 20px;
