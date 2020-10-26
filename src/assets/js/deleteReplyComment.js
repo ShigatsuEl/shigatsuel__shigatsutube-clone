@@ -2,7 +2,6 @@ import axios from "axios";
 import { addNotificationModal } from "./notificationModal";
 
 const commentContainer = document.getElementById("jsCommentContainer");
-const replySubinfo = document.querySelector(".reply__subinfo");
 
 let commentId;
 let replyId;
@@ -51,6 +50,6 @@ function init() {
   commentContainer.addEventListener("click", handleDelteBtn);
 }
 
-if (replySubinfo) {
+if (commentContainer) {
   init();
 }

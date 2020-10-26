@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const commentContainer = document.getElementById("jsCommentContainer");
-const replySubinfo = document.querySelector(".reply__subinfo");
 
 let replyId;
 let userId;
@@ -72,6 +71,6 @@ function init() {
   commentContainer.addEventListener("click", handleHeartBtn);
 }
 
-if (replySubinfo) {
+if (commentContainer) {
   init();
 }

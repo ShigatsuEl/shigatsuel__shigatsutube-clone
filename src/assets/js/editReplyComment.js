@@ -2,7 +2,6 @@ import axios from "axios";
 import { addNotificationModal } from "./notificationModal";
 
 const commentContainer = document.getElementById("jsCommentContainer");
-const replySubinfo = document.querySelector(".reply__subinfo");
 const replyText = document.querySelectorAll(".reply__text");
 
 let replyId;
@@ -74,6 +73,9 @@ const handleSave = async (event) => {
       replyEditInput.innerHTML = newReply;
       replyContent.classList.toggle("hidden");
       replyEditBox.classList.toggle("hidden");
+      addNotificationModal("Successfully", "fixed", "reply");
+    } else {
+      addNotificationModal("Failed to", "fixed", "reply");
     }
   }
 };
@@ -129,6 +131,6 @@ function init() {
   commentContainer.addEventListener("click", handleEdit);
 }
 
-if (replySubinfo) {
+if (commentContainer) {
   init();
 }
