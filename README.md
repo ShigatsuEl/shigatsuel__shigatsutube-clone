@@ -264,3 +264,26 @@ jjanmo님 깃헙소스를 보면서 혼자서 다 찾아보고 만들어보셨�
 ## Server Build
 
 시간이 부족해서 하루만에 서버 배포를 해버렸다.<br>과정은 다 기억나지만 왜 그렇게 해야되는지에 대해 제대로 짚고 넘어가지 못했다.<br>
+
+**[⬆ Back to Top](#Shigatsuel__Shigatsutube)**
+
+# Move Forward
+
+## JavaScript30
+
+이번 유튜브 챌린지를 통해 자바스크립트를 정말로 많이 배웠다고 생각은 하지만 기본적인 것에 대해서는 아직 많이 부족하다고 생각한다.<br>따라서 Wesbos의 [JavaScript30])(https://javascript30.com/) 챌린지를 통해 JS의 기초를 더 쌓을 생각이다.
+
+## 33 Concepts every JavaScript developer should know
+
+면접에서 호이스팅이 뭐냐 Promise가 어떤 역할이냐 같은 질문에 대답도 못하면 말이 안된다고 생각한다.<br> 이 자바스크립트 33가지 개념은 필수는 아니지만 내가 자바스크립트가 어떻게 작동하는지 더 깊게 이해할 수 있게 도와줄 초석이 되어줄 거라 믿는다.<br>
+[33 Concepts every JavaScript developer should know](https://github.com/yjs03057/33-js-concepts)
+
+## Dream Coding JS Foundation
+
+위의 33가지 개념과 같이 하면 좋을 것 같다는 생각이 들어 추가했다.<br>
+1주 정도의 기간을 갖고 완주하는 것을 목표로 하고 있으며 완주하는 후로 JavaScript30 챌린지에 도전할 생각이다.<br>
+
+# Finally
+
+개발자는 아무나 될 수 없다는 것을 유튜브 챌린지를 통해 실감했다.<br>
+과정이 매우 어려운 것은 사실이나 포기하지 않고 끝까지 하게된다면 언젠가 그 빛을 보게 될 것이다.<br>어떤 어려움이 닥쳐와도 절대 포기하지 않고 노력한다면 분명 언젠가는 코딩을 즐길 수 있다고 믿는다 :) <br><br>
