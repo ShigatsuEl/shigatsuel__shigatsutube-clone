@@ -32,11 +32,11 @@ Cloning Youtube with VanillaJS and NodeJS
 
 ## Pages
 
-- [x] Home
+- [x] Home `1️⃣The Latest Video` `2️⃣The Best View Video` `3️⃣Uploaded Videos`
 
-- [x] Join
+- [x] Join `Local Sign Up` + `Social Sign Up`
 
-- [x] Login
+- [x] Login `Local Sign In` + `Social Sign In`
 
 - [x] Search
 
@@ -48,9 +48,9 @@ Cloning Youtube with VanillaJS and NodeJS
 
 - [x] Change Password
 
-- [x] Upload
+- [x] Upload `You can upload single video at once` + `You can upload record video!`
 
-- [x] Video Detail
+- [x] Video Detail `1️⃣Like or Dislike Video` `2️⃣Comment & Reply in Realtime~` `3️⃣Comment & Reply Heart` `4️⃣Flash Message & ModalBlock`
 
 - [x] Edit Video
 
@@ -158,3 +158,23 @@ src
 |-- webpack.config.js
 
 ```
+
+## Install and Setup
+
+Git this repository. You will need `node` and `npm` installed globally on your device!<br><br>
+
+1. `git clone https://github.com/ShigatsuEl/shigatsutube-clone.git`
+
+2. `npm install`
+
+If you are Window user, you need to change a few more
+
+1. Go to pakage.json and fixed `"script": {"prebuild": "rm -rf build"}` -> `"script": {"prebuild": " rd /s /q build"}`
+
+2. Go to pakage.json and fixed `"script": {"copyAll": "cp -R src/static build && cp -R src/views build"}` -> `"script": {"copyAll": "xcopy [option] src/static build && xcopy [option] src/views build"}`
+
+## Run
+
+To start Server:
+
+`npm start`
