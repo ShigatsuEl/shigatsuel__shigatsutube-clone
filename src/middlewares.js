@@ -14,7 +14,7 @@ const multerVideo = multer({
     acl: "public-read",
     bucket: "shigatsutube/video",
   }),
-  limits: { fileSize: 100 * 1024 * 1024 },
+  // limits: { fileSize: 100 * 1024 * 1024 },
 });
 const multerAvatar = multer({
   storage: multerS3({
