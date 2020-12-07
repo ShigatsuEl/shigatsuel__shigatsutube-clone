@@ -5,15 +5,12 @@ import User from "../models/User";
 // Home
 export const home = async (req, res) => {
   try {
-    let videos = await Video.find({})
+    const videos = await Video.find({})
       .populate("creator")
       .sort({ _id: -1 })
+      .skip(1)
+      .sort({ views: -1 })
       .skip(1);
-    videos = videos
-      .sort(function (a, b) {
-        return a.views > b.views ? -1 : a.views < b.views ? 1 : 0;
-      })
-      .slice(1);
     const lastVideo = await Video.find({})
       .populate("creator")
       .sort({ _id: -1 })
