@@ -13,3 +13,4 @@ import "./deleteReplyComment";
 import "./heartReplyComment";
 import "./modalBlock";
 import "./notificationModal";
+import "./validateFile";
