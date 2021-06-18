@@ -5,18 +5,18 @@ const formListener = (e) => {
 
 (function () {
   const videoInput = document.getElementById("file");
-  const form = document.getElementById("upload-form");
-  const submit = form.querySelector("#form-submit");
-  const info = document.createElement("span");
-  info.textContent = "You can not upload vertical video";
-  info.style = `
-    display: inline-block;
-    margin-bottom: 5px;
-    line-height: 1.5;
-    color: red;
-    font-weight: 600;
-  `;
   if (videoInput) {
+    const form = document.getElementById("upload-form");
+    const submit = form.querySelector("#form-submit");
+    const info = document.createElement("span");
+    info.textContent = "You can not upload vertical video";
+    info.style = `
+      display: inline-block;
+      margin-bottom: 5px;
+      line-height: 1.5;
+      color: red;
+      font-weight: 600;
+    `;
     videoInput.addEventListener("change", async (e) => {
       const {
         target: { files },

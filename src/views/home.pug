@@ -8,7 +8,7 @@ block content
                 h3.video__category The Latest Video
             if lastVideo.length > 0
                 a.latest__video(href=routes.videoDetail(lastVideo[0].id))
-                    video.videoBlock__thumbnail(src=lastVideo[0].fileUrl)
+                    video.videoBlock__thumbnail(src=lastVideo[0].fileUrl, poster=lastVideo[0].thumbnailUrl)
                     .videoBlock__description
                         .left
                             img.videoBlock__img(src=lastVideo[0].creator.avatarUrl)
@@ -21,7 +21,7 @@ block content
                 h3.video__category Best Views Video
             if bestVideo.length > 0
                 a.best__view__video(href=routes.videoDetail(bestVideo[0].id))
-                    video.videoBlock__thumbnail(src=bestVideo[0].fileUrl)
+                    video.videoBlock__thumbnail(src=bestVideo[0].fileUrl, poster=bestVideo[0].thumbnailUrl)
                     .videoBlock__description
                         .left
                             img.videoBlock__img(src=bestVideo[0].creator.avatarUrl)
@@ -37,6 +37,7 @@ block content
                 views:item.views,
                 createdAt: item.createdAt,
                 videoFile:item.fileUrl,
+                thumbnailFile: item.thumbnailUrl,
                 imgFile:item.creator.avatarUrl,
                 name:item.creator.name,
                 creator:item.creator.id

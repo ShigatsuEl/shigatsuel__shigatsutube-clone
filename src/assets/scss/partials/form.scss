@@ -34,6 +34,10 @@
         border: 2px solid $light-blue;
       }
     }
+    label {
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
   }
   .form-container__link--delete {
     padding: 11px 10px;

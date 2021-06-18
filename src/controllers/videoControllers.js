@@ -51,18 +51,22 @@ export const getUpload = (req, res) =>
 export const postUpload = async (req, res) => {
   const {
     body: { title, description },
-    file: { location },
+    files: {
+      videoFile: [{ location: videoLocation }],
+      thumbnailFile: [{ location: thumbnailLocation }],
+    },
   } = req;
-  // console.log(req.file);
   try {
     const newVideo = await Video.create({
       creator: req.user.id,
-      fileUrl: location,
+      fileUrl: videoLocation,
+      thumbnailUrl: thumbnailLocation,
       title,
       description,
     });
     req.user.videos.push(newVideo.id);
     req.user.save();
+    console.log(req.user.videos);
     req.flash("success", "Successfully upload video!");
     res.redirect(routes.videoDetail(newVideo.id));
   } catch (error) {

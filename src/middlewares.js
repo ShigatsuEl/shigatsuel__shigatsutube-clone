@@ -14,7 +14,6 @@ const multerVideo = multer({
     acl: "public-read",
     bucket: "shigatsutube/video",
   }),
-  // limits: { fileSize: 100 * 1024 * 1024 },
 });
 const multerAvatar = multer({
   storage: multerS3({
@@ -57,5 +56,8 @@ export const dateFormatter = (dateStr) => {
     date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
   } ${date.getHours()}시 ${date.getMinutes()}분`;
 };
-export const uploadVideo = multerVideo.single("videoFile");
+export const uploadVideo = multerVideo.fields([
+  { name: "videoFile" },
+  { name: "thumbnailFile" },
+]);
 export const uploadAvatar = multerAvatar.single("avatar");
