@@ -1,4 +1,4 @@
-const videos = document.querySelector(".videos");
+/* const videos = document.querySelector(".videos");
 const userName = document.getElementById("jsUserName");
 const videoBlock = document.querySelectorAll(".videoBlock__thumbnail");
 
@@ -22,4 +22,4 @@ if (videos) {
   init();
 } else if (userName) {
   init();
-}
+} */
