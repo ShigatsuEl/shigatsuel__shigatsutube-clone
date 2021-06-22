@@ -1,6 +1,5 @@
 import "../scss/styles.scss";
 import "./videoPlayer";
-import "./videoBlock";
 import "./videoRecorder";
 import "./likeVideo";
 import "./addComment";
