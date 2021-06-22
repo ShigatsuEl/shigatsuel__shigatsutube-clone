@@ -3,26 +3,30 @@ include mixins/videoBlock
 
 block content
     .videos
-        .latest__video-box
-            .latest__video-text
-                h3.video__category The Latest Video
+        .latest__video-wrapper
+            .latest__video-category
+                h3.video__header The Latest Video
             if lastVideo.length > 0
                 a.latest__video(href=routes.videoDetail(lastVideo[0].id))
-                    video.videoBlock__thumbnail(src=lastVideo[0].fileUrl, poster=lastVideo[0].thumbnailUrl)
-                    .videoBlock__description
+                    div.videoBlock__main-box
+                        video.videoBlock__video(src=lastVideo[0].fileUrl muted)
+                        img.videoBlock__thumbnail(src=lastVideo[0].thumbnailUrl)
+                    .videoBlock__sub-box
                         .left
                             img.videoBlock__img(src=lastVideo[0].creator.avatarUrl)
                         .right
                             h6.videoBlock__title=lastVideo[0].title
                             h6.videoBlock__creator=`Uploaded by ${lastVideo[0].creator.name}`
                             h6.videoBlock__views=`VIEWS ${lastVideo[0].views} · ${dateFormatter(lastVideo[0].createdAt)}`
-        .best__view__video-box
-            .best__view__video-text
-                h3.video__category Best Views Video
+        .best__view__video-wrapper
+            .best__view__video-category
+                h3.video__header Best Views Video
             if bestVideo.length > 0
                 a.best__view__video(href=routes.videoDetail(bestVideo[0].id))
-                    video.videoBlock__thumbnail(src=bestVideo[0].fileUrl, poster=bestVideo[0].thumbnailUrl)
-                    .videoBlock__description
+                    div.videoBlock__main-box
+                        video.videoBlock__video(src=bestVideo[0].fileUrl muted)
+                        img.videoBlock__thumbnail(src=bestVideo[0].thumbnailUrl)
+                    .videoBlock__sub-box
                         .left
                             img.videoBlock__img(src=bestVideo[0].creator.avatarUrl)
                         .right

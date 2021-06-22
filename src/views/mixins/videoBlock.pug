@@ -1,8 +1,10 @@
 mixin videoBlock(video ={})
     .videoBlock
         a(href=routes.videoDetail(video.id))
-            video.videoBlock__thumbnail(src=video.videoFile, poster=video.thumbnailFile)
-            .videoBlock__description
+            div.videoBlock__main-box
+                video.videoBlock__video(src=video.videoFile muted)
+                img.videoBlock__thumbnail(src=video.thumbnailFile)
+            .videoBlock__sub-box
                 .left
                     img.videoBlock__img(src=video.imgFile)
                 .right
