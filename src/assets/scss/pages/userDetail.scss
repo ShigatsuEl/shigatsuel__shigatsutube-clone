@@ -10,7 +10,7 @@
   .uploaded-videos__container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(50%, 100%));
-    grid-template-rows: 0.3fr 9.7fr;
+    grid-template-rows: 0.03fr minmax(min-content, 0.97fr);
     gap: 10px;
     flex-wrap: wrap;
     background-color: black;
@@ -23,10 +23,12 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(45%, 49%));
       gap: 5px;
+      height: calc(100vh - 150px);
       padding: $third-padding $third-padding;
       overflow-x: hidden;
       overflow-y: auto;
       .videoBlock {
+        height: min-content;
         a {
           display: flex;
           flex-direction: column;
@@ -163,7 +165,7 @@
   .liked-videos__container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(50%, 100%));
-    grid-template-rows: 0.3fr 9.7fr;
+    grid-template-rows: 0.03fr minmax(min-content, 0.97fr);
     gap: 10px;
     flex-wrap: wrap;
     background-color: black;
@@ -177,13 +179,14 @@
       grid-template-columns: repeat(auto-fill, minmax(45%, 49%));
       gap: 5px;
       padding: $third-padding $third-padding;
+      height: calc(100vh - 150px);
       overflow-x: hidden;
       overflow-y: auto;
       .videoBlock {
+        height: min-content;
         a {
           display: flex;
           flex-direction: column;
-          height: 100%;
           color: white;
           .videoBlock__main-box {
             position: relative;
